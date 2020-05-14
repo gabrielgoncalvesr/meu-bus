@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const { User } = require('../../models/user');
+const { User } = require('../../../app/models');
 
 router.get('/', function (req, res) {
-    User.create({ name: 'Claudio', email: 'claudio@rocketseat.com.br', password: '123456' });
+    User.create({ name: 'Claio', email: 'claio@rocktseat.com.br', password: '12356' });
+    res.send('Some response.');
 });
 
 router.post('/', function (req, res) {
