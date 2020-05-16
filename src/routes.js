@@ -3,6 +3,6 @@ const router = express.Router();
 
 const userRoutes = require('./api/test');
 
-router.use('/test', userRoutes.router);
+router.use('/sptrans', userRoutes.router);
 
 module.exports = router;

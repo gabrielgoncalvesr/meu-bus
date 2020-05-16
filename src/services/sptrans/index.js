@@ -15,10 +15,12 @@ const loginSPTrans = async () => {
     }
 }
 
-const searchLine = async (searchByTerm) => {
-    const response = await get(`${process.env.SPTRANS_API_URL}/Linha/Buscar`, `termosBusca=${searchByTerm}`, headers);
+const searchLine = async (req, res) => {
+    const { term } = req.query;
 
-    return response.data.map(item => {
+    const response = await get(`${process.env.SPTRANS_API_URL}/Linha/Buscar`, `termosBusca=${term}`, headers);
+
+    const line = response.data.map(item => {
         return {
             circularMode: item['lc'],
             lineDirection: item['sl'],
@@ -29,7 +31,28 @@ const searchLine = async (searchByTerm) => {
             descriptiveSignOutward: item['tp']
         }
     });
+
+    return res.json(line)
+}
+
+const serchPosition = async (req, res) => {
+    const { code } = req.query;
+
+    const response = await get(`${process.env.SPTRANS_API_URL}/Posicao/Linha`, `codigoLinha=${code}`, headers);
+
+    const vehicles = response.data['vs'].map(item => {
+        return {
+            captureTime: item['a'],
+            vehiclePrefix: item['p'],
+            vehicleAccessible: item['a'],
+            latitudePosition: item['py'],
+            longitudePosition: item['px'],
+        }
+    });
+
+    return res.json(vehicles)
 }
 
 module.exports.searchLine = searchLine;
 module.exports.loginSPTrans = loginSPTrans;
+module.exports.serchPosition = serchPosition;
