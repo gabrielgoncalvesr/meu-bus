@@ -1,15 +1,18 @@
 const express = require('express');
 const router = express.Router();
+const { celebrate, Segments, Joi } = require('celebrate');
+const { searchLine, serchPosition } = require('../../services/sptrans');
 
-const { User } = require('../../models/user');
+router.get('/search/line', celebrate({
+    [Segments.QUERY]: Joi.object().keys({
+        term: Joi.string()
+    })
+}), searchLine);
 
-router.get('/', function (req, res) {
-    User.create({ name: 'Claudio', email: 'claudio@rocketseat.com.br', password: '123456' });
-});
-
-router.post('/', function (req, res) {
-    // Create user
-    res.send('Some response.');
-});
+router.get('/search/position', celebrate({
+    [Segments.QUERY]: Joi.object().keys({
+        code: Joi.string()
+    })
+}), serchPosition);
 
 module.exports.router = router;
