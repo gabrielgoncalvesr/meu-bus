@@ -3,9 +3,11 @@ import Constants from 'expo-constants';
 
 const styles = StyleSheet.create({
     container: {
-        ...StyleSheet.absoluteFillObject,
+        //...StyleSheet.absoluteFillObject,
         paddingHorizontal: 24,
-        paddingTop: Constants.statusBarHeight + 20
+        paddingTop: Constants.statusBarHeight + 20,
+        width: '100%',
+        height: '100%'
     },
 
     boxSearch: {
@@ -59,10 +61,6 @@ const styles = StyleSheet.create({
     },
 
     contentHome: {
-        position: 'absolute',
-        top: 500,
-        left: 0,
-        right: 0,
         height: '100%',
         borderRadius: 5,
         backgroundColor: '#393e46',
