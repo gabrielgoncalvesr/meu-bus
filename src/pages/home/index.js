@@ -7,9 +7,12 @@ import { Text, View, TouchableOpacity, Image, TextInput } from 'react-native';
 
 import LogoImg from '../../../assets/icon.png';
 
-import ComponentMap from '../../components/map';
+import ComponentMap from '../../components/Map';
+
+import { SlideBar, Map } from '../../components';
 
 import styles from './styles';
+
 
 const Detail = () => {
     const [termToSearch, setTermToSearch] = useState('');
@@ -26,56 +29,75 @@ const Detail = () => {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.contentMap}>
-                <ComponentMap />
-            </View>
+        <SlideBar
+            mainContent={<ComponentMap />}
+            barContent={
+                <View style={styles.contentHome}>
+                    <View style={styles.actionBar}>
+                        <TouchableOpacity style={styles.buttonFunction} onPress={() => { }}>
+                            <View style={styles.buttonIconBar}>
+                                <FontAwesome5 name="bus" size={24} color="#414141" />
+                            </View>
 
-            <TextInput style={styles.searchInput}
-                placeholder={"procure por uma linha..."}
-                onChangeText={text => onChangeText(text)}
-                value={termToSearch}
-            />
+                            <Text style={styles.buttonTitle}>SPTRANS</Text>
+                        </TouchableOpacity>
 
+                        <TouchableOpacity style={styles.buttonFunction} onPress={() => { }}>
+                            <View style={styles.buttonIconBar}>
+                                <Ionicons name="md-bus" size={30} color="#414141" />
+                            </View>
 
-            <View style={styles.contentHome}>
-                <View style={styles.actionBar}>
-                    <TouchableOpacity style={styles.buttonFunction} onPress={() => { }}>
-                        <View style={styles.buttonIconBar}>
-                            <FontAwesome5 name="bus" size={24} color="#414141" />
-                        </View>
-
-                        <Text style={styles.buttonTitle}>SPTRANS</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.buttonFunction} onPress={() => { }}>
-                        <View style={styles.buttonIconBar}>
-                            <Ionicons name="md-bus" size={30} color="#414141" />
-                        </View>
-
-                        <Text style={styles.buttonTitle}>EMTU</Text>
-                    </TouchableOpacity>
+                            <Text style={styles.buttonTitle}>EMTU</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
-
-            {/* <View style={styles.contactBox}>
-                <Text style={styles.heroTitle}>Salve o dia!</Text>
-                <Text style={styles.heroTitle}>Seja o herói desse caso.</Text>
-
-                <Text style={styles.heroDescription}>Entre em contato:</Text>
-
-                <View style={styles.actions}>
-                    <TouchableOpacity style={styles.action} onPress={() => { }}>
-                        <Text style={styles.actionText}>WhatsApp</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.action} onPress={() => { }}>
-                        <Text style={styles.actionText}>E-mail</Text>
-                    </TouchableOpacity>
-                </View>
-            </View> */}
-        </View>
+            }
+        />
     );
 }
 
 export default Detail;
+
+
+
+
+
+
+
+
+
+{/*
+<View style={styles.container}>
+ <View style={styles.contentMap}>
+    <ComponentMap />
+</View>
+
+<TextInput style={styles.searchInput}
+    placeholder={"procure por uma linha..."}
+    onChangeText={text => onChangeText(text)}
+    value={termToSearch}
+/>
+
+
+
+
+
+
+ <View style={styles.contactBox}>
+    <Text style={styles.heroTitle}>Salve o dia!</Text>
+    <Text style={styles.heroTitle}>Seja o herói desse caso.</Text>
+
+    <Text style={styles.heroDescription}>Entre em contato:</Text>
+
+    <View style={styles.actions}>
+        <TouchableOpacity style={styles.action} onPress={() => { }}>
+            <Text style={styles.actionText}>WhatsApp</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.action} onPress={() => { }}>
+            <Text style={styles.actionText}>E-mail</Text>
+        </TouchableOpacity>
+    </View>
+</View> 
+</View>
+*/}

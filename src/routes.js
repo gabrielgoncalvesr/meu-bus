@@ -6,14 +6,17 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SafeAreaView from 'react-native-safe-area-view';
 
 import Home from './pages/home';
-import Maps from './components/map';
-import ResizableComponentBar from './components/ResizableComponentBar';
-
+import { SlideBar, Map } from './components';
 
 function HomeScreen({ navigation }) {
     return (
         <SafeAreaView style={[styles.container, { backgroundColor: '#222831' }]}>
             <StatusBar barStyle="light-content" backgroundColor="#222831" />
+            {/* <SlideBar
+                firstContent={<Text>TESTE</Text>}
+                secondContent={<Text>TESTE</Text>}
+            /> */}
+
             <Home />
         </SafeAreaView>
     );
