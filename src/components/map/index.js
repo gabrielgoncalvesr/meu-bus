@@ -7,9 +7,9 @@ import MapView from 'react-native-maps';
 import styles from './styles';
 
 const MapComponent = () => {
+    
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
-
     const [initialRegion, setInitialRegion] = useState(null);
 
     useEffect(() => {
@@ -52,8 +52,8 @@ const MapComponent = () => {
                 >
                     <MapView.Marker
                         coordinate={{
-                            latitude: -23.6088023,
-                            longitude: -46.7784665
+                            latitude: -23.6088023,//initialRegion.latitude
+                            longitude: -46.7784665//initialRegion.longitude
                         }}
                         title={"Your Current Position"}
                     />
