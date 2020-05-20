@@ -3,24 +3,34 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        width: '100%',
         alignItems: 'center',
-        width: '100%'
+        justifyContent: 'center'
     },
-    button: {
-        padding: 8,
+    touchableBar: {
+        height: 30,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    buttonText: {
-        fontSize: 17,
-        color: "#007AFF"
+    horizontalBarIcon: {
+        color: '#adadad',
+        borderRadius: 10,
     },
     subView: {
-        position: "absolute",
-        bottom: 0,
         left: 0,
         right: 0,
-        backgroundColor: "#FFFFFF",
-        height: 350,
+        bottom: 0,
+        height: 450,
+        elevation: 5,
+        shadowRadius: 2,
+        shadowOpacity: 0.8,
+        shadowColor: '#000',
+        position: "absolute",
+        backgroundColor: "#f5f5f5",
+        shadowOffset: {
+            width: 0,
+            height: 1
+        }
     }
 });
 

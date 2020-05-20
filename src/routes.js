@@ -1,23 +1,28 @@
 import * as React from 'react';
-import { Text, StatusBar, Button, StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SafeAreaView from 'react-native-safe-area-view';
 
-import Home from './pages/home';
-import { SlideBar, Map } from './components';
+import Home from './pages/Home';
+import Search from './pages/Search';
+
 
 function HomeScreen({ navigation }) {
     return (
-        <SafeAreaView style={[styles.container, { backgroundColor: '#222831' }]}>
+        <SafeAreaView style={[styles.container, { backgroundColor: '#f5f5f5' }]}>
             <StatusBar barStyle="light-content" backgroundColor="#222831" />
-            {/* <SlideBar
-                firstContent={<Text>TESTE</Text>}
-                secondContent={<Text>TESTE</Text>}
-            /> */}
-
             <Home />
+        </SafeAreaView>
+    );
+}
+
+function SearchScreen({ navigation }) {
+    return (
+        <SafeAreaView style={[styles.container, { backgroundColor: '#f5f5f5' }]}>
+            <StatusBar barStyle="light-content" backgroundColor="#222831" />
+            <Search />
         </SafeAreaView>
     );
 }
@@ -30,6 +35,7 @@ export default function Routes() {
             <NavigationContainer>
                 <Stack.Navigator headerMode="none">
                     <Stack.Screen name="HomeScreen" component={HomeScreen} />
+                    <Stack.Screen name="SearchScreen" component={SearchScreen} />
                 </Stack.Navigator>
             </NavigationContainer>
         </SafeAreaProvider>
