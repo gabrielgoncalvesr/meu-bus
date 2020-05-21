@@ -3,12 +3,6 @@ module.exports = {
 		return queryInterface.createTable('Buses', {
 			id: {
 				allowNull: false,
-				autoIncrement: true,
-				primaryKey: true,
-				type: DataTypes.INTEGER,
-			},
-			routeId: {
-				allowNull: false,
 				primaryKey: true,
 				type: DataTypes.STRING,
 			},
@@ -16,23 +10,23 @@ module.exports = {
 				allowNull: false,
 				type: DataTypes.INTEGER,
 			},
-			routeShortName: {
+			shortName: {
 				allowNull: false,
 				type: DataTypes.STRING,
 			},
-			routeLongName: {
+			longName: {
 				allowNull: false,
 				type: DataTypes.STRING,
 			},
-			routeType: {
+			type: {
 				allowNull: false,
 				type: DataTypes.INTEGER,
 			},
-			routeColor: {
+			color: {
 				allowNull: false,
 				type: DataTypes.STRING,
 			},
-			routeTextColor: {
+			textColor: {
 				allowNull: false,
 				type: DataTypes.STRING,
 			},

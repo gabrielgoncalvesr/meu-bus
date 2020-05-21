@@ -3,28 +3,22 @@ module.exports = {
 		return queryInterface.createTable('Stops', {
 			id: {
 				allowNull: false,
-				autoIncrement: true,
-				primaryKey: true,
-				type: DataTypes.INTEGER,
-			},
-			stopId: {
-				allowNull: false,
 				primaryKey: true,
 				type: DataTypes.BIGINT,
 			},
-			stopName: {
+			name: {
 				allowNull: false,
 				type: DataTypes.STRING,
 			},
-			stopDesc: {
+			description: {
 				allowNull: false,
 				type: DataTypes.STRING,
 			},
-			stopLatitude: {
+			latitude: {
 				allowNull: false,
 				type: DataTypes.DECIMAL(8, 6),
 			},
-			stopLongitude: {
+			longitude: {
 				allowNull: false,
 				type: DataTypes.DECIMAL(8, 6),
 			},

@@ -1,13 +1,20 @@
 module.exports = (sequelize, DataTypes) => {
     const Bus = sequelize.define('Bus', {
-        routeId: DataTypes.STRING,
+        id: {
+            type: DataTypes.STRING,
+            primaryKey: true,
+        },
         agencyId: DataTypes.INTEGER,
-        routeShortName: DataTypes.STRING,
-        routeLongName: DataTypes.STRING,
-        routeType: DataTypes.INTEGER,
-        routeColor: DataTypes.STRING,
-        routeTextColor: DataTypes.STRING,
+        shortName: DataTypes.STRING,
+        longName: DataTypes.STRING,
+        type: DataTypes.INTEGER,
+        color: DataTypes.STRING,
+        textColor: DataTypes.STRING,
     });
+
+    Bus.associate = function (models) {
+        Bus.hasMany(models.Trip, { foreignKey: 'busId' });
+    }
 
     return Bus;
 }
