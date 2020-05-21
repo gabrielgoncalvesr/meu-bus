@@ -1,22 +1,38 @@
 module.exports = {
 	up: (queryInterface, DataTypes) => {
-		return queryInterface.createTable('Users', {
+		return queryInterface.createTable('Buses', {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
 				type: DataTypes.INTEGER,
 			},
-			name: {
+			routeId: {
+				allowNull: false,
+				primaryKey: true,
+				type: DataTypes.STRING,
+			},
+			agencyId: {
+				allowNull: false,
+				type: DataTypes.INTEGER,
+			},
+			routeShortName: {
 				allowNull: false,
 				type: DataTypes.STRING,
 			},
-			email: {
+			routeLongName: {
 				allowNull: false,
 				type: DataTypes.STRING,
-				unique: true,
 			},
-			password: {
+			routeType: {
+				allowNull: false,
+				type: DataTypes.INTEGER,
+			},
+			routeColor: {
+				allowNull: false,
+				type: DataTypes.STRING,
+			},
+			routeTextColor: {
 				allowNull: false,
 				type: DataTypes.STRING,
 			},
@@ -32,6 +48,6 @@ module.exports = {
 	},
 
 	down: (queryInterface) => {
-		return queryInterface.dropTable('Users');
+		return queryInterface.dropTable('Buses');
 	}
 };
