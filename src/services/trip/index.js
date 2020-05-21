@@ -3,18 +3,34 @@ const Op = Sequelize.Op;
 
 const { Trip, Route } = require('../../../app/models');
 
-const searchTripByRouteId = async (req, res) => {
+const searchTrips = async (req, res) => {
     const { routeId } = req.query;
 
+    if (!routeId) {
+        return res.status(400).json({ message: "missing routeId" });
+    }
+
+    let where = {};
+
+    let options = {
+        order: [
+            ['Routes', 'routeId', 'ASC'],
+            ['Routes', 'sequence', 'ASC']
+        ],
+        include: [{
+            model: Route,
+            as: 'Routes'
+        }]
+    };
+
+    if (routeId) {
+        where['routeId'] = routeId;
+    }
+
+    options['where'] = where;
+
     try {
-        const results = await Trip.findAll({
-            where: {
-                routeId: routeId
-            },
-            include: [{
-                model: Route
-            }]
-        });
+        const results = await Trip.findAll(options);
 
         res.json(results);
     } catch (e) {
@@ -22,4 +38,4 @@ const searchTripByRouteId = async (req, res) => {
     }
 }
 
-module.exports.searchTripByRouteId = searchTripByRouteId;
+module.exports.searchTrips = searchTrips;

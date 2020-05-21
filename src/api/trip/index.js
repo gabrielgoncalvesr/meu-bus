@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const {
-    searchTripByRouteId,
+    searchTrips,
 } = require('../../services/trip');
 
-router.get('/:routeId', searchTripByRouteId);
+router.get('/', searchTrips);
 
 module.exports.router = router;
