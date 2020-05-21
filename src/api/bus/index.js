@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const { Bus } = require('../../../app/models');
+const {
+    searchBuses,
+    searchBusTripsByBusCode,
+} = require('../../services/bus');
 
-
-router.get('/', async (req, res) => {
-    const result = await Bus.findAll();
-    res.send(result);
-});
-
+router.get('/', searchBuses);
+router.get('/trip', searchBusTripsByBusCode);
 
 module.exports.router = router;
