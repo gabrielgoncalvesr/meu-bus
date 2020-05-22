@@ -36,8 +36,6 @@ const SlideBarComponent = ({
         }).start();
     }
 
-    console.log(height, animatedHeight, isLongBar)
-
     return (
         <View style={styles.container}>
             {mainContent}

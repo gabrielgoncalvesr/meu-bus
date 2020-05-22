@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         margin: 20,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#17347a',
+        //backgroundColor: '#17347a',
     },
     busIconBox: {
         width: 30,
@@ -78,9 +78,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-
     busIdentificationText: {
-        fontSize: 16,
+        fontSize: 14,
         color: '#ffffff',
         fontWeight: 'bold',
     },
