@@ -7,27 +7,28 @@ import { SlideBar, Map } from '../../components';
 
 import styles from './styles';
 
-const Home = () => {
+const Tracking = () => {
     const navigation = useNavigation();
 
-    const navigateToSearch = (typeSearch) => {
-        navigation.navigate('SearchScreen', { typeSearch });
+    const navigateBack = () => {
+        navigation.goBack();
     }
 
     return (
         <SlideBar
+            isLongBar={true}
             mainContent={
                 <View style={styles.containerMap}>
                     <Map />
-                    <TouchableOpacity style={styles.userIcon} onPress={() => { console.log("user") }}>
-                        <FontAwesome5 name="user-circle" size={35} />
+                    <TouchableOpacity style={styles.backIcon} onPress={() => navigateBack()}>
+                        <Ionicons name="md-arrow-round-back" size={30} color="#828282" />
                     </TouchableOpacity>
                 </View>
             }
             barContent={
                 <View style={styles.containerAction}>
                     <View style={styles.actionBar}>
-                        <TouchableOpacity style={styles.buttonFunction} onPress={() => navigateToSearch("SPTRANS")}>
+                        <TouchableOpacity style={styles.buttonFunction} onPress={() => console.log("aaaa")}>
                             <View style={styles.buttonIconBar}>
                                 <FontAwesome5 style={styles.buttonIcon} name="bus" size={24} />
                             </View>
@@ -35,7 +36,7 @@ const Home = () => {
                             <Text style={styles.buttonTitle}>SPTRANS</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.buttonFunction} onPress={() => navigateToSearch("EMTU")}>
+                        <TouchableOpacity style={styles.buttonFunction} onPress={() => console.log("bbbb")}>
                             <View style={styles.buttonIconBar}>
                                 <Ionicons style={styles.buttonIcon} name="md-bus" size={30} />
                             </View>
@@ -57,4 +58,4 @@ const Home = () => {
     );
 }
 
-export default Home;
+export default Tracking;

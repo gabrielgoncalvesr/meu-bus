@@ -51,10 +51,16 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'center'
     },
-    userIcon: {
-        top: 15,
-        right: 15,
-        position: 'absolute'
+    backIcon: {
+        top: 30,
+        left: 20,
+        width: 40,
+        height: 40,
+        borderRadius: 5,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#ffffff'
     }
 });
 

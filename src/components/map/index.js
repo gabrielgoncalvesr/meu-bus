@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Platform, Text, View } from 'react-native';
-import Constants from 'expo-constants';
+import { View } from 'react-native';
 import * as Location from 'expo-location';
 
 import MapView from 'react-native-maps';
 
 import styles from './styles';
 
-const Map = () => {
+const MapComponent = () => {
+    
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
-
-
     const [initialRegion, setInitialRegion] = useState(null);
 
     useEffect(() => {
@@ -54,8 +52,8 @@ const Map = () => {
                 >
                     <MapView.Marker
                         coordinate={{
-                            latitude: -23.6088023,
-                            longitude: -46.7784665
+                            latitude: -23.6088023,//initialRegion.latitude
+                            longitude: -46.7784665//initialRegion.longitude
                         }}
                         title={"Your Current Position"}
                     />
@@ -65,15 +63,4 @@ const Map = () => {
     );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-export default Map;
+export default MapComponent;
