@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
-import { Feather, FontAwesome5, Ionicons, FontAwesome } from '@expo/vector-icons';
-
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Text, View, TouchableOpacity, Image, TextInput, FlatList } from 'react-native';
+import { Text, View, TouchableOpacity, FlatList } from 'react-native';
 
 import request from '../../services/api';
 
