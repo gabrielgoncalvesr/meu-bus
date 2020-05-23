@@ -23,12 +23,12 @@ const Search = () => {
         navigation.goBack();
     }
 
-    const navigateToTracking = (object) => {
-        navigation.navigate('TrackingScreen', { object });
+    const navigateToTracking = (busData) => {
+        navigation.navigate('TrackingScreen', { busData });
     }
 
-    const navigateToSearch = (object) => {
-        navigation.navigate('SearchScreen', { object });
+    const navigateToSearch = () => {
+        navigation.navigate('SearchScreen', { typeSearch: route.params.typeSearch });
     }
 
     async function loadData() {
@@ -41,8 +41,6 @@ const Search = () => {
         }
 
         setLoading(true);
-
-        console.log(typeSearch)
 
         const response = await request.get('/bus', {
             params: { page: page }

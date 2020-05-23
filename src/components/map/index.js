@@ -6,14 +6,14 @@ import MapView from 'react-native-maps';
 
 import styles from './styles';
 
-const MapComponent = () => {
-    
+const MapComponent = (props) => {
+
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const [initialRegion, setInitialRegion] = useState(null);
+    const [coordinates, setCoordinates] = useState([]);
 
     useEffect(() => {
-
         (async () => {
             let { status } = await Location.requestPermissionsAsync();
             if (status !== 'granted') {
@@ -42,6 +42,10 @@ const MapComponent = () => {
         text = JSON.stringify(location);
     }
 
+    useEffect(() => {
+        setCoordinates(props.coordinates);
+    }, []);
+
     return (
         <View style={styles.container}>
             {
@@ -57,6 +61,13 @@ const MapComponent = () => {
                         }}
                         title={"Your Current Position"}
                     />
+
+                    <MapView.Polyline
+                        coordinates={coordinates}
+                        strokeWidth={5}
+                        strokeColor="#2b2e4a"
+                    />
+
                 </MapView>
             }
         </View>
