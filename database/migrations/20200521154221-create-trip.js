@@ -13,8 +13,9 @@ module.exports = {
 				allowNull: false,
 				type: DataTypes.STRING,
 			},
-			tripId: {
+			id: {
 				allowNull: false,
+				primaryKey: true,
 				type: DataTypes.STRING,
 			},
 			headsign: {
@@ -26,9 +27,9 @@ module.exports = {
 				type: DataTypes.INTEGER,
 			},
 			routeId: {
+				unique: true,
 				allowNull: false,
-				primaryKey: true,
-				type: DataTypes.STRING,
+				type: DataTypes.BIGINT,
 			},
 			createdAt: {
 				allowNull: false,

@@ -9,7 +9,7 @@ module.exports = {
 			},
 			routeId: {
 				allowNull: false,
-				type: DataTypes.STRING,
+				type: DataTypes.BIGINT,
 				references: {
 					model: "Trips",
 					key: "routeId"
@@ -17,19 +17,19 @@ module.exports = {
 			},
 			latitude: {
 				allowNull: false,
-				type: DataTypes.STRING,
+				type: DataTypes.DECIMAL(8, 6),
 			},
 			longitude: {
 				allowNull: false,
-				type: DataTypes.STRING,
+				type: DataTypes.DECIMAL(8, 6),
 			},
 			sequence: {
 				allowNull: false,
-				type: DataTypes.STRING,
+				type: DataTypes.INTEGER,
 			},
 			distanceTraveled: {
 				allowNull: false,
-				type: DataTypes.STRING,
+				type: DataTypes.DECIMAL(10, 4),
 			},
 			createdAt: {
 				allowNull: false,

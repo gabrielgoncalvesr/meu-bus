@@ -1,8 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
     const Trip = sequelize.define('Trip', {
         routeId: {
-            type: DataTypes.STRING,
-            primaryKey: true
+            unique: true,
+            type: DataTypes.BIGINT,
         },
         busId: {
             type: DataTypes.STRING,
@@ -12,7 +12,10 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         serviceId: DataTypes.STRING,
-        tripId: DataTypes.STRING,
+        id: {
+            primaryKey: true,
+            type: DataTypes.STRING
+        },
         headsign: DataTypes.STRING,
         direction: DataTypes.INTEGER,
     });
