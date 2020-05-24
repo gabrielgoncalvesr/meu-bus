@@ -71,7 +71,6 @@ const searchBusTripsByBusCode = async (req, res) => {
             res.json(result.rows.map(item => item['dataValues']));
         });
     } catch (e) {
-        console.log(e)
         res.status(404).json({ message: "error getting results" });
     }
 }
