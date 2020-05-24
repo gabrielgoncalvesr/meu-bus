@@ -23,8 +23,8 @@ const Search = () => {
         navigation.goBack();
     }
 
-    const navigateToTracking = (object) => {
-        navigation.navigate('TrackingScreen', { object });
+    const navigateToTracking = (busData) => {
+        navigation.navigate('TrackingScreen', { busData });
     }
 
     const handleTermSearch = async (value) => {

@@ -11,6 +11,10 @@ const styles = StyleSheet.create({
         right: 0,
         bottom: 0,
         position: 'absolute'
+    },
+    stopBusImg: {
+        width: 25,
+        height: 25
     }
 });
 
