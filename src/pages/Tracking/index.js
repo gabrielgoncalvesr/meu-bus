@@ -14,7 +14,9 @@ const Tracking = () => {
     const route = useRoute();
     const navigation = useNavigation();
 
-    const [coordinates, setCoordinates] = useState([]);
+    const [coordinatesStops, setCoordinatesStops] = useState([]);
+    const [coordinatesRoute, setCoordinatesRoute] = useState([]);
+    const [coordenatesLoaded, setCoordenatesLoaded] = useState(false);
 
     const navigateBack = () => {
         navigation.goBack();
@@ -23,19 +25,33 @@ const Tracking = () => {
     async function loadData() {
         const busData = route.params.busData;
 
-        console.log("busData:", busData);
-
-        const response = await request.get('/bus/trip', {
+        const responseRoute = await request.get('/bus/trip', {
             params: { busCode: busData.id, direction: 0 }
         });
 
-        const coordinates = response.data[0]['Trips'][0]['Routes'].map(item => {
-            return { latitude: Number(item.latitude), longitude: Number(item.longitude) }
+        const responseStops = await request.get('/stop/route', {
+            params: { tripId: busData.id + "-" + 0 }
         });
 
-        console.log(coordinates)
+        const coordinatesRoute = responseRoute.data[0]['Trips'][0]['Routes'].map(item => {
+            return {
+                latitude: Number(item.latitude),
+                longitude: Number(item.longitude)
+            }
+        });
 
-        setCoordinates(coordinates);
+        const coordinatesStops = responseStops.data.map(item => {
+            return {
+                description: item.name,
+                latitude: Number(item['Stop'].latitude),
+                longitude: Number(item['Stop'].longitude)
+            }
+        });
+
+        setCoordinatesRoute(coordinatesRoute);
+        setCoordinatesStops(coordinatesStops);
+
+        setCoordenatesLoaded(true);
     }
 
     useEffect(() => {
@@ -47,9 +63,13 @@ const Tracking = () => {
             isLongBar={true}
             mainContent={
                 <View style={styles.containerMap}>
-                    <Map
-                        coordinates={coordinates}
-                    />
+                    {
+                        coordenatesLoaded &&
+                        <Map
+                            coordinatesRoute={coordinatesRoute}
+                            coordinatesStops={coordinatesStops}
+                        />
+                    }
                     <TouchableOpacity style={styles.backIcon} onPress={() => navigateBack()}>
                         <Ionicons name="md-arrow-round-back" size={30} color="#828282" />
                     </TouchableOpacity>
@@ -58,7 +78,7 @@ const Tracking = () => {
             barContent={
                 <View style={styles.containerAction}>
                     <View style={styles.actionBar}>
-                        <TouchableOpacity style={styles.buttonFunction} onPress={() => console.log("aaaa")}>
+                        <TouchableOpacity style={styles.buttonFunction} onPress={() => console.log(coordinates.length)}>
                             <View style={styles.buttonIconBar}>
                                 <FontAwesome5 style={styles.buttonIcon} name="bus" size={24} />
                             </View>

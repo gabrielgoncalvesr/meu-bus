@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons';
 import * as Location from 'expo-location';
 
 import MapView from 'react-native-maps';
 
 import styles from './styles';
 
-const MapComponent = (props) => {
+const MapComponent = ({
+    coordinatesRoute,
+    coordinatesStops
+}) => {
 
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
+    //const [coordinates, setCoordinates] = useState([]);
     const [initialRegion, setInitialRegion] = useState(null);
-    const [coordinates, setCoordinates] = useState([]);
 
     useEffect(() => {
         (async () => {
@@ -34,7 +38,6 @@ const MapComponent = (props) => {
         })();
     }, []);
 
-
     let text = 'Waiting..';
     if (errorMsg) {
         text = errorMsg;
@@ -42,9 +45,7 @@ const MapComponent = (props) => {
         text = JSON.stringify(location);
     }
 
-    useEffect(() => {
-        setCoordinates(props.coordinates);
-    }, []);
+    console.log(coordinatesStops)
 
     return (
         <View style={styles.container}>
@@ -62,12 +63,35 @@ const MapComponent = (props) => {
                         title={"Your Current Position"}
                     />
 
-                    <MapView.Polyline
-                        coordinates={coordinates}
-                        strokeWidth={5}
-                        strokeColor="#2b2e4a"
-                    />
+                    {
+                        (coordinatesStops && coordinatesStops.length) &&
+                        coordinatesStops.map((item, index) => (
+                            <MapView.Marker
+                                key={index}
+                                title={item.description}
+                                coordinate={{
+                                    latitude: item.latitude,
+                                    longitude: item.longitude
+                                }}
+                            >
 
+                                <Image
+                                    style={styles.stopBusImg}
+                                    source={require('../../assets/stopBusIcon.png')}
+                                />
+
+                            </MapView.Marker>
+                        ))
+                    }
+
+                    {
+                        (coordinatesRoute && coordinatesRoute.length) &&
+                        <MapView.Polyline
+                            coordinates={coordinatesRoute}
+                            strokeWidth={5}
+                            strokeColor="#002d96"
+                        />
+                    }
                 </MapView>
             }
         </View>
