@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             references: {
                 model: "trips",
-                key: "id"
+                key: "tripÍd"
             }
         },
         arrivalTime: DataTypes.TIME,

@@ -1,6 +1,12 @@
 module.exports = {
 	up: (queryInterface, DataTypes) => {
 		return queryInterface.createTable('Trips', {
+			id: {
+				allowNull: false,
+				primaryKey: true,
+				autoIncrement: true,
+				type: DataTypes.INTEGER
+			},
 			busId: {
 				allowNull: false,
 				type: DataTypes.STRING,
@@ -13,9 +19,9 @@ module.exports = {
 				allowNull: false,
 				type: DataTypes.STRING,
 			},
-			id: {
+			tripId: {
+				unique: true,
 				allowNull: false,
-				primaryKey: true,
 				type: DataTypes.STRING,
 			},
 			headsign: {

@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Route.associate = function (models) {
-        Route.belongsTo(models.Trip, { foreignKey: 'routeId' });
+        Route.belongsTo(models.Trip, { foreignKey: 'routeId', targetKey: 'routeId' });
     }
 
     return Route;

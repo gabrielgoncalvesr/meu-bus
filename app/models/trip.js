@@ -1,5 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
     const Trip = sequelize.define('Trip', {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+        },
         routeId: {
             unique: true,
             type: DataTypes.BIGINT,
@@ -12,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         serviceId: DataTypes.STRING,
-        id: {
-            primaryKey: true,
+        tripId: {
+            unique: true,
             type: DataTypes.STRING
         },
         headsign: DataTypes.STRING,
@@ -21,11 +25,11 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Trip.associate = function (models) {
-        Trip.belongsTo(models.Bus);
+        Trip.belongsTo(models.Bus, { foreignKey: 'busId', targetKey: 'id' });
     }
 
     Trip.associate = function (models) {
-        Trip.hasMany(models.Route, { foreignKey: 'routeId' });
+        Trip.hasMany(models.Route, { foreignKey: 'routeId', sourceKey: 'routeId' });
     }
 
     return Trip;
