@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Bus.associate = function (models) {
-        Bus.hasMany(models.Trip, { foreignKey: 'busId' });
+        Bus.hasMany(models.Trip, { foreignKey: 'busId', sourceKey: 'id' });
     }
 
     return Bus;
