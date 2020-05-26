@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image } from 'react-native';
-import { FontAwesome5 } from '@expo/vector-icons';
 import * as Location from 'expo-location';
+import { View, Text } from 'react-native';
 
 import MapView from 'react-native-maps';
 
+import MapLocation from '../MapLocation';
+
 import styles from './styles';
 
-const MapComponent = ({
-    coordinatesRoute,
-    coordinatesStops
-}) => {
+const MapComponent = (props) => {
 
+    const [coordinate, setCoordinate] = useState({ latitude: -23.4285, longitude: -46.795379 });
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
-    //const [coordinates, setCoordinates] = useState([]);
     const [initialRegion, setInitialRegion] = useState(null);
 
     useEffect(() => {
@@ -45,27 +43,31 @@ const MapComponent = ({
         text = JSON.stringify(location);
     }
 
-    console.log(coordinatesStops)
-
     return (
         <View style={styles.container}>
             {
                 initialRegion &&
-                <MapView
-                    initialRegion={initialRegion}
-                    style={styles.map}
-                >
+                <MapView initialRegion={initialRegion} style={styles.map} >
                     <MapView.Marker
-                        coordinate={{
-                            latitude: -23.6088023,//initialRegion.latitude
-                            longitude: -46.7784665//initialRegion.longitude
-                        }}
                         title={"Your Current Position"}
+                        coordinate={{ latitude: initialRegion.latitude, longitude: initialRegion.longitude }}
                     />
 
-                    {
-                        (coordinatesStops && coordinatesStops.length) &&
-                        coordinatesStops.map((item, index) => (
+                    {props.children &&
+                        props.children
+                    }
+
+                    {/* {(markerList && markerList.length) &&
+                        markerList.map((item, index) => (
+                            <MapLocation
+                                key={index}
+                                coordinates={item}
+                            />
+                        ))
+                    } */}
+
+                    {(props.coordinatesStops && props.coordinatesStops.length) &&
+                        props.coordinatesStops.map((item, index) => (
                             <MapView.Marker
                                 key={index}
                                 title={item.description}
@@ -74,22 +76,16 @@ const MapComponent = ({
                                     longitude: item.longitude
                                 }}
                             >
-
-                                <Image
-                                    style={styles.stopBusImg}
-                                    source={require('../../assets/stopBusIcon.png')}
-                                />
-
+                                <View style={[styles.stopBusCircle, { backgroundColor: '#ffffff', borderColor: props.routeColor ? props.routeColor : "#002d96" }]} />
                             </MapView.Marker>
                         ))
                     }
 
-                    {
-                        (coordinatesRoute && coordinatesRoute.length) &&
+                    {(props.coordinatesRoute && props.coordinatesRoute.length) &&
                         <MapView.Polyline
-                            coordinates={coordinatesRoute}
+                            coordinates={props.coordinatesRoute}
                             strokeWidth={5}
-                            strokeColor="#002d96"
+                            strokeColor={props.routeColor ? props.routeColor : "#002d96"}
                         />
                     }
                 </MapView>
