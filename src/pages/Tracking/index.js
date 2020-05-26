@@ -16,10 +16,7 @@ import styles from './styles';
 
 import MapView from 'react-native-maps';
 
-const ENDPOINT = "http://192.168.0.148:4001";
-
-
-
+const socket = socketIOClient("http://192.168.0.148:4001");
 
 
 const Tracking = () => {
@@ -33,9 +30,12 @@ const Tracking = () => {
     const [routeColor, setRouteColor] = useState('');
     const [coordinatesStops, setCoordinatesStops] = useState([]);
     const [coordinatesRoute, setCoordinatesRoute] = useState([]);
+
+    const [infoLoaded, setInfoLoaded] = useState(false);
     const [coordenatesLoaded, setCoordenatesLoaded] = useState(false);
 
     const navigateBack = () => {
+        socket.disconnect();
         navigation.goBack();
     }
 
@@ -63,16 +63,11 @@ const Tracking = () => {
         setCoordinatesStops(coordinatesStops);
 
 
+        setInfoLoaded(true);
+    }
 
-
-
-
-
-
-
-
-
-
+    const loadCoordinates = async () => {
+        const busData = route.params.busData;
 
         const responseLine = await request.get('/sptrans/search/line', {
             params: { term: busData.shortName }
@@ -84,54 +79,29 @@ const Tracking = () => {
 
         const lineIdentifier = lineInformations[0]['lineIdentifier'];
 
-        const responsePosition = await request.get('/sptrans/search/position', {
-            params: { code: lineIdentifier }
+        console.log("lineIdentifier" + lineIdentifier)
+
+        // const responsePosition = await request.get('/sptrans/search/position', {
+        //     params: { code: lineIdentifier }
+        // });
+
+
+        console.log("entrando")
+        socket.on("/position", data => {
+            console.log(data)
+
+            const markerList = data.map(item => {
+                return { vehiclePrefix: item.vehiclePrefix, latitude: item.latitudePosition, longitude: item.longitudePosition }
+            });
+    
+            setMarkerList(markerList);
         });
 
-        const markerList = responsePosition.data.map(item => {
-            return { vehiclePrefix: item.vehiclePrefix, latitude: item.latitudePosition, longitude: item.longitudePosition }
-        });
-
-        setMarkerList(markerList);
-
-
-
-
-
+        socket.emit("/position", { code: lineIdentifier });
 
         setCoordenatesLoaded(true);
     }
 
-    const loadCoordinates = async () => {
-
-
-        //console.log("markerList size:" + markerList.length)
-
-
-
-        // setInterval(() => {
-        //     console.log("repeating");
-
-        // }, 10000);
-
-    }
-
-
-
-
-
-
-
-    useEffect(() => {
-        let cont = 0;
-
-        const socket = socketIOClient(ENDPOINT);
-        socket.on("/position", data => {
-            console.log("resposta" + cont++)
-        });
-
-        socket.emit("/position", { code: "2486" });
-    }, []);
 
 
 
@@ -153,9 +123,8 @@ const Tracking = () => {
             mainContent={
                 <View style={styles.containerMap}>
                     {
-                        coordenatesLoaded &&
+                        (infoLoaded && coordenatesLoaded) &&
                         <Map
-                            markerList={markerList}
                             routeColor={routeColor}
                             coordinatesRoute={coordinatesRoute}
                             coordinatesStops={coordinatesStops}
