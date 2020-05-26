@@ -35,7 +35,7 @@ const searchLine = async (req, res) => {
     return res.json(line)
 }
 
-const serchPosition = async (req, res) => {
+const searchPosition = async (req, res) => {
     const { code } = req.query;
 
     const response = await get(`${process.env.SPTRANS_API_URL}/Posicao/Linha`, `codigoLinha=${code}`, headers);
@@ -55,4 +55,4 @@ const serchPosition = async (req, res) => {
 
 module.exports.searchLine = searchLine;
 module.exports.loginSPTrans = loginSPTrans;
-module.exports.serchPosition = serchPosition;
+module.exports.searchPosition = searchPosition;
