@@ -11,7 +11,8 @@ const MapLocationComponent = ({
     const [mapMarker, setMapMarker] = useState();
 
     useEffect(() => {
-        console.log("load coordinates" + coordinates)
+        //console.log("TESTE", coordinates)
+        //console.log("load coordinates" + coordinates)
 
         // const newCoordinate = { latitude: coordinates.latitude, longitude: coordinates.longitude };
 
@@ -25,7 +26,6 @@ const MapLocationComponent = ({
         //     coordinate.timing(newCoordinate).start();
         //     setCoordinate(coordinate);
         // }
-
     }, [coordinates]);
 
     return (

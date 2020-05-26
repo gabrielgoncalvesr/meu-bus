@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';

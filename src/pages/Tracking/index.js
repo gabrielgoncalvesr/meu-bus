@@ -3,11 +3,24 @@ import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
-import { SlideBar, Map } from '../../components';
+
+import socketIOClient from "socket.io-client";
+
+
+import { SlideBar, Map, MapLocation } from '../../components';
 
 import request from '../../services/api';
 
 import styles from './styles';
+
+
+import MapView from 'react-native-maps';
+
+const ENDPOINT = "http://192.168.0.148:4001";
+
+
+
+
 
 const Tracking = () => {
 
@@ -90,7 +103,7 @@ const Tracking = () => {
     }
 
     const loadCoordinates = async () => {
-        
+
 
         //console.log("markerList size:" + markerList.length)
 
@@ -102,6 +115,32 @@ const Tracking = () => {
         // }, 10000);
 
     }
+
+
+
+
+
+
+
+    useEffect(() => {
+        let cont = 0;
+
+        const socket = socketIOClient(ENDPOINT);
+        socket.on("/position", data => {
+            console.log("resposta" + cont++)
+        });
+
+        socket.emit("/position", { code: "2486" });
+    }, []);
+
+
+
+
+
+
+
+
+
 
     useEffect(() => {
         loadData();
@@ -120,7 +159,16 @@ const Tracking = () => {
                             routeColor={routeColor}
                             coordinatesRoute={coordinatesRoute}
                             coordinatesStops={coordinatesStops}
-                        />
+                        >
+                            {(markerList && markerList.length) &&
+                                markerList.map((item, index) => (
+                                    <MapLocation
+                                        key={index}
+                                        coordinates={item}
+                                    />
+                                ))
+                            }
+                        </Map>
                     }
                     <TouchableOpacity style={styles.backIcon} onPress={() => navigateBack()}>
                         <Ionicons name="md-arrow-round-back" size={30} color="#828282" />

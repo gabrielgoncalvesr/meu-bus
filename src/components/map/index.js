@@ -8,12 +8,7 @@ import MapLocation from '../MapLocation';
 
 import styles from './styles';
 
-const MapComponent = ({
-    routeColor,
-    markerList,
-    coordinatesRoute,
-    coordinatesStops
-}) => {
+const MapComponent = (props) => {
 
     const [coordinate, setCoordinate] = useState({ latitude: -23.4285, longitude: -46.795379 });
     const [location, setLocation] = useState(null);
@@ -58,17 +53,21 @@ const MapComponent = ({
                         coordinate={{ latitude: initialRegion.latitude, longitude: initialRegion.longitude }}
                     />
 
-                    {(markerList && markerList.length) &&
+                    {props.children &&
+                        props.children
+                    }
+
+                    {/* {(markerList && markerList.length) &&
                         markerList.map((item, index) => (
                             <MapLocation
                                 key={index}
                                 coordinates={item}
                             />
                         ))
-                    }
+                    } */}
 
-                    {(coordinatesStops && coordinatesStops.length) &&
-                        coordinatesStops.map((item, index) => (
+                    {(props.coordinatesStops && props.coordinatesStops.length) &&
+                        props.coordinatesStops.map((item, index) => (
                             <MapView.Marker
                                 key={index}
                                 title={item.description}
@@ -77,16 +76,16 @@ const MapComponent = ({
                                     longitude: item.longitude
                                 }}
                             >
-                                <View style={[styles.stopBusCircle, { backgroundColor: '#ffffff', borderColor: routeColor ? routeColor : "#002d96" }]} />
+                                <View style={[styles.stopBusCircle, { backgroundColor: '#ffffff', borderColor: props.routeColor ? props.routeColor : "#002d96" }]} />
                             </MapView.Marker>
                         ))
                     }
 
-                    {(coordinatesRoute && coordinatesRoute.length) &&
+                    {(props.coordinatesRoute && props.coordinatesRoute.length) &&
                         <MapView.Polyline
-                            coordinates={coordinatesRoute}
+                            coordinates={props.coordinatesRoute}
                             strokeWidth={5}
-                            strokeColor={routeColor ? routeColor : "#002d96"}
+                            strokeColor={props.routeColor ? props.routeColor : "#002d96"}
                         />
                     }
                 </MapView>
