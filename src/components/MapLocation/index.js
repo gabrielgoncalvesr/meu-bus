@@ -8,30 +8,30 @@ import styles from './styles';
 const MapLocationComponent = ({
     coordinates,
 }) => {
+
     const [mapMarker, setMapMarker] = useState();
+    const [coordinate, setCoordinate] = useState();
 
     useEffect(() => {
-        //console.log("TESTE", coordinates)
+        console.log("new coordinates", coordinates)
         //console.log("load coordinates" + coordinates)
 
-        // const newCoordinate = { latitude: coordinates.latitude, longitude: coordinates.longitude };
+        const newCoordinate = { latitude: coordinates.latitude, longitude: coordinates.longitude };
+        console.log(newCoordinate)
 
-        // if (Platform.OS === 'android') {
-        //     console.log("teste1");
-        //     if (mapMarker) {
-        //         mapMarker._component.animateMarkerToCoordinate(newCoordinate, 500);
-        //     }
-        // } else {
-        //     console.log("teste2");
-        //     coordinate.timing(newCoordinate).start();
-        //     setCoordinate(coordinate);
+        console.log("teste1");
+        // if (mapMarker) {
+        //     mapMarker._component.animateMarkerToCoordinate(newCoordinate, 500);
         // }
+
     }, [coordinates]);
+
+    //{ latitude: coordinates.latitude, longitude: coordinates.longitude }
 
     return (
         <MapView.Marker.Animated
             ref={marker => setMapMarker(marker)}
-            coordinate={{ latitude: coordinates.latitude, longitude: coordinates.longitude }}
+            coordinate={coordinate}
         >
             <Image source={require('../../assets/busIcon.png')} style={styles.busIconImage} />
         </MapView.Marker.Animated>

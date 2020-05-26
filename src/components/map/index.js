@@ -53,18 +53,7 @@ const MapComponent = (props) => {
                         coordinate={{ latitude: initialRegion.latitude, longitude: initialRegion.longitude }}
                     />
 
-                    {props.children &&
-                        props.children
-                    }
-
-                    {/* {(markerList && markerList.length) &&
-                        markerList.map((item, index) => (
-                            <MapLocation
-                                key={index}
-                                coordinates={item}
-                            />
-                        ))
-                    } */}
+                    {props.children && props.children}
 
                     {(props.coordinatesStops && props.coordinatesStops.length) &&
                         props.coordinatesStops.map((item, index) => (
