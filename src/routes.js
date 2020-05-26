@@ -7,6 +7,7 @@ import SafeAreaView from 'react-native-safe-area-view';
 
 import Home from './pages/Home';
 import Search from './pages/Search';
+import BusList from './pages/BusList';
 import Tracking from './pages/Tracking';
 
 function HomeScreen({ navigation }) {
@@ -36,6 +37,15 @@ function TrackingScreen({ navigation }) {
     );
 }
 
+function BusListScreen({ navigation }) {
+    return (
+        <SafeAreaView style={[styles.container, { backgroundColor: '#f5f5f5' }]}>
+            <StatusBar barStyle="light-content" backgroundColor="#222831" />
+            <BusList />
+        </SafeAreaView>
+    );
+}
+
 const Stack = createStackNavigator();
 
 export default function Routes() {
@@ -45,6 +55,7 @@ export default function Routes() {
                 <Stack.Navigator headerMode="none">
                     <Stack.Screen name="HomeScreen" component={HomeScreen} />
                     <Stack.Screen name="SearchScreen" component={SearchScreen} />
+                    <Stack.Screen name="BusListScreen" component={BusListScreen} />
                     <Stack.Screen name="TrackingScreen" component={TrackingScreen} />
                 </Stack.Navigator>
             </NavigationContainer>

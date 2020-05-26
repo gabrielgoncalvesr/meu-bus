@@ -10,8 +10,8 @@ import styles from './styles';
 const Home = () => {
     const navigation = useNavigation();
 
-    const navigateToSearch = (typeSearch) => {
-        navigation.navigate('SearchScreen', { typeSearch });
+    const navigateToList = (typeSearch) => {
+        navigation.navigate('BusListScreen', { typeSearch });
     }
 
     return (
@@ -27,7 +27,7 @@ const Home = () => {
             barContent={
                 <View style={styles.containerAction}>
                     <View style={styles.actionBar}>
-                        <TouchableOpacity style={styles.buttonFunction} onPress={() => navigateToSearch("SPTRANS")}>
+                        <TouchableOpacity style={styles.buttonFunction} onPress={() => navigateToList("SPTRANS")}>
                             <View style={styles.buttonIconBar}>
                                 <FontAwesome5 style={styles.buttonIcon} name="bus" size={24} />
                             </View>
@@ -35,7 +35,7 @@ const Home = () => {
                             <Text style={styles.buttonTitle}>SPTRANS</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.buttonFunction} onPress={() => navigateToSearch("EMTU")}>
+                        <TouchableOpacity style={styles.buttonFunction} onPress={() => navigateToList("EMTU")}>
                             <View style={styles.buttonIconBar}>
                                 <Ionicons style={styles.buttonIcon} name="md-bus" size={30} />
                             </View>

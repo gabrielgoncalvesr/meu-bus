@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import { Dimensions } from "react-native";
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -22,43 +24,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    searchIcon: {
-        color: '#bdbdbd',
-        padding: 12
-    },
-    searchArea: {
-        flexDirection: 'row',
-        backgroundColor: '#f5f5f5'
-    },
-    searchInput: {
-        flex: 1,
+    contentTitle: {
+        fontSize: 16,
         fontWeight: 'bold',
-        color: '#595959',
-        fontSize: 18
+        color: '#828282'
     },
     divisorBar: {
         height: 50,
         paddingLeft: 20,
         alignItems: 'flex-start',
         justifyContent: 'center'
-    },
-    infoContainer: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ffffff',
-    },
-    infoText: {
-        fontSize: 16,
-        color: '#828282',
-        fontWeight: 'bold',
-
-    },
-    loadingContainer: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ffffff',
     },
     contentResults: {
         width: '100%',
@@ -82,7 +57,6 @@ const styles = StyleSheet.create({
     },
     busIdentificationText: {
         fontSize: 14,
-        color: '#ffffff',
         fontWeight: 'bold',
     },
     touchableArea: {
