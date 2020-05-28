@@ -13,8 +13,16 @@ const styles = StyleSheet.create({
         position: 'absolute'
     },
     stopBusImg: {
-        width: 25,
-        height: 25
+        width: 30,
+        height: 30
+    },
+    stopBusCircle: {
+        margin: 0,
+        padding: 0,
+        width: 16,
+        height: 16,
+        borderRadius: 16 / 2,
+        borderWidth: 3
     }
 });
 
