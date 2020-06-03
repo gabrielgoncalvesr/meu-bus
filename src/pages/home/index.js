@@ -14,12 +14,16 @@ const Home = () => {
         navigation.navigate('BusListScreen', { typeSearch });
     }
 
+    const navigateToUser = () => {
+        navigation.navigate('UserScreen');
+    }
+
     return (
         <SlideBar
             mainContent={
                 <View style={styles.containerMap}>
                     <Map />
-                    <TouchableOpacity style={styles.userIcon} onPress={() => { console.log("user") }}>
+                    <TouchableOpacity style={styles.userIcon} onPress={() => navigateToUser()}>
                         <FontAwesome5 name="user-circle" size={35} />
                     </TouchableOpacity>
                 </View>
