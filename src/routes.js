@@ -9,8 +9,9 @@ import Home from './pages/Home';
 import Search from './pages/Search';
 import BusList from './pages/BusList';
 import Tracking from './pages/Tracking';
+import User from './pages/User';
 
-function HomeScreen({ navigation }) {
+const HomeScreen = () => {
     return (
         <SafeAreaView style={[styles.container, { backgroundColor: '#f5f5f5' }]}>
             <StatusBar barStyle="light-content" backgroundColor="#222831" />
@@ -19,7 +20,7 @@ function HomeScreen({ navigation }) {
     );
 }
 
-function SearchScreen({ navigation }) {
+const SearchScreen = () => {
     return (
         <SafeAreaView style={[styles.container, { backgroundColor: '#f5f5f5' }]}>
             <StatusBar barStyle="light-content" backgroundColor="#222831" />
@@ -28,7 +29,7 @@ function SearchScreen({ navigation }) {
     );
 }
 
-function TrackingScreen({ navigation }) {
+const TrackingScreen = () => {
     return (
         <SafeAreaView style={[styles.container, { backgroundColor: '#f5f5f5' }]}>
             <StatusBar barStyle="light-content" backgroundColor="#222831" />
@@ -37,11 +38,20 @@ function TrackingScreen({ navigation }) {
     );
 }
 
-function BusListScreen({ navigation }) {
+const BusListScreen = () => {
     return (
         <SafeAreaView style={[styles.container, { backgroundColor: '#f5f5f5' }]}>
             <StatusBar barStyle="light-content" backgroundColor="#222831" />
             <BusList />
+        </SafeAreaView>
+    );
+}
+
+const UserScreen = () => {
+    return (
+        <SafeAreaView style={[styles.container, { backgroundColor: '#f5f5f5' }]}>
+            <StatusBar barStyle="light-content" backgroundColor="#222831" />
+            <User />
         </SafeAreaView>
     );
 }
@@ -57,6 +67,7 @@ export default function Routes() {
                     <Stack.Screen name="SearchScreen" component={SearchScreen} />
                     <Stack.Screen name="BusListScreen" component={BusListScreen} />
                     <Stack.Screen name="TrackingScreen" component={TrackingScreen} />
+                    <Stack.Screen name="UserScreen" component={UserScreen} />
                 </Stack.Navigator>
             </NavigationContainer>
         </SafeAreaProvider>
@@ -64,5 +75,9 @@ export default function Routes() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
 });

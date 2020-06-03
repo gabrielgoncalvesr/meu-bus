@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#828282',
         fontWeight: 'bold',
-
     },
     loadingContainer: {
         flex: 1,
