@@ -1,23 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { FontAwesome5, Ionicons } from '@expo/vector-icons';
-import { Text, View, TouchableOpacity } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
-
-
+import MapView from 'react-native-maps';
 import socketIOClient from "socket.io-client";
-
-
-import { SlideBar, Map, MapLocation } from '../../components';
+import {
+    FontAwesome5,
+    Ionicons
+} from '@expo/vector-icons';
+import {
+    useNavigation,
+    useRoute
+} from '@react-navigation/native';
+import {
+    Text,
+    View,
+    TouchableOpacity,
+    YellowBox
+} from 'react-native';
+import {
+    SlideBar,
+    Map,
+    MapLocation
+} from '../../components';
 
 import request from '../../services/api';
 
 import styles from './styles';
 
-
-import MapView from 'react-native-maps';
-
-const socket = socketIOClient("http://192.168.0.148:4001");
-
+const socket = socketIOClient("http://192.168.0.148:4001", { jsonp: false, agent: '-', pfx: '-', cert: '-', ca: '-', ciphers: '-', rejectUnauthorized: '-', perMessageDeflate: '-' });
 
 const Tracking = () => {
 
@@ -93,7 +101,7 @@ const Tracking = () => {
             const markerList = data.map(item => {
                 return { vehiclePrefix: item.vehiclePrefix, latitude: item.latitudePosition, longitude: item.longitudePosition }
             });
-    
+
             setMarkerList(markerList);
         });
 
