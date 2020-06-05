@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
 
 import { SlideBar, Map } from '../../components';
 
@@ -9,13 +9,17 @@ import styles from './styles';
 
 const Home = () => {
     const navigation = useNavigation();
-
-    const navigateToList = (typeSearch) => {
-        navigation.navigate('BusListScreen', { typeSearch });
-    }
-
+    
     const navigateToUser = () => {
         navigation.navigate('UserScreen');
+    }
+    
+    const navigateToList = () => {
+        navigation.navigate('BusListScreen');
+    }
+
+    const navigateToSearch = () => {
+        navigation.navigate('SearchScreen');
     }
 
     return (
@@ -31,20 +35,20 @@ const Home = () => {
             barContent={
                 <View style={styles.containerAction}>
                     <View style={styles.actionBar}>
-                        <TouchableOpacity style={styles.buttonFunction} onPress={() => navigateToList("SPTRANS")}>
+                        <TouchableOpacity style={styles.buttonFunction} onPress={() => navigateToList()}>
                             <View style={styles.buttonIconBar}>
                                 <FontAwesome5 style={styles.buttonIcon} name="bus" size={24} />
                             </View>
 
-                            <Text style={styles.buttonTitle}>SPTRANS</Text>
+                            <Text style={styles.buttonTitle}>Ver Linhas</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.buttonFunction} onPress={() => navigateToList("EMTU")}>
+                        <TouchableOpacity style={styles.buttonFunction} onPress={() => navigateToSearch()}>
                             <View style={styles.buttonIconBar}>
-                                <Ionicons style={styles.buttonIcon} name="md-bus" size={30} />
+                                <FontAwesome style={styles.buttonIcon} name="search" size={30} />
                             </View>
 
-                            <Text style={styles.buttonTitle}>EMTU</Text>
+                            <Text style={styles.buttonTitle}>Pesquisar Linha</Text>
                         </TouchableOpacity>
                     </View>
 

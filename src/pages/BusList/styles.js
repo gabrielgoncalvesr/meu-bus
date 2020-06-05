@@ -86,6 +86,10 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2,
         borderColor: '#f5f5f5',
     },
+    divisorBarText: {
+        color: '#999999',
+        fontWeight: 'bold'
+    }
 });
 
 export default styles;

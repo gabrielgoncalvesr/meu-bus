@@ -20,20 +20,20 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around'
     },
     buttonFunction: {
-        width: 90,
+        width: 100,
         height: 90,
         borderRadius: 5,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#2b2e4a'
+        backgroundColor: '#162447'
     },
     buttonTitle: {
         fontSize: 14,
-        color: '#d1d1d1',
-        fontWeight: 'bold'
+        color: '#e6eef5',
+        fontWeight: 'bold',
     },
     buttonIcon: {
-        color: '#d1d1d1',
+        color: '#e6eef5',
     },
     buttonIconBar: {
         height: 45,
