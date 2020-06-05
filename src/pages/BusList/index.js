@@ -9,7 +9,6 @@ import styles from './styles';
 
 const Search = () => {
 
-    const route = useRoute();
     const navigation = useNavigation();
 
     const [page, setPage] = useState(0);
@@ -17,18 +16,12 @@ const Search = () => {
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(false);
 
-    const typeSearch = route.params.typeSearch;
-
     const navigateBack = () => {
         navigation.goBack();
     }
 
     const navigateToTracking = (busData) => {
         navigation.navigate('TrackingScreen', { busData });
-    }
-
-    const navigateToSearch = () => {
-        navigation.navigate('SearchScreen', { typeSearch: route.params.typeSearch });
     }
 
     async function loadData() {
@@ -60,22 +53,20 @@ const Search = () => {
     return (
         <View style={styles.container}>
             <View style={styles.searchBar}>
-
                 <TouchableOpacity style={styles.iconArea} onPress={() => navigateBack()}>
-                    <Ionicons name="md-arrow-round-back" size={30} color="#828282" />
+                    <Ionicons name="md-arrow-round-back" size={30} color="#162447" />
                 </TouchableOpacity>
 
                 <View>
-                    <Text style={styles.contentTitle}>{typeSearch}</Text>
+                    <Text style={styles.contentTitle}>SPTRANS</Text>
                 </View>
 
-                <TouchableOpacity style={styles.iconArea} onPress={() => navigateToSearch()}>
-                    <FontAwesome name="search" size={24} color="#828282" />
+                <TouchableOpacity style={styles.iconArea}>
                 </TouchableOpacity>
             </View>
 
             <View style={styles.divisorBar}>
-                <Text>TODAS AS LINHAS</Text>
+                <Text style={styles.divisorBarText}>TODAS AS LINHAS</Text>
             </View>
 
             <FlatList

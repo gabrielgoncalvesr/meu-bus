@@ -9,15 +9,12 @@ import styles from './styles';
 
 const Search = () => {
 
-    const route = useRoute();
     const navigation = useNavigation();
 
     const [data, setData] = useState([]);
     const [termSearch, setTermSearch] = useState("");
     const [dataLoading, setDataLoading] = useState(false);
     const [emptySearch, setEmptySearch] = useState(false);
-
-    const typeSearch = route.params.typeSearch;
 
     const navigateBack = () => {
         navigation.goBack();
@@ -54,7 +51,7 @@ const Search = () => {
         <View style={styles.container}>
             <View style={styles.searchBar}>
                 <TouchableOpacity style={styles.iconArea} onPress={() => navigateBack()}>
-                    <Ionicons name="md-arrow-round-back" size={30} color="#828282" />
+                    <Ionicons name="md-arrow-round-back" size={30} color="#162447" />
                 </TouchableOpacity>
 
                 <View style={styles.searchArea}>
@@ -68,7 +65,7 @@ const Search = () => {
             </View>
 
             <View style={styles.divisorBar}>
-                <Text>BUSCA DE ROTAS</Text>
+                <Text style={styles.divisorBarText}>BUSCA DE ROTAS</Text>
             </View>
 
             {
