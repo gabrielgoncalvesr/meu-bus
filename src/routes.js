@@ -10,6 +10,7 @@ import Search from './pages/Search';
 import BusList from './pages/BusList';
 import Tracking from './pages/Tracking';
 import User from './pages/User';
+import Authentication from './pages/Authentication';
 
 const HomeScreen = () => {
     return (
@@ -56,6 +57,15 @@ const UserScreen = () => {
     );
 }
 
+const AuthenticationScreen = () => {
+    return (
+        <SafeAreaView style={[styles.container, { backgroundColor: '#f5f5f5' }]}>
+            <StatusBar barStyle="light-content" backgroundColor="#222831" />
+            <Authentication />
+        </SafeAreaView>
+    );
+}
+
 const Stack = createStackNavigator();
 
 export default function Routes() {
@@ -68,6 +78,7 @@ export default function Routes() {
                     <Stack.Screen name="BusListScreen" component={BusListScreen} />
                     <Stack.Screen name="TrackingScreen" component={TrackingScreen} />
                     <Stack.Screen name="UserScreen" component={UserScreen} />
+                    <Stack.Screen name="AuthenticationScreen" component={AuthenticationScreen} />
                 </Stack.Navigator>
             </NavigationContainer>
         </SafeAreaProvider>
