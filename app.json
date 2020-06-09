@@ -1,28 +1,34 @@
 {
-  "expo": {
-    "name": "meu-bus-mobile",
-    "slug": "meu-bus-mobile",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
+    "expo": {
+        "name": "MeuBus",
+        "slug": "meu-bus-mobile",
+        "platforms": [
+            "ios",
+            "android",
+        ],
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/icon.png",
+        "splash": {
+            "image": "./assets/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
+        },
+        "updates": {
+            "fallbackToCacheTimeout": 0
+        },
+        "assetBundlePatterns": [
+            "**/*"
+        ],
+        "android": {
+            "versionCode": 1,
+            "package": "com.thecode.meubus",
+            "config": {
+                "googleMaps": {
+                    "apiKey": ""
+                }
+            },
+            "googleServicesFile": "./google-services.json"
+        }
     }
-  }
 }
