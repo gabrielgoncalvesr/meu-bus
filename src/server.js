@@ -4,5 +4,5 @@ const { loginSPTrans } = require('./services/sptrans');
 
 loginSPTrans();
 
-socketServer.listen(4001, () => console.log(`Listening on port ${4001}`));
+socketServer.listen(process.env.API_SOCKET_PORT, () => console.log(`Listening on port ${process.env.API_SOCKET_PORT}`));
 app.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}`));
