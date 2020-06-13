@@ -16,5 +16,9 @@ module.exports = (sequelize, DataTypes) => {
         Bus.hasMany(models.Trip, { foreignKey: 'busId', sourceKey: 'id' });
     }
 
+    Bus.associate = function (models) {
+        Bus.hasMany(models.History, { foreignKey: 'busId', sourceKey: 'id', as: 'history'});
+    }
+
     return Bus;
 }

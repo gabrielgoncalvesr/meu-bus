@@ -3,7 +3,7 @@ const router = express.Router();
 
 const {
     searchBuses,
-    searchBusTripsByBusCode,
+    searchBusTripsByBusCode
 } = require('../../services/bus');
 
 router.get('/', searchBuses);
