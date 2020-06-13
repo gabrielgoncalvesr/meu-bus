@@ -3,6 +3,8 @@ import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Text, View, TouchableOpacity, FlatList } from 'react-native';
 
+import { BusList, BackButton, DivisorBar } from '../../components';
+
 import request from '../../services/api';
 
 import styles from './styles';
@@ -20,8 +22,8 @@ const Search = () => {
         navigation.goBack();
     }
 
-    const navigateToTracking = (busData) => {
-        navigation.navigate('TrackingScreen', { busData });
+    const navigateToTracking = (value) => {
+        navigation.navigate('TrackingScreen', { busData: value });
     }
 
     async function loadData() {
@@ -51,55 +53,22 @@ const Search = () => {
     }, []);
 
     return (
-        <View style={styles.container}>
-            <View style={styles.searchBar}>
-                <TouchableOpacity style={styles.iconArea} onPress={() => navigateBack()}>
-                    <Ionicons name="md-arrow-round-back" size={30} color="#162447" />
-                </TouchableOpacity>
+        <View style={styles.content}>
 
-                <View>
-                    <Text style={styles.contentTitle}>SPTRANS</Text>
-                </View>
+            <BackButton callback={() => navigateBack()} />
 
-                <TouchableOpacity style={styles.iconArea}>
-                </TouchableOpacity>
+            <View style={styles.titleBar}>
+                <Text style={styles.title}>SPTRANS</Text>
             </View>
 
-            <View style={styles.divisorBar}>
-                <Text style={styles.divisorBarText}>TODAS AS LINHAS</Text>
-            </View>
+            <DivisorBar text={"TODAS AS LINHAS"} />
 
-            <FlatList
-                style={styles.contentResults}
+            <BusList
                 data={data}
-                keyExtractor={item => String(item.id)}
-                showsVerticalScrollIndicator={false}
-                onEndReached={loadData}
-                onEndReachedThreshold={0.5}
-                renderItem={({ item }) => (
-                    <>
-                        <View style={styles.busItem}>
-                            <View style={[styles.busIdentificationBox, { backgroundColor: `#${item.color}` }]}>
-                                <Text style={[styles.busIdentificationText, { color: `#${item.textColor}` }]}>{item.shortName}</Text>
-                            </View>
-                            <TouchableOpacity
-                                style={styles.touchableArea}
-                                onPress={() => navigateToTracking(item)}
-                            >
-                                <View style={styles.busInformationBox}>
-                                    <Text style={styles.busInformationText}>{item.longName}</Text>
-                                </View>
-
-                                <View style={styles.busIconBox}>
-                                    <FontAwesome name="chevron-right" size={24} color="#828282" />
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={styles.itemDivisor} />
-                    </>
-                )}
+                callback={() => loadData()}
+                onPressBar={navigateToTracking}
             />
+
         </View>
     );
 }

@@ -1,7 +1,18 @@
 import React, { useState } from 'react';
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { Text, View, TouchableOpacity, TextInput, FlatList, ActivityIndicator } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import {
+    View,
+    AsyncStorage
+} from 'react-native';
+
+import {
+    Input,
+    Loading,
+    BusList,
+    Message,
+    BackButton,
+    DivisorBar,
+} from '../../components';
 
 import request from '../../services/api';
 
@@ -12,27 +23,37 @@ const Search = () => {
     const navigation = useNavigation();
 
     const [data, setData] = useState([]);
-    const [termSearch, setTermSearch] = useState("");
-    const [dataLoading, setDataLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [emptySearch, setEmptySearch] = useState(false);
 
     const navigateBack = () => {
         navigation.goBack();
     }
 
-    const navigateToTracking = (busData) => {
-        navigation.navigate('TrackingScreen', { busData });
+    const navigateToTracking = async (value) => {
+        const user = JSON.parse(await AsyncStorage.getItem('user'));
+        console.log(user)
+        if (!user) {
+            await request.post({
+                method: 'post',
+                url: '/history',
+                data: {
+                    busId: value.id,
+                    userId: user.id
+                }
+            });
+        }
+
+        navigation.navigate('TrackingScreen', { busData: value });
     }
 
     const handleTermSearch = async (value) => {
-        setTermSearch(value);
-
         setData([]);
-        setDataLoading(true);
+        setLoading(true);
         setEmptySearch(false);
 
         if (!value && value === "") {
-            setDataLoading(false);
+            setLoading(false);
             return;
         }
 
@@ -40,78 +61,43 @@ const Search = () => {
             params: { searchTerm: value }
         });
 
-        setDataLoading(false);
-        setData(response.data);
         if (response.data.length === 0) {
             setEmptySearch(true);
         }
+        setLoading(false);
+        setData(response.data);
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.searchBar}>
-                <TouchableOpacity style={styles.iconArea} onPress={() => navigateBack()}>
-                    <Ionicons name="md-arrow-round-back" size={30} color="#162447" />
-                </TouchableOpacity>
+        <View style={styles.content}>
 
-                <View style={styles.searchArea}>
-                    <FontAwesome style={styles.searchIcon} name="search" size={20} />
-                    <TextInput
-                        autoCapitalize='none'
-                        placeholder="bus number"
-                        style={styles.searchInput} onChangeText={text => handleTermSearch(text)} value={termSearch}
+            <BackButton callback={() => navigateBack()} />
+
+            <View style={styles.contentBar}>
+                <View style={styles.searchBar}>
+                    <Input
+                        light
+                        hasIcon
+                        iconSize={20}
+                        iconType={"search"}
+                        placeholder={"código do linha, nome da linha..."}
+                        callback={value => handleTermSearch(value)}
                     />
                 </View>
             </View>
 
-            <View style={styles.divisorBar}>
-                <Text style={styles.divisorBarText}>BUSCA DE ROTAS</Text>
-            </View>
+            <DivisorBar text={"BUSCA DE ROTAS"} />
 
-            {
-                dataLoading &&
-                <View style={styles.loadingContainer}>
-                    <ActivityIndicator size="large" color="#828282" />
-                </View>
+            <Loading loading={loading} />
+
+            {emptySearch &&
+                <Message text={"Nenhum resultado encontrado"} />
             }
 
-            {
-                emptySearch &&
-                <View style={styles.infoContainer}>
-                    <Text style={styles.infoText}>Nenhum resultado encontrado</Text>
-                </View>
-            }
-
-            {
-                !emptySearch &&
-                <FlatList
-                    style={styles.contentResults}
+            {!emptySearch &&
+                <BusList
                     data={data}
-                    keyExtractor={item => item.id}
-                    showsVerticalScrollIndicator={false}
-                    renderItem={({ item }) => (
-                        <>
-                            <View style={styles.busItem}>
-                                <View style={[styles.busIdentificationBox, { backgroundColor: `#${item.color}` }]}>
-                                    <Text style={styles.busIdentificationText}>{item.shortName}</Text>
-                                </View>
-                                <TouchableOpacity
-                                    style={styles.touchableArea}
-                                    onPress={() => navigateToTracking(item)}
-                                >
-                                    <View style={styles.busInformationBox}>
-                                        <Text style={styles.busInformationText}>{item.longName}</Text>
-                                    </View>
-
-                                    <View style={styles.busIconBox}>
-                                        <FontAwesome name="chevron-right" size={24} color="#828282" />
-                                    </View>
-                                </TouchableOpacity>
-                            </View>
-
-                            <View style={styles.itemDivisor} />
-                        </>
-                    )}
+                    onPressBar={navigateToTracking}
                 />
             }
         </View>
