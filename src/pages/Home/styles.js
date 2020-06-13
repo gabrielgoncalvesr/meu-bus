@@ -1,25 +1,25 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    containerAction: {
-        height: '100%',
-        borderRadius: 5
+    content: {
+        height: '100%'
     },
-    containerMap: {
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        position: 'absolute'
+    userIconContent: {
+        top: 20,
+        right: 20,
+        position: 'absolute',
     },
-    actionBar: {
+    userIcon: {
+        fontSize: 45
+    },
+    barContent: {
         height: 130,
         backgroundColor: '#ffffff',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around'
     },
-    buttonFunction: {
+    button: {
         width: 100,
         height: 90,
         borderRadius: 5,
@@ -27,15 +27,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#162447'
     },
-    buttonTitle: {
+    title: {
         fontSize: 14,
         color: '#e6eef5',
         fontWeight: 'bold',
     },
-    buttonIcon: {
+    icon: {
+        fontSize: 25,
         color: '#e6eef5',
     },
-    buttonIconBar: {
+    iconContent: {
         height: 45,
     },
     contentMap: {
@@ -45,16 +46,9 @@ const styles = StyleSheet.create({
         bottom: 0,
         position: 'absolute'
     },
-    divisorBar: {
-        height: 50,
-        paddingLeft: 20,
-        alignItems: 'flex-start',
-        justifyContent: 'center'
-    },
-    userIcon: {
-        top: 15,
-        right: 15,
-        position: 'absolute'
+    historyContent: {
+        height: '100%',
+        backgroundColor: '#FFFFFF'
     }
 });
 

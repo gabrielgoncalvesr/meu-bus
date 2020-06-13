@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { View, Animated, TouchableOpacity } from 'react-native';
-
+import React, { useState } from 'react';
 import { Feather } from '@expo/vector-icons';
+import {
+    View,
+    Animated,
+    TouchableOpacity
+} from 'react-native';
 
 import styles from './styles';
-import { set } from 'react-native-reanimated';
 
 const SlideBarComponent = ({
     isLongBar,
@@ -13,23 +15,19 @@ const SlideBarComponent = ({
 }) => {
     const LONG_HEIGHT = 700;
     const SMALL_HEIGHT = 450;
-
     const LONG_ANIMATED_HEIGHT = 550;
     const SMALL_ANIMATED_HEIGHT = 380;
 
-    const [height, setHeight] = useState(isLongBar ? LONG_HEIGHT : SMALL_HEIGHT);
-    const [animatedHeight, setAnimatedHeight] = useState(isLongBar ? LONG_ANIMATED_HEIGHT : SMALL_ANIMATED_HEIGHT);
+    const animatedHeight = isLongBar ? LONG_ANIMATED_HEIGHT : SMALL_ANIMATED_HEIGHT;
 
     const [isHiddenBar, setIsHiddenBar] = useState(false);
     const [bounceValue, setBounceValue] = useState(new Animated.Value(isLongBar ? LONG_ANIMATED_HEIGHT : SMALL_ANIMATED_HEIGHT));
 
-    const handleBar = () => {
-        const toValue = isHiddenBar ? animatedHeight : 0;
-
+    const handleBarPress = () => {
         setIsHiddenBar(!isHiddenBar);
 
         Animated.spring(bounceValue, {
-            toValue,
+            toValue: isHiddenBar ? animatedHeight : 0,
             tension: 2,
             friction: 8,
             velocity: 3
@@ -37,12 +35,25 @@ const SlideBarComponent = ({
     }
 
     return (
-        <View style={styles.container}>
+        <View style={styles.content}>
             {mainContent}
-            <Animated.View style={[styles.subView, { height: height, transform: [{ translateY: bounceValue }] }]}>
-                <TouchableOpacity style={styles.touchableBar} onPress={() => handleBar()}>
-                    <Feather style={styles.horizontalBarIcon} name="minus" size={60} color="black" />
+
+            <Animated.View
+                style={[styles.subView, {
+                    height: isLongBar ? LONG_HEIGHT : SMALL_HEIGHT,
+                    transform: [{ translateY: bounceValue }]
+                }]}
+            >
+                <TouchableOpacity
+                    style={styles.touchableBar}
+                    onPress={() => handleBarPress()}
+                >
+                    <Feather
+                        name="minus"
+                        style={styles.icon}
+                    />
                 </TouchableOpacity>
+
                 {barContent}
             </Animated.View>
         </View>
