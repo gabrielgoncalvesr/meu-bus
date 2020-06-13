@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
         longitude: DataTypes.DECIMAL(8, 6),
     });
 
-
     Stop.associate = function (models) {
         Stop.hasMany(models.StopRoute, { foreignKey: 'stopId' });
     }
