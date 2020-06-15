@@ -20,6 +20,9 @@
         "assetBundlePatterns": [
             "**/*"
         ],
+        "ios": {
+            "supportsTablet": true
+        },
         "android": {
             "versionCode": 1,
             "package": "com.thecode.meubus",
@@ -27,8 +30,7 @@
                 "googleMaps": {
                     "apiKey": ""
                 }
-            },
-            "googleServicesFile": "./google-services.json"
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    container: {
+    content: {
         flex: 1,
         width: '100%',
         alignItems: 'center',
@@ -9,10 +9,20 @@ const styles = StyleSheet.create({
     },
     touchableBar: {
         height: 30,
+        elevation: 2,
+        shadowRadius: 2,
+        shadowOpacity: 0.8,
+        shadowColor: '#000',
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: "#f5f5f5",
+        shadowOffset: {
+            width: 0,
+            height: 1
+        }
     },
-    horizontalBarIcon: {
+    icon: {
+        fontSize: 60,
         color: '#adadad',
         borderRadius: 10,
     },

@@ -5,26 +5,13 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
     },
-    backIcon: {
-        top: 30,
-        left: 20,
-        width: 40,
-        height: 40,
-        borderRadius: 5,
-        position: 'absolute',
+    userBar: {
+        height: 85,
+        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#162447',
-        zIndex: 1000
+        justifyContent: 'flex-end',
     },
-    infoBox: {
-        height: 320,
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        width: '100%',
-        marginTop: 40,
-    },
-    functionsBox: {
+    itemsBox: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
@@ -39,20 +26,9 @@ const styles = StyleSheet.create({
             height: 1
         }
     },
-    functionItem: {
-        height: 70,
-        width: '100%',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-    },
-    itemDivisor: {
-        borderBottomWidth: 2,
-        borderColor: '#f5f5f5',
-    },
     contentFunctions: {
-        width: '100%',
         flex: 1,
+        width: '100%',
         backgroundColor: '#ffffff'
     },
     divisorBar: {
@@ -66,32 +42,23 @@ const styles = StyleSheet.create({
         color: '#999999',
         fontWeight: 'bold'
     },
-    functionItemIcon: {
-        width: 60,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    functionItemText: {
-        fontSize: 16,
-        color: '#162447',
-        fontWeight: 'bold',
-        textAlign: 'right'
-    },
     infoName: {
+        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'space-between'
     },
-    infoNameText: {
+    userName: {
         fontSize: 20,
         color: '#162447',
         fontWeight: 'bold'
     },
-    infoIcon: {
-        width: 200,
-        height: 200,
-        borderRadius: 200 / 2,
-        borderColor: "#162447",
-        borderWidth: 3
+    userIcon: {
+        width: 65,
+        height: 65,
+        margin: 10,
+        borderWidth: 2,
+        borderRadius: 65 / 2,
+        borderColor: "#162447"
     }
 });
 
