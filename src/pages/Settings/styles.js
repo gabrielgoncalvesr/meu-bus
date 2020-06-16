@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-end',
+        
     },
     itemsBox: {
         flex: 1,
@@ -31,19 +32,6 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#ffffff'
     },
-    userName: {
-        fontSize: 20,
-        color: '#162447',
-        fontWeight: 'bold'
-    },
-    userIcon: {
-        width: 65,
-        height: 65,
-        margin: 10,
-        borderWidth: 2,
-        borderRadius: 65 / 2,
-        borderColor: "#162447"
-    }
 });
 
 export default styles;

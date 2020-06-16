@@ -5,18 +5,21 @@ import {
     Text,
     View,
     TouchableOpacity,
-    AsyncStorage
 } from 'react-native';
 
 import {
-    SlideBar,
     Map,
-    DivisorBar,
     Message,
-    BusList
+    BusList,
+    SlideBar,
+    DivisorBar,
 } from '../../components';
 
 import request from '../../services/api';
+import {
+    addItem,
+    getItem
+} from '../../util/storage';
 
 import styles from './styles';
 
@@ -24,7 +27,6 @@ const Home = () => {
     const navigation = useNavigation();
 
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [emptySearch, setEmptySearch] = useState(false);
 
     const [userLogged, setUserLogged] = useState(true);
@@ -47,15 +49,13 @@ const Home = () => {
 
     const loadData = async () => {
         setData([]);
-        setLoading(true);
         setEmptySearch(false);
 
-        await AsyncStorage.setItem("user", JSON.stringify({ id: 1 }));
+        await addItem('user', { id: 1, language: 'pt-BR', theme: 'light', name: 'Nome do Usuário', profilePhoto: 'user-icon1' });
 
-        const user = JSON.parse(await AsyncStorage.getItem('user'));
+        const user = await getItem('user');
         if (!user) {
             setUserLogged(false);
-            setLoading(false);
             return;
         }
 
@@ -64,7 +64,6 @@ const Home = () => {
         if (response.data.length === 0) {
             setEmptySearch(true);
         }
-        setLoading(false);
         setData(response.data);
     }
 

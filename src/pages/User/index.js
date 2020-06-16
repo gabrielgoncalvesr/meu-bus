@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import {
     Text,
@@ -12,49 +12,80 @@ import {
     DivisorBar
 } from '../../components';
 
+import { getItem } from '../../util/storage';
+
 import styles from './styles';
 
 const User = () => {
 
+    const userIcons = {
+        'user-icon1': require('../../../assets/user-icons/user-icon1.jpg'),
+        'user-icon2': require('../../../assets/user-icons/user-icon2.jpg'),
+        'user-icon3': require('../../../assets/user-icons/user-icon3.jpg'),
+        'user-icon4': require('../../../assets/user-icons/user-icon4.jpg'),
+    };
+
     const navigation = useNavigation();
 
-    const navigateBack = () => {
-        navigation.goBack();
+    const [userName, setUserName] = useState('');
+    const [userProfilePhoto, setUserProfilePhoto] = useState('');
+
+    const navigateToSettings = () => {
+        navigation.navigate('SettingsScreen');
     }
 
+    const navigateToInfo = () => {
+        navigation.navigate('InfoScreen');
+    }
+
+    const navigateToHelp = () => {
+        navigation.navigate('HelpScreen');
+    }
+
+    const signOutAccount = () => {
+
+        navigation.navigate();
+    }
+
+    useEffect(() => {
+        const getInfo = async () => {
+            const user = await getItem('user');
+            if(user) {
+                setUserName(user.name);
+                setUserProfilePhoto(user.profilePhoto);
+            }
+        }
+
+        getInfo();
+    }, []);
+
     return (
-        <View style={styles.container}>
-            <BackButton callback={() => navigateBack()} />
+        <View style={styles.content}>
+            <BackButton />
 
             <View style={styles.userBar}>
-                <Text style={styles.userName}>Visitante</Text>
+                <Text style={styles.userName}>{userName}</Text>
 
                 <Image
                     style={styles.userIcon}
-                    source={require('../../../assets/user-icons/user-icon1.jpg')}
+                    source={userIcons[userProfilePhoto]}
                 />
             </View>
 
             <View style={styles.itemsBox}>
                 <View style={styles.contentFunctions}>
-                    <DivisorBar text={"CONFIGURAÇÕES"} />
+                    <DivisorBar text={"FUNÇÕES"} />
 
                     <ButtonBar
                         iconType={"cog"}
                         text={"Configurações"}
-                        callback={() => console.log("TESTE")}
+                        callback={navigateToSettings}
                     />
 
                     <ButtonBar
-                        iconType={"brush"}
-                        text={"Alterar Tema"}
-                        callback={() => console.log("TESTE")}
-                    />
-
-                    <ButtonBar
-                        iconType={"brush"}
-                        text={"Alterar Tema"}
-                        callback={() => console.log("TESTE")}
+                        iconType={"sign-out-alt"}
+                        text={"Sair da Conta"}
+                        callback={() => signOutAccount()}
                     />
 
                     <DivisorBar text={"INFORMAÇÕES"} />
@@ -62,14 +93,15 @@ const User = () => {
                     <ButtonBar
                         iconType={"info-circle"}
                         text={"Informações"}
-                        callback={() => console.log("TESTE")}
+                        callback={navigateToInfo}
                     />
 
                     <ButtonBar
                         iconType={"question-circle"}
-                        text={"Informações"}
-                        callback={() => console.log("TESTE")}
+                        text={"Ajuda"}
+                        callback={navigateToHelp}
                     />
+
                 </View>
             </View>
         </View>

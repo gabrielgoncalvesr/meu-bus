@@ -26,10 +26,6 @@ const Search = () => {
     const [loading, setLoading] = useState(false);
     const [emptySearch, setEmptySearch] = useState(false);
 
-    const navigateBack = () => {
-        navigation.goBack();
-    }
-
     const navigateToTracking = async (value) => {
         const user = JSON.parse(await AsyncStorage.getItem('user'));
         console.log(user)
@@ -71,7 +67,7 @@ const Search = () => {
     return (
         <View style={styles.content}>
 
-            <BackButton callback={() => navigateBack()} />
+            <BackButton />
 
             <View style={styles.contentBar}>
                 <View style={styles.searchBar}>

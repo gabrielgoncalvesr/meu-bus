@@ -3,6 +3,7 @@ import Input from './Input';
 import Loading from './Loading';
 import BusList from './BusList';
 import Message from './Message';
+import CheckBox from './CheckBox';
 import SlideBar from './SlideBar';
 import ButtonBar from './ButtonBar';
 import DivisorBar from './DivisorBar';
@@ -16,6 +17,7 @@ export {
     Loading,
     BusList,
     Message,
+    CheckBox,
     SlideBar,
     ButtonBar,
     BackButton,

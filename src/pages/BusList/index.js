@@ -18,9 +18,6 @@ const Search = () => {
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(false);
 
-    const navigateBack = () => {
-        navigation.goBack();
-    }
 
     const navigateToTracking = (value) => {
         navigation.navigate('TrackingScreen', { busData: value });
@@ -55,7 +52,7 @@ const Search = () => {
     return (
         <View style={styles.content}>
 
-            <BackButton callback={() => navigateBack()} />
+            <BackButton />
 
             <View style={styles.titleBar}>
                 <Text style={styles.title}>SPTRANS</Text>
