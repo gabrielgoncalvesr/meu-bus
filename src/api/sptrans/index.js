@@ -1,18 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { celebrate, Segments, Joi } = require('celebrate');
+
 const { searchLine, searchPosition } = require('../../services/sptrans');
 
-router.get('/search/line', celebrate({
-    [Segments.QUERY]: Joi.object().keys({
-        term: Joi.string()
-    })
-}), searchLine);
+router.get('/search/line', searchLine);
 
-router.get('/search/position', celebrate({
-    [Segments.QUERY]: Joi.object().keys({
-        code: Joi.string()
-    })
-}), searchPosition);
+router.get('/search/position', searchPosition);
 
 module.exports.router = router;

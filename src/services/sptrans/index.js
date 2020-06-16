@@ -53,6 +53,8 @@ const searchPosition = async (req, res) => {
     return res.json(vehicles)
 }
 
-module.exports.searchLine = searchLine;
-module.exports.loginSPTrans = loginSPTrans;
-module.exports.searchPosition = searchPosition;
+module.exports = {
+    searchLine,
+    loginSPTrans,
+    searchPosition,
+}
