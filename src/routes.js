@@ -10,6 +10,14 @@ import Search from './pages/Search';
 import BusList from './pages/BusList';
 import Tracking from './pages/Tracking';
 import User from './pages/User';
+
+import Info from './pages/Info';
+import Help from './pages/Help';
+import Settings from './pages/Settings';
+
+import Image from './pages/Image';
+import Theme from './pages/Theme';
+import Language from './pages/Language';
 // import Authentication from './pages/Authentication';
 
 const HomeScreen = () => {
@@ -57,6 +65,62 @@ const UserScreen = () => {
     );
 }
 
+const InfoScreen = () => {
+    return (
+        <SafeAreaView style={[styles.container, { backgroundColor: '#f5f5f5' }]}>
+            <StatusBar barStyle="light-content" backgroundColor="#222831" />
+            <Info />
+        </SafeAreaView>
+    );
+}
+
+
+const HelpScreen = () => {
+    return (
+        <SafeAreaView style={[styles.container, { backgroundColor: '#f5f5f5' }]}>
+            <StatusBar barStyle="light-content" backgroundColor="#222831" />
+            <Help />
+        </SafeAreaView>
+    );
+}
+
+
+const SettingsScreen = () => {
+    return (
+        <SafeAreaView style={[styles.container, { backgroundColor: '#f5f5f5' }]}>
+            <StatusBar barStyle="light-content" backgroundColor="#222831" />
+            <Settings />
+        </SafeAreaView>
+    );
+}
+
+const LanguageScreen = () => {
+    return (
+        <SafeAreaView style={[styles.container, { backgroundColor: '#f5f5f5' }]}>
+            <StatusBar barStyle="light-content" backgroundColor="#222831" />
+            <Language />
+        </SafeAreaView>
+    );
+}
+
+const ThemeScreen = () => {
+    return (
+        <SafeAreaView style={[styles.container, { backgroundColor: '#f5f5f5' }]}>
+            <StatusBar barStyle="light-content" backgroundColor="#222831" />
+            <Theme />
+        </SafeAreaView>
+    );
+}
+
+const ImageScreen = () => {
+    return (
+        <SafeAreaView style={[styles.container, { backgroundColor: '#f5f5f5' }]}>
+            <StatusBar barStyle="light-content" backgroundColor="#222831" />
+            <Image />
+        </SafeAreaView>
+    );
+}
+
 // const AuthenticationScreen = () => {
 //     return (
 //         <SafeAreaView style={[styles.container, { backgroundColor: '#f5f5f5' }]}>
@@ -78,6 +142,14 @@ export default function Routes() {
                     <Stack.Screen name="BusListScreen" component={BusListScreen} />
                     <Stack.Screen name="TrackingScreen" component={TrackingScreen} />
                     <Stack.Screen name="UserScreen" component={UserScreen} />
+
+                    <Stack.Screen name="InfoScreen" component={InfoScreen} />
+                    <Stack.Screen name="HelpScreen" component={HelpScreen} />
+                    <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
+
+                    <Stack.Screen name="LanguageScreen" component={LanguageScreen} />
+                    <Stack.Screen name="ThemeScreen" component={ThemeScreen} />
+                    <Stack.Screen name="ImageScreen" component={ImageScreen} />
                     {/* <Stack.Screen name="AuthenticationScreen" component={AuthenticationScreen} /> */}
                 </Stack.Navigator>
             </NavigationContainer>

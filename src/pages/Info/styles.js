@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
     },
-    userBar: {
+    bar: {
         height: 85,
         flexDirection: 'row',
         alignItems: 'center',
@@ -26,23 +26,19 @@ const styles = StyleSheet.create({
             height: 1
         }
     },
-    contentFunctions: {
+    contentInfo: {
         flex: 1,
         width: '100%',
         backgroundColor: '#ffffff'
     },
-    userName: {
-        fontSize: 20,
-        color: '#162447',
-        fontWeight: 'bold'
+    contentText: {
+        margin: 20,
     },
-    userIcon: {
-        width: 65,
-        height: 65,
-        margin: 10,
-        borderWidth: 2,
-        borderRadius: 65 / 2,
-        borderColor: "#162447"
+    text: {
+        fontSize: 15,
+        marginTop: 5,
+        color: '#999999',
+        fontWeight: 'bold',
     }
 });
 

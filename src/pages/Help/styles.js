@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
     },
-    userBar: {
+    bar: {
         height: 85,
         flexDirection: 'row',
         alignItems: 'center',
@@ -13,14 +13,14 @@ const styles = StyleSheet.create({
     },
     itemsBox: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
         elevation: 5,
+        width: '100%',
         shadowRadius: 2,
         shadowOpacity: 0.8,
-        shadowColor: '#000',
-        backgroundColor: "#f5f5f5",
+        alignItems: 'center',
+        shadowColor: '#000000',
+        justifyContent: 'center',
+        backgroundColor: '#FFF',
         shadowOffset: {
             width: 0,
             height: 1
@@ -29,20 +29,16 @@ const styles = StyleSheet.create({
     contentFunctions: {
         flex: 1,
         width: '100%',
-        backgroundColor: '#ffffff'
+        backgroundColor: '#FFF'
     },
-    userName: {
-        fontSize: 20,
-        color: '#162447',
-        fontWeight: 'bold'
+    contentText: {
+        margin: 20,
     },
-    userIcon: {
-        width: 65,
-        height: 65,
-        margin: 10,
-        borderWidth: 2,
-        borderRadius: 65 / 2,
-        borderColor: "#162447"
+    text: {
+        fontSize: 15,
+        marginTop: 5,
+        color: '#FFF',
+        fontWeight: 'bold',
     }
 });
 
