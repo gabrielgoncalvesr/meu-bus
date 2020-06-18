@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import intl from 'react-intl-universal';
 import { FontAwesome5 } from '@expo/vector-icons';
 import {
     useTheme,
@@ -98,8 +99,9 @@ const Home = () => {
                                 </View>
 
                                 <Text style={[styles.title, { color: colors.text }]}>
-                                    Ver Linhas
-                            </Text>
+                                    {/* Ver Linhas */}
+                                    {intl.get('phrases.seeLines')}
+                                </Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity

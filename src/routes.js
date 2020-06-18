@@ -17,6 +17,8 @@ import {
 } from './util/storage';
 import { ThemeContext } from './util/themeContext';
 
+import { loadLocales } from './util/locales';
+
 import Home from './pages/Home';
 import User from './pages/User';
 import Info from './pages/Info';
@@ -40,6 +42,10 @@ const Routes = () => {
             setIsDarkTheme(value === "dark" ? true : false)
         }
     }), []);
+
+    React.useEffect(() => {
+        loadLocales("fr-FR");
+    }, []);
 
     const CustomDefaultTheme = {
         ...DefaultTheme,
