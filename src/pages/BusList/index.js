@@ -3,7 +3,7 @@ import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Text, View, TouchableOpacity, FlatList } from 'react-native';
 
-import { BusList, BackButton, DivisorBar } from '../../components';
+import { BusList, HeaderBar, DivisorBar } from '../../components';
 
 import request from '../../services/api';
 
@@ -51,8 +51,7 @@ const Search = () => {
 
     return (
         <View style={styles.content}>
-
-            <BackButton />
+            <HeaderBar />
 
             <View style={styles.titleBar}>
                 <Text style={styles.title}>SPTRANS</Text>

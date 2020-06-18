@@ -10,7 +10,7 @@ import {
     Loading,
     BusList,
     Message,
-    BackButton,
+    HeaderBar,
     DivisorBar,
 } from '../../components';
 
@@ -67,9 +67,7 @@ const Search = () => {
     return (
         <View style={styles.content}>
 
-            <BackButton />
-
-            <View style={styles.contentBar}>
+            <HeaderBar>
                 <View style={styles.searchBar}>
                     <Input
                         light
@@ -80,7 +78,7 @@ const Search = () => {
                         callback={value => handleTermSearch(value)}
                     />
                 </View>
-            </View>
+            </HeaderBar>
 
             <DivisorBar text={"BUSCA DE ROTAS"} />
 

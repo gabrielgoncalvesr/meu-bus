@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     content: {
-        height: 55,
+        height: 60,
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
@@ -15,14 +15,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     icon: {
-        fontSize: 24,
-        color: '#162447'
+        fontSize: 24
     },
     text: {
         fontSize: 16,
-        color: '#162447',
+        textAlign: 'right',
         fontWeight: 'bold',
-        textAlign: 'right'
     }
 });
 

@@ -5,10 +5,10 @@ import BusList from './BusList';
 import Message from './Message';
 import CheckBox from './CheckBox';
 import SlideBar from './SlideBar';
+import HeaderBar from './HeaderBar';
 import ButtonBar from './ButtonBar';
 import StatusBar from './StatusBar';
 import DivisorBar from './DivisorBar';
-import BackButton from './BackButton';
 import ItemDivisor from './ItemDivisor';
 import MapLocation from './MapLocation';
 
@@ -20,9 +20,9 @@ export {
     Message,
     CheckBox,
     SlideBar,
+    HeaderBar,
     ButtonBar,
     StatusBar,
-    BackButton,
     DivisorBar,
     ItemDivisor,
     MapLocation

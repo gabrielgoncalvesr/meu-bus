@@ -4,10 +4,11 @@ import {
     View,
     Image
 } from 'react-native';
+import { useTheme } from '@react-navigation/native';
 
 import {
     CheckBox,
-    BackButton,
+    HeaderBar,
     DivisorBar,
     ItemDivisor
 } from '../../components';
@@ -17,6 +18,8 @@ import { getItem } from '../../util/storage';
 import styles from './styles';
 
 const Language = () => {
+
+    const { colors } = useTheme();
 
     const [selectedLanguage, setSelectedLanguage] = useState('');
 
@@ -35,20 +38,19 @@ const Language = () => {
         loadLanguage();
     }, []);
 
-
     return (
         <View style={styles.content}>
-            <BackButton />
-
-            <View style={styles.bar} />
+            <HeaderBar />
 
             <View style={styles.contentItem}>
                 <DivisorBar text={"LINGUAGEM"} />
 
                 <View style={styles.item}>
                     <View style={styles.iconContent}>
-                        <Image source={require('../../assets/language-images/portuguese.jpg')} style={styles.icon} />
-                        <Text style={styles.text}>PORTUGUÊS</Text>
+                        <Image source={require('../../assets/languages/portuguese.png')} style={styles.icon} />
+                        <Text style={[styles.text, { color: colors.text }]}>
+                            PORTUGUÊS
+                        </Text>
                     </View>
 
                     <CheckBox
@@ -61,8 +63,10 @@ const Language = () => {
 
                 <View style={styles.item}>
                     <View style={styles.iconContent}>
-                        <Image source={require('../../assets/language-images/english.jpg')} style={styles.icon} />
-                        <Text style={styles.text}>INGLÊS</Text>
+                        <Image source={require('../../assets/languages/english.png')} style={styles.icon} />
+                        <Text style={[styles.text, { color: colors.text }]}>
+                            INGLÊS
+                        </Text>
                     </View>
 
                     <CheckBox
@@ -75,8 +79,10 @@ const Language = () => {
 
                 <View style={styles.item}>
                     <View style={styles.iconContent}>
-                        <Image source={require('../../assets/language-images/french.jpg')} style={styles.icon} />
-                        <Text style={styles.text}>FRANCÊS</Text>
+                        <Image source={require('../../assets/languages/french.png')} style={styles.icon} />
+                        <Text style={[styles.text, { color: colors.text }]}>
+                            FRANCÊS
+                        </Text>
                     </View>
 
                     <CheckBox

@@ -135,7 +135,6 @@ const Home = () => {
                                 <Message text={"sem histórico"} />
                             }
                         </View>
-
                     </View>
                 }
             />
