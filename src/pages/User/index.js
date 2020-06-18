@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import {
+    useTheme,
+    useNavigation
+} from '@react-navigation/native';
 import {
     Text,
     View,
@@ -8,8 +11,9 @@ import {
 
 import {
     ButtonBar,
-    BackButton,
-    DivisorBar
+    HeaderBar,
+    DivisorBar,
+    ItemDivisor
 } from '../../components';
 
 import { getItem } from '../../util/storage';
@@ -17,6 +21,8 @@ import { getItem } from '../../util/storage';
 import styles from './styles';
 
 const User = () => {
+
+    const { colors } = useTheme();
 
     const userIcons = {
         'user-icon1': require('../../../assets/user-icons/user-icon1.jpg'),
@@ -42,6 +48,18 @@ const User = () => {
         navigation.navigate('HelpScreen');
     }
 
+    const navigateToTheme = () => {
+        navigation.navigate('ThemeScreen');
+    }
+
+    const navigateToLanguage = () => {
+        navigation.navigate('LanguageScreen');
+    }
+
+    const navigateToImage = () => {
+        navigation.navigate('ImageScreen');
+    }
+
     const signOutAccount = () => {
 
         navigation.navigate();
@@ -50,7 +68,7 @@ const User = () => {
     useEffect(() => {
         const getInfo = async () => {
             const user = await getItem('user');
-            if(user) {
+            if (user) {
                 setUserName(user.name);
                 setUserProfilePhoto(user.profilePhoto);
             }
@@ -61,48 +79,57 @@ const User = () => {
 
     return (
         <View style={styles.content}>
-            <BackButton />
+            <HeaderBar>
+                <View style={styles.userBar}>
+                    <Text style={[styles.userName, { color: colors.text }]}>
+                        {userName}
+                    </Text>
 
-            <View style={styles.userBar}>
-                <Text style={styles.userName}>{userName}</Text>
-
-                <Image
-                    style={styles.userIcon}
-                    source={userIcons[userProfilePhoto]}
-                />
-            </View>
-
-            <View style={styles.itemsBox}>
-                <View style={styles.contentFunctions}>
-                    <DivisorBar text={"FUNÇÕES"} />
-
-                    <ButtonBar
-                        iconType={"cog"}
-                        text={"Configurações"}
-                        callback={navigateToSettings}
+                    <Image
+                        style={[styles.userIcon, { borderColor: colors.text }]}
+                        source={userIcons[userProfilePhoto]}
                     />
-
-                    <ButtonBar
-                        iconType={"sign-out-alt"}
-                        text={"Sair da Conta"}
-                        callback={() => signOutAccount()}
-                    />
-
-                    <DivisorBar text={"INFORMAÇÕES"} />
-
-                    <ButtonBar
-                        iconType={"info-circle"}
-                        text={"Informações"}
-                        callback={navigateToInfo}
-                    />
-
-                    <ButtonBar
-                        iconType={"question-circle"}
-                        text={"Ajuda"}
-                        callback={navigateToHelp}
-                    />
-
                 </View>
+            </HeaderBar>
+
+            <View style={styles.contentFunctions}>
+                <DivisorBar text={"CONFIGURAÇÕES"} />
+
+                <ButtonBar
+                    iconType={"paint-roller"}
+                    text={"Alterar Tema"}
+                    callback={navigateToTheme}
+                />
+
+                <ButtonBar
+                    iconType={"language"}
+                    text={"Alterar Idioma"}
+                    callback={navigateToLanguage}
+                />
+
+                <ButtonBar
+                    iconType={"image"}
+                    text={"Alterar Imagem"}
+                    callback={navigateToImage}
+                />
+
+                <ButtonBar
+                    iconType={"info-circle"}
+                    text={"Informações"}
+                    callback={navigateToInfo}
+                />
+
+                <ButtonBar
+                    iconType={"question-circle"}
+                    text={"Ajuda"}
+                    callback={navigateToHelp}
+                />
+
+                <ButtonBar
+                    iconType={"sign-out-alt"}
+                    text={"Sair da Conta"}
+                    callback={() => signOutAccount()}
+                />
             </View>
         </View>
     );

@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
     },
     barContent: {
         height: 130,
-        backgroundColor: '#ffffff',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around'
@@ -24,17 +23,14 @@ const styles = StyleSheet.create({
         height: 90,
         borderRadius: 5,
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#162447'
+        justifyContent: 'center'
     },
     title: {
         fontSize: 14,
-        color: '#e6eef5',
         fontWeight: 'bold',
     },
     icon: {
-        fontSize: 25,
-        color: '#e6eef5',
+        fontSize: 25
     },
     iconContent: {
         height: 45,
@@ -47,8 +43,7 @@ const styles = StyleSheet.create({
         position: 'absolute'
     },
     historyContent: {
-        height: '100%',
-        backgroundColor: '#FFFFFF'
+        height: '100%'
     }
 });
 

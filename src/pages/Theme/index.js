@@ -4,43 +4,50 @@ import {
     Text,
     View
 } from 'react-native';
+import {
+    useTheme
+} from '@react-navigation/native';
 
 import {
     CheckBox,
-    BackButton,
+    HeaderBar,
     DivisorBar,
     ItemDivisor
 } from '../../components';
 
 import { getItem } from '../../util/storage';
+import { ThemeContext } from '../../util/themeContext';
 
 import styles from './styles';
 
 const Theme = () => {
 
-    const [selectedTheme, setSelectedTheme] = useState('');
+    const { colors } = useTheme();
 
-    const handleThemeChange = (value) => {
+    const {
+        handleThemeChange
+    } = React.useContext(ThemeContext);
+
+    const [selectedTheme, setSelectedTheme] = useState();
+
+    const handleTheme = (value) => {
         setSelectedTheme(value);
+        handleThemeChange(value);
     }
 
     useEffect(() => {
-        const loadLanguage = async () => {
-            const user = await getItem('user');
-            if (user) {
-                setSelectedTheme(user.theme);
-            }
+        const loadTheme = async () => {
+            const theme = await getItem('theme');
+            setSelectedTheme(theme);
         }
 
-        loadLanguage();
+        loadTheme();
     }, []);
 
 
     return (
         <View style={styles.content}>
-            <BackButton />
-
-            <View style={styles.bar} />
+            <HeaderBar />
 
             <View style={styles.contentItem}>
                 <DivisorBar text={"TEMA"} />
@@ -49,15 +56,17 @@ const Theme = () => {
                     <View style={styles.themeContent}>
                         <FontAwesome5
                             name={"sun"}
-                            style={styles.icon}
+                            style={[styles.icon, { color: colors.text }]}
                         />
 
-                        <Text style={styles.text}>LIGHT</Text>
+                        <Text style={[styles.text, { color: colors.text }]}>
+                            LIGHT
+                        </Text>
                     </View>
 
                     <CheckBox
                         name={"light"}
-                        callback={handleThemeChange}
+                        callback={handleTheme}
                         value={selectedTheme === "light" ? true : false}
                     />
                 </View>
@@ -67,15 +76,17 @@ const Theme = () => {
                     <View style={styles.themeContent}>
                         <FontAwesome5
                             name={"moon"}
-                            style={styles.icon}
+                            style={[styles.icon, { color: colors.text }]}
                         />
 
-                        <Text style={styles.text}>DARK</Text>
+                        <Text style={[styles.text, { color: colors.text }]}>
+                            DARK
+                        </Text>
                     </View>
 
                     <CheckBox
                         name={"dark"}
-                        callback={handleThemeChange}
+                        callback={handleTheme}
                         value={selectedTheme === "dark" ? true : false}
                     />
                 </View>

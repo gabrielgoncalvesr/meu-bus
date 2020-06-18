@@ -3,6 +3,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { View, TouchableOpacity, Text } from 'react-native';
 
 import styles from './styles';
+import { useTheme } from '@react-navigation/native';
 
 const CheckBox = ({
     name,
@@ -10,6 +11,8 @@ const CheckBox = ({
     value,
     callback,
 }) => {
+
+    const { colors } = useTheme();
 
     const handleChange = () => {
         if (callback) {
@@ -21,13 +24,13 @@ const CheckBox = ({
         <View style={styles.content}>
             <TouchableOpacity
                 onPress={handleChange}
-                style={styles.checkbox}
+                style={[styles.checkbox, { borderColor: colors.text }]}
             >
                 {
                     value &&
                     <FontAwesome5
                         name="check"
-                        style={styles.icon}
+                        style={[styles.icon, { color: colors.text }]}
                     />
                 }
 
@@ -35,8 +38,8 @@ const CheckBox = ({
 
             {
                 label &&
-                <Text style={styles.label}>
-                    {label}
+                <Text style={[styles.label, { color: colors.text }]}>
+                    {"TESTE"}
                 </Text>
             }
         </View>

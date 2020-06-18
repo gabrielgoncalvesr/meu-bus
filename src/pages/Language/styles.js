@@ -5,17 +5,9 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
     },
-    bar: {
-        height: 85,
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: "#f5f5f5",
-        justifyContent: 'flex-end',
-    },
     contentItem: {
         flex: 1,
         width: '100%',
-        backgroundColor: '#ffffff'
     },
     item: {
         height: 80,
@@ -26,8 +18,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     icon: {
-        width: 40,
-        height: 40,
+        width: 35,
+        height: 25,
         marginRight: 10
     },
     iconContent: {
@@ -37,7 +29,6 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 14,
-        color: '#162447',
         fontWeight: 'bold',
         textAlign: 'right'
     }

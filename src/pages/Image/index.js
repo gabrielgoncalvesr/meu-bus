@@ -8,7 +8,7 @@ import {
 
 import {
     ButtonBar,
-    BackButton,
+    HeaderBar,
     DivisorBar
 } from '../../components';
 
@@ -36,7 +36,7 @@ const User = () => {
 
     return (
         <View style={styles.content}>
-            <BackButton />
+            <HeaderBar />
 
             <View style={styles.userBar} />
 

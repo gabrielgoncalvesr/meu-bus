@@ -5,12 +5,6 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%'
     },
-    contentBar: {
-        height: 85,
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     searchBar: {
         height: 50,
         marginLeft: 85,

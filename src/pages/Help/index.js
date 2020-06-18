@@ -1,14 +1,17 @@
 import React from 'react';
 import {
+    useTheme,
+} from '@react-navigation/native';
+
+import {
     Text,
     View,
-    Image,
     Linking
 } from 'react-native';
 
 import {
     ButtonBar,
-    BackButton,
+    HeaderBar,
     DivisorBar,
     ItemDivisor
 } from '../../components';
@@ -17,6 +20,8 @@ import styles from './styles';
 
 const Help = () => {
 
+    const { colors } = useTheme();
+
     const handleSendEmail = () => {
         console.log("teste")
         Linking.openURL('mailto:ggr89@outlook.com?subject=Contato por Suporte')
@@ -24,26 +29,24 @@ const Help = () => {
 
     return (
         <View style={styles.content}>
-            <BackButton />
+            <HeaderBar />
 
-            <View style={styles.bar} />
+            <View style={styles.contentFunctions}>
+                <DivisorBar text={"AJUDA"} />
 
-            <View style={styles.itemsBox}>
-                <View style={styles.contentFunctions}>
-                    <DivisorBar text={"AJUDA"} />
-
-                    <View style={styles.contentText}>
-                        <Text style={styles.text}>Em caso de ajuda com o aplicativo, funcionalidade e sugestões, envie um email para entrar em contato.</Text>
-                    </View>
-
-                    <ItemDivisor />
-
-                    <ButtonBar
-                        iconType={"envelope"}
-                        text={"Enviar Email"}
-                        callback={() => handleSendEmail()}
-                    />
+                <View style={styles.contentText}>
+                    <Text style={[styles.text, { color: colors.text }]}>
+                        Em caso de ajuda com o aplicativo, funcionalidade e sugestões, envie um email para entrar em contato.
+                    </Text>
                 </View>
+
+                <ItemDivisor />
+
+                <ButtonBar
+                    iconType={"envelope"}
+                    text={"Enviar Email"}
+                    callback={() => handleSendEmail()}
+                />
             </View>
         </View>
     );
