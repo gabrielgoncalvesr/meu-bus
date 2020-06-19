@@ -35,17 +35,21 @@ const Stack = createStackNavigator();
 const Routes = () => {
 
     const [isDarkTheme, setIsDarkTheme] = React.useState(true);
+    const [language, setLanguage] = React.useState('pt-BR');
 
     const themeContext = React.useMemo(() => ({
         handleThemeChange: async (value) => {
             await addItem('theme', value);
             setIsDarkTheme(value === "dark" ? true : false)
+        },
+        handleLanguageChange: async (value) => {
+            setLanguage(value);
         }
     }), []);
 
     React.useEffect(() => {
-        loadLocales("fr-FR");
-    }, []);
+        loadLocales(language);
+    }, [language]);
 
     const CustomDefaultTheme = {
         ...DefaultTheme,
@@ -113,15 +117,6 @@ const Routes = () => {
             fourth: '#FFFFFF'
         }
     }
-
-    // React.useEffect(() => {
-    //     const loadTheme = async () => {
-    //         const theme = await getItem('theme');
-    //         console.log(theme)
-    //     }
-
-    //     loadTheme();
-    // }, []);
 
     const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
 

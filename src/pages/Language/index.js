@@ -1,19 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import {
-    Text,
-    View,
-    Image
-} from 'react-native';
+import { Text, View, Image } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
 import { useTheme } from '@react-navigation/native';
 
-import {
-    CheckBox,
-    HeaderBar,
-    DivisorBar,
-    ItemDivisor
-} from '../../components';
+import { CheckBox, HeaderBar, DivisorBar, ItemDivisor } from '../../components';
 
+import { getTranslation } from '../../util/locales';
 import { getItem } from '../../util/storage';
+import { ThemeContext } from '../../util/themeContext';
 
 import styles from './styles';
 
@@ -21,10 +14,14 @@ const Language = () => {
 
     const { colors } = useTheme();
 
+    const { handleLanguageChange } = useContext(ThemeContext);
+
     const [selectedLanguage, setSelectedLanguage] = useState('');
 
-    const handleLanguageChange = (value) => {
+    const handleLanguage = (value) => {
+        console.log("langugage" + value)
         setSelectedLanguage(value);
+        handleLanguageChange(value);
     }
 
     useEffect(() => {
@@ -43,19 +40,19 @@ const Language = () => {
             <HeaderBar />
 
             <View style={styles.contentItem}>
-                <DivisorBar text={"LINGUAGEM"} />
+                <DivisorBar text={getTranslation('words.language')} />
 
                 <View style={styles.item}>
                     <View style={styles.iconContent}>
                         <Image source={require('../../assets/languages/portuguese.png')} style={styles.icon} />
                         <Text style={[styles.text, { color: colors.text }]}>
-                            PORTUGUÊS
+                            {getTranslation('words.portuguese')}
                         </Text>
                     </View>
 
                     <CheckBox
                         name={"pt-BR"}
-                        callback={handleLanguageChange}
+                        callback={handleLanguage}
                         value={selectedLanguage === "pt-BR" ? true : false}
                     />
                 </View>
@@ -65,14 +62,14 @@ const Language = () => {
                     <View style={styles.iconContent}>
                         <Image source={require('../../assets/languages/english.png')} style={styles.icon} />
                         <Text style={[styles.text, { color: colors.text }]}>
-                            INGLÊS
+                            {getTranslation('words.english')}
                         </Text>
                     </View>
 
                     <CheckBox
-                        name={"fr-FR"}
-                        callback={handleLanguageChange}
-                        value={selectedLanguage === "fr-FR" ? true : false}
+                        name={"en-US"}
+                        callback={handleLanguage}
+                        value={selectedLanguage === "en-US" ? true : false}
                     />
                 </View>
                 <ItemDivisor />
@@ -81,14 +78,14 @@ const Language = () => {
                     <View style={styles.iconContent}>
                         <Image source={require('../../assets/languages/french.png')} style={styles.icon} />
                         <Text style={[styles.text, { color: colors.text }]}>
-                            FRANCÊS
+                            {getTranslation('words.french')}
                         </Text>
                     </View>
 
                     <CheckBox
-                        name={"en-US"}
-                        callback={handleLanguageChange}
-                        value={selectedLanguage === "en-US" ? true : false}
+                        name={"fr-FR"}
+                        callback={handleLanguage}
+                        value={selectedLanguage === "fr-FR" ? true : false}
                     />
                 </View>
                 <ItemDivisor />

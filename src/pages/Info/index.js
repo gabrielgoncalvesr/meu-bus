@@ -1,34 +1,30 @@
 import React from 'react';
-import { useTheme } from '@react-navigation/native';
-import {
-    Text,
-    View
-} from 'react-native';
+import { Text, View } from 'react-native';
 
-import {
-    HeaderBar,
-    DivisorBar
-} from '../../components';
+import { HeaderBar, DivisorBar } from '../../components';
+
+import { getTranslation } from '../../util/locales';
+import { getThemeColors } from '../../util/themeContext';
 
 import styles from './styles';
 
 const Info = () => {
 
-    const { colors } = useTheme();
+    const colors = getThemeColors();
 
     return (
         <View style={styles.content}>
             <HeaderBar />
 
             <View style={styles.contentInfo}>
-                <DivisorBar text={"INFORMAÇÕES"} />
+                <DivisorBar text={getTranslation('words.information')} />
 
                 <View style={styles.contentText}>
                     <Text style={[styles.text, { color: colors.text }]}>
-                        Esse aplicativo é construído utilizando React Native e consumindo uma API em NodeJS.
+                        {getTranslation('text.buildInfo')}
                     </Text>
                     <Text style={[styles.text, { color: colors.text }]}>
-                        Esse aplicativo tem somente o intuito de aprendizado e de como utilizar tecnologias.
+                        {getTranslation('text.goalsInfo')}
                     </Text>
                 </View>
             </View>

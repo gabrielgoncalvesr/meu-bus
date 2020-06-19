@@ -1,22 +1,15 @@
 import intl from 'react-intl-universal';
 
-require('intl/locale-data/jsonp/en.js');
-require('intl/locale-data/jsonp/zh.js');
-require('intl/locale-data/jsonp/fr.js');
-require('intl/locale-data/jsonp/ja.js');
-require('intl/locale-data/jsonp/pt.js');
-
 const locales = {
-    "en-US": require('../../../public/locales/en-US.json'),
+    "en-US": require('./en-US.json'),
+    "fr-FR": require('./fr-FR.json'),
+    "pt-BR": require('./pt-BR.json'),
 }
 
 const loadLocales = (currentLocale) => {
-
-    console.log("currentLocale" + currentLocale)
-
     intl.init({
+        locales,
         currentLocale,
-        locales
     }).then(() => {
         return true;
     }).catch(() => {
@@ -24,6 +17,11 @@ const loadLocales = (currentLocale) => {
     });
 }
 
+const getTranslation = (object) => {
+    return intl.get(object);
+}
+
 export {
-    loadLocales
+    loadLocales,
+    getTranslation,
 }
