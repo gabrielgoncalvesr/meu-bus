@@ -1,36 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import intl from 'react-intl-universal';
 import { FontAwesome5 } from '@expo/vector-icons';
-import {
-    useTheme,
-    useNavigation
-} from '@react-navigation/native';
-import {
-    Text,
-    View,
-    TouchableOpacity,
-} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Text, View, TouchableOpacity } from 'react-native';
 
-import {
-    Map,
-    Message,
-    BusList,
-    SlideBar,
-    StatusBar,
-    DivisorBar
-} from '../../components';
+import { Map, Message, BusList, SlideBar, StatusBar, DivisorBar } from '../../components';
 
 import request from '../../services/api';
-import {
-    addItem,
-    getItem
-} from '../../util/storage';
+import { getTranslation } from '../../util/locales';
+import { addItem, getItem } from '../../util/storage';
+import { getThemeColors } from '../../util/themeContext';
 
 import styles from './styles';
 
 const Home = () => {
 
-    const { colors } = useTheme();
+    const colors = getThemeColors();
 
     const navigation = useNavigation();
 
@@ -85,56 +69,55 @@ const Home = () => {
                     </View>
                 }
                 barContent={
-                    <View style={styles.content}>
-                        <View style={[styles.barContent, { backgroundColor: colors.item }]}>
+                    <View style={[styles.content, { backgroundColor: colors.background }]}>
+                        <View style={[styles.barContent]}>
                             <TouchableOpacity
-                                style={[styles.button, { backgroundColor: colors.primaryColor }]}
+                                style={[styles.button, { backgroundColor: colors.card }]}
                                 onPress={() => navigateToScreen('BusListScreen')}
                             >
                                 <View style={styles.iconContent}>
                                     <FontAwesome5
                                         name="bus"
-                                        style={[styles.icon, { color: colors.text }]}
+                                        style={[styles.icon, { color: colors.cardText }]}
                                     />
                                 </View>
 
-                                <Text style={[styles.title, { color: colors.text }]}>
-                                    {/* Ver Linhas */}
-                                    {intl.get('phrases.seeLines')}
+                                <Text style={[styles.title, { color: colors.cardText }]}>
+                                    {getTranslation('phrases.seeLines')}
                                 </Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity
-                                style={[styles.button, { backgroundColor: colors.primaryColor }]}
+                                style={[styles.button, { backgroundColor: colors.card }]}
                                 onPress={() => navigateToScreen('SearchScreen')}
                             >
                                 <View style={styles.iconContent}>
                                     <FontAwesome5
                                         name="search"
-                                        style={[styles.icon, { color: colors.text }]}
+                                        style={[styles.icon, { color: colors.cardText }]}
                                     />
                                 </View>
 
-                                <Text style={[styles.title, { color: colors.text }]}>
-                                    Pesquisar Linha
-                            </Text>
+                                <Text style={[styles.title, { color: colors.cardText }]}>
+                                    {getTranslation('phrases.searchLine')}
+                                </Text>
                             </TouchableOpacity>
                         </View>
 
-                        <DivisorBar text={"HISTÓRICO DE PESQUISA"} />
+                        <DivisorBar text={getTranslation('phrases.searchHistory')} />
 
-                        <View style={[styles.historyContent, { backgroundColor: colors.item }]}>
+                        <View style={[styles.historyContent, { backgroundColor: colors.background }]}>
                             <BusList
                                 data={data}
                                 onPressBar={navigateToTracking}
                             />
 
                             {!userLogged && emptySearch &&
-                                <Message text={"nenhum resultado encontrado"} />
+                                <Message text={getTranslation('phrases.emptyResult')} />
                             }
 
                             {!emptySearch && userLogged &&
-                                <Message text={"sem histórico"} />
+                                <Message text={getTranslation('phrases.withoutHistory')} />
                             }
                         </View>
                     </View>

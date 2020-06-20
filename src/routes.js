@@ -35,7 +35,7 @@ const Stack = createStackNavigator();
 const Routes = () => {
 
     const [isDarkTheme, setIsDarkTheme] = React.useState(true);
-    const [language, setLanguage] = React.useState('pt-BR');
+    const [language, setLanguage] = React.useState('en-US');
 
     const themeContext = React.useMemo(() => ({
         handleThemeChange: async (value) => {
@@ -56,8 +56,8 @@ const Routes = () => {
         colors: {
             background: '#F5F5F5',//#1B1C21
             text: '#162447',
-
-
+            card: '#162447',
+            cardText: '#EEEEEE',
 
 
 
@@ -88,7 +88,8 @@ const Routes = () => {
         colors: {
             background: '#1B1C21',//#1B1C21
             text: '#EEEEEE',
-
+            card: '#EEEEEE',
+            cardText: '#162447',
 
 
 

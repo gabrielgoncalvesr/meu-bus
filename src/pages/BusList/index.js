@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { Text, View, TouchableOpacity, FlatList } from 'react-native';
+import { Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { BusList, HeaderBar, DivisorBar } from '../../components';
 
 import request from '../../services/api';
+import { getTranslation } from '../../util/locales';
+import { getThemeColors } from '../../util/themeContext';
 
 import styles from './styles';
 
 const Search = () => {
+
+    const colors = getThemeColors();
 
     const navigation = useNavigation();
 
@@ -17,7 +20,6 @@ const Search = () => {
     const [data, setData] = useState([]);
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(false);
-
 
     const navigateToTracking = (value) => {
         navigation.navigate('TrackingScreen', { busData: value });
@@ -51,20 +53,19 @@ const Search = () => {
 
     return (
         <View style={styles.content}>
-            <HeaderBar />
+            <HeaderBar>
+                <Text style={[styles.title, { color: colors.text }]}>
+                    SPTRANS
+                </Text>
+            </HeaderBar>
 
-            <View style={styles.titleBar}>
-                <Text style={styles.title}>SPTRANS</Text>
-            </View>
-
-            <DivisorBar text={"TODAS AS LINHAS"} />
+            <DivisorBar text={getTranslation('phrases.allLines')} />
 
             <BusList
                 data={data}
                 callback={() => loadData()}
                 onPressBar={navigateToTracking}
             />
-
         </View>
     );
 }

@@ -63,7 +63,7 @@ const User = () => {
             </HeaderBar>
 
             <View style={styles.contentFunctions}>
-                <DivisorBar text={getTranslation('words.configurations')} />
+                <DivisorBar text={getTranslation('words.settings')} />
 
                 <ButtonBar
                     iconType={"paint-roller"}

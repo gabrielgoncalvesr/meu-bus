@@ -1,6 +1,6 @@
+import React, { useState, useEffect, useContext } from 'react';
 import { Text, View } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-import React, { useState, useEffect, useContext } from 'react';
 
 import { CheckBox, HeaderBar, DivisorBar, ItemDivisor } from '../../components';
 

@@ -1,5 +1,5 @@
-import { Text, View, Image } from 'react-native';
 import React, { useState, useEffect, useContext } from 'react';
+import { Text, View, Image } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 
 import { CheckBox, HeaderBar, DivisorBar, ItemDivisor } from '../../components';
