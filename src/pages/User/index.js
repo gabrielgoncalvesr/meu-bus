@@ -1,20 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import {
-    useTheme,
-    useNavigation
-} from '@react-navigation/native';
-import {
-    Text,
-    View,
-    Image
-} from 'react-native';
+import { Text, View, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-import {
-    ButtonBar,
-    HeaderBar,
-    DivisorBar,
-    ItemDivisor
-} from '../../components';
+import { ButtonBar, HeaderBar, DivisorBar } from '../../components';
+
+import { getTranslation } from '../../util/locales';
+import { getThemeColors } from '../../util/themeContext';
 
 import { getItem } from '../../util/storage';
 
@@ -22,7 +13,7 @@ import styles from './styles';
 
 const User = () => {
 
-    const { colors } = useTheme();
+    const colors = getThemeColors();
 
     const userIcons = {
         'user-icon1': require('../../../assets/user-icons/user-icon1.jpg'),
@@ -36,32 +27,11 @@ const User = () => {
     const [userName, setUserName] = useState('');
     const [userProfilePhoto, setUserProfilePhoto] = useState('');
 
-    const navigateToSettings = () => {
-        navigation.navigate('SettingsScreen');
-    }
-
-    const navigateToInfo = () => {
-        navigation.navigate('InfoScreen');
-    }
-
-    const navigateToHelp = () => {
-        navigation.navigate('HelpScreen');
-    }
-
-    const navigateToTheme = () => {
-        navigation.navigate('ThemeScreen');
-    }
-
-    const navigateToLanguage = () => {
-        navigation.navigate('LanguageScreen');
-    }
-
-    const navigateToImage = () => {
-        navigation.navigate('ImageScreen');
+    const navigateToScreen = (value) => {
+        navigation.navigate(value);
     }
 
     const signOutAccount = () => {
-
         navigation.navigate();
     }
 
@@ -93,41 +63,41 @@ const User = () => {
             </HeaderBar>
 
             <View style={styles.contentFunctions}>
-                <DivisorBar text={"CONFIGURAÇÕES"} />
+                <DivisorBar text={getTranslation('words.settings')} />
 
                 <ButtonBar
                     iconType={"paint-roller"}
-                    text={"Alterar Tema"}
-                    callback={navigateToTheme}
+                    text={getTranslation('phrases.changeTheme')}
+                    callback={() => navigateToScreen("ThemeScreen")}
                 />
 
                 <ButtonBar
                     iconType={"language"}
-                    text={"Alterar Idioma"}
-                    callback={navigateToLanguage}
+                    text={getTranslation('phrases.changeLanguage')}
+                    callback={() => navigateToScreen("LanguageScreen")}
                 />
 
                 <ButtonBar
                     iconType={"image"}
-                    text={"Alterar Imagem"}
-                    callback={navigateToImage}
+                    text={getTranslation('phrases.changeImage')}
+                    callback={() => navigateToScreen("ImageScreen")}
                 />
 
                 <ButtonBar
                     iconType={"info-circle"}
-                    text={"Informações"}
-                    callback={navigateToInfo}
+                    text={getTranslation('words.information')}
+                    callback={() => navigateToScreen("InfoScreen")}
                 />
 
                 <ButtonBar
                     iconType={"question-circle"}
-                    text={"Ajuda"}
-                    callback={navigateToHelp}
+                    text={getTranslation('words.help')}
+                    callback={() => navigateToScreen("HelpScreen")}
                 />
 
                 <ButtonBar
                     iconType={"sign-out-alt"}
-                    text={"Sair da Conta"}
+                    text={getTranslation('phrases.signOut')}
                     callback={() => signOutAccount()}
                 />
             </View>

@@ -1,0 +1,33 @@
+{
+    "phrases": {
+        "seeLines": "See Lines",
+        "sendEmail": "Send E-mail",
+        "changeTheme": "Change Theme",
+        "changeLanguage": "Change Language",
+        "changeImage": "Change Image",
+        "signOut": "Sign Out",
+        "searchLine": "Search Line",
+        "withoutHistory": "Without Result",
+        "searchHistory": "Search History",
+        "allLines": "All Lines",
+        "routesSearch": "Routes Search"
+    },
+    "words": {
+        "help": "Help",
+        "language": "Language",
+        "portuguese": "Portuguese",
+        "english": "English",
+        "french": "French",
+        "information": "Information",
+        "theme": "Tema",
+        "light": "Light",
+        "dark": "Dark",
+        "settings": "Settings"
+    },
+    "text": {
+        "searchPlaceholder": "line code, line name ...",
+        "emailHelp": "In case of help with the application, functionality and suggestions, send an email to contact us.",
+        "buildInfo": "This application is built using React Native and consuming an API in NodeJS.",
+        "goalsInfo": "This application is only intended for learning and how to use technologies."
+    }
+}

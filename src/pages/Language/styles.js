@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     icon: {
         width: 35,
         height: 25,
-        marginRight: 10
+        marginRight: 10,
     },
     iconContent: {
         flexDirection: 'row',

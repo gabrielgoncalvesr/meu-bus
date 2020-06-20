@@ -17,6 +17,8 @@ import {
 } from './util/storage';
 import { ThemeContext } from './util/themeContext';
 
+import { loadLocales } from './util/locales';
+
 import Home from './pages/Home';
 import User from './pages/User';
 import Info from './pages/Info';
@@ -33,21 +35,29 @@ const Stack = createStackNavigator();
 const Routes = () => {
 
     const [isDarkTheme, setIsDarkTheme] = React.useState(true);
+    const [language, setLanguage] = React.useState('en-US');
 
     const themeContext = React.useMemo(() => ({
         handleThemeChange: async (value) => {
             await addItem('theme', value);
             setIsDarkTheme(value === "dark" ? true : false)
+        },
+        handleLanguageChange: async (value) => {
+            setLanguage(value);
         }
     }), []);
+
+    React.useEffect(() => {
+        loadLocales(language);
+    }, [language]);
 
     const CustomDefaultTheme = {
         ...DefaultTheme,
         colors: {
             background: '#F5F5F5',//#1B1C21
             text: '#162447',
-
-
+            card: '#162447',
+            cardText: '#EEEEEE',
 
 
 
@@ -78,7 +88,8 @@ const Routes = () => {
         colors: {
             background: '#1B1C21',//#1B1C21
             text: '#EEEEEE',
-
+            card: '#EEEEEE',
+            cardText: '#162447',
 
 
 
@@ -107,15 +118,6 @@ const Routes = () => {
             fourth: '#FFFFFF'
         }
     }
-
-    // React.useEffect(() => {
-    //     const loadTheme = async () => {
-    //         const theme = await getItem('theme');
-    //         console.log(theme)
-    //     }
-
-    //     loadTheme();
-    // }, []);
 
     const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
 

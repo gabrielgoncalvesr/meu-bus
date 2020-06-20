@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { View } from 'react-native';
 import * as Location from 'expo-location';
-import { View, Text } from 'react-native';
 
 import MapView from 'react-native-maps';
 
-import MapLocation from '../MapLocation';
+//import MapLocation from '../MapLocation';
+
+//import { getThemeColors } from '../../util/themeContext';
 
 import styles from './styles';
 
 const MapComponent = (props) => {
+
+    //const colors = getThemeColors();
 
     const [coordinate, setCoordinate] = useState({ latitude: -23.4285, longitude: -46.795379 });
     const [location, setLocation] = useState(null);

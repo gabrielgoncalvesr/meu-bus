@@ -1,21 +1,13 @@
 import React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
-import {
-    View,
-    Text,
-    FlatList,
-    TouchableOpacity
-} from 'react-native';
-
-import ItemDivisor from '../ItemDivisor'
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
+import { getThemeColors } from '../../util/themeContext';
 
-const BusList = ({
-    data,
-    callback,
-    onPressBar
-}) => {
+const BusList = ({ data, callback, onPressBar }) => {
+
+    const colors = getThemeColors();
 
     const handleLoadData = () => {
         if (callback) {
@@ -48,21 +40,19 @@ const BusList = ({
                             onPress={() => handlePressBar(item)}
                         >
                             <View style={styles.informationContent}>
-                                <Text style={styles.informationText}>
+                                <Text style={[styles.informationText, { color: colors.text }]}>
                                     {item.longName}
                                 </Text>
                             </View>
 
                             <View style={styles.iconContent}>
                                 <FontAwesome
-                                    style={styles.icon}
+                                    style={[styles.icon, { color: colors.text }]}
                                     name="chevron-right"
                                 />
                             </View>
                         </TouchableOpacity>
                     </View>
-
-                    <ItemDivisor />
                 </>
             )}
         />

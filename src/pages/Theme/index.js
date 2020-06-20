@@ -1,32 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { Text, View } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-import {
-    Text,
-    View
-} from 'react-native';
-import {
-    useTheme
-} from '@react-navigation/native';
 
-import {
-    CheckBox,
-    HeaderBar,
-    DivisorBar,
-    ItemDivisor
-} from '../../components';
+import { CheckBox, HeaderBar, DivisorBar, ItemDivisor } from '../../components';
 
 import { getItem } from '../../util/storage';
-import { ThemeContext } from '../../util/themeContext';
+import { getTranslation } from '../../util/locales';
+import { ThemeContext, getThemeColors } from '../../util/themeContext';
 
 import styles from './styles';
 
 const Theme = () => {
 
-    const { colors } = useTheme();
+    const colors = getThemeColors();
 
-    const {
-        handleThemeChange
-    } = React.useContext(ThemeContext);
+    const { handleThemeChange } = useContext(ThemeContext);
 
     const [selectedTheme, setSelectedTheme] = useState();
 
@@ -44,13 +32,12 @@ const Theme = () => {
         loadTheme();
     }, []);
 
-
     return (
         <View style={styles.content}>
             <HeaderBar />
 
             <View style={styles.contentItem}>
-                <DivisorBar text={"TEMA"} />
+                <DivisorBar text={getTranslation('words.theme')} />
 
                 <View style={styles.item}>
                     <View style={styles.themeContent}>
@@ -60,7 +47,7 @@ const Theme = () => {
                         />
 
                         <Text style={[styles.text, { color: colors.text }]}>
-                            LIGHT
+                            {getTranslation('words.light').toUpperCase()}
                         </Text>
                     </View>
 
@@ -80,7 +67,7 @@ const Theme = () => {
                         />
 
                         <Text style={[styles.text, { color: colors.text }]}>
-                            DARK
+                            {getTranslation('words.dark').toUpperCase()}
                         </Text>
                     </View>
 

@@ -19,7 +19,7 @@ const DivisorBar = ({ text }) => {
             backgroundColor: colors.thirdy,
         }]}>
             <Text style={[styles.text, { color: colors.text }]}>
-                {text}
+                {text.toUpperCase()}
             </Text>
         </View>
     );

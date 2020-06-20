@@ -8,14 +8,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     touchableBar: {
-        height: 30,
+        height: 31,
         elevation: 2,
         shadowRadius: 2,
         shadowOpacity: 0.8,
-        shadowColor: '#000',
         alignItems: 'center',
+        shadowColor: '#000000',
         justifyContent: 'center',
-        backgroundColor: "#f5f5f5",
         shadowOffset: {
             width: 0,
             height: 1
@@ -33,9 +32,8 @@ const styles = StyleSheet.create({
         elevation: 5,
         shadowRadius: 2,
         shadowOpacity: 0.8,
-        shadowColor: '#000',
         position: "absolute",
-        backgroundColor: "#f5f5f5",
+        shadowColor: '#000000',
         shadowOffset: {
             width: 0,
             height: 1
