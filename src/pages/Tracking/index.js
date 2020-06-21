@@ -1,25 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import MapView from 'react-native-maps';
 import socketIOClient from "socket.io-client";
-import {
-    FontAwesome5,
-    Ionicons
-} from '@expo/vector-icons';
-import {
-    useNavigation,
-    useRoute
-} from '@react-navigation/native';
-import {
-    Text,
-    View,
-    TouchableOpacity,
-    YellowBox
-} from 'react-native';
-import {
-    SlideBar,
-    Map,
-    MapLocation
-} from '../../components';
+import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { Text, View, TouchableOpacity, YellowBox } from 'react-native';
+import { SlideBar, Map, MapLocation } from '../../components';
 
 import request from '../../services/api';
 
@@ -53,6 +38,8 @@ const Tracking = () => {
         const responseRoute = await request.get('/bus/trip', {
             params: { busCode: busData.id, direction: 0 }
         });
+
+        console.log(responseRoute.data)
 
         const coordinatesRoute = responseRoute.data[0]['Trips'][0]['Routes'].map(item => {
             return { latitude: Number(item.latitude), longitude: Number(item.longitude) }
