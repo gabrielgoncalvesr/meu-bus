@@ -10,8 +10,7 @@ const historyRoutes = require('./api/history');
 router.use('/trip', tripRoutes.router);
 router.use('/sptrans', userRoutes.router);
 router.use('/history', historyRoutes.router);
-
-// router.use('/stop', stopRoutes.router);
+router.use('/stop', stopRoutes.router);
 router.use('/bus', busRoutes.router);
 
 
