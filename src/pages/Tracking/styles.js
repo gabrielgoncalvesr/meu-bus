@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    containerAction: {
+    container: {
         height: '100%',
         borderRadius: 5
     },
@@ -12,32 +12,9 @@ const styles = StyleSheet.create({
         bottom: 0,
         position: 'absolute'
     },
-    actionBar: {
-        height: 130,
-        backgroundColor: '#ffffff',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-around'
-    },
-    buttonFunction: {
-        width: 90,
-        height: 90,
-        borderRadius: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#2b2e4a'
-    },
-    buttonTitle: {
-        fontSize: 14,
-        color: '#d1d1d1',
-        fontWeight: 'bold'
-    },
-    buttonIcon: {
-        color: '#d1d1d1',
-    },
-    buttonIconBar: {
-        height: 45,
-    },
+
+
+
     contentMap: {
         top: 0,
         left: 0,
@@ -45,23 +22,80 @@ const styles = StyleSheet.create({
         bottom: 0,
         position: 'absolute'
     },
-    divisorBar: {
-        height: 50,
-        paddingLeft: 20,
-        alignItems: 'flex-start',
+    icon: {
+        fontSize: 5
+    },
+
+    descriptionContent: {
+        width: '100%',
+    },
+    stopContent: {
+        width: '100%',
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    iconContent: {
+        width: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    barContent: {
+        height: 100,
+        width: '100%',
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    tagContent: {
+        width: 60,
+        height: 40,
+        margin: 20,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    tagText: {
+        fontSize: 14,
+        fontWeight: 'bold',
+    },
+    informationContent: {
+        margin: 5,
+        width: '100%',
+        flexShrink: 1,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    informationText: {
+        fontSize: 16,
+    },
+    routesContent: {
+        height: '100%',
+        alignItems: 'center',
+        backgroundColor: 'red',
         justifyContent: 'center'
     },
+    header: {
+        height: 100,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
     backIcon: {
-        top: 30,
+        top: 20,
         left: 20,
-        width: 40,
-        height: 40,
+        width: 45,
+        height: 45,
+        zIndex: 1000,
         borderRadius: 5,
         position: 'absolute',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#ffffff'
-    }
+    },
+    icon: {
+        fontSize: 25,
+    },
 });
 
 export default styles;

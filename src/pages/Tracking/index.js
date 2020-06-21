@@ -3,16 +3,22 @@ import MapView from 'react-native-maps';
 import socketIOClient from "socket.io-client";
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Text, View, TouchableOpacity, YellowBox } from 'react-native';
+import { Text, View, TouchableOpacity, YellowBox, ScrollView } from 'react-native';
 import { SlideBar, Map, MapLocation } from '../../components';
 
 import request from '../../services/api';
 
 import styles from './styles';
+import { getThemeColors } from '../../util/themeContext';
+import { getTranslation } from '../../util/locales';
+import { DivisorBar } from '../../components';
+import { set } from 'react-native-reanimated';
 
-const socket = socketIOClient("http://192.168.0.148:4001", { jsonp: false, agent: '-', pfx: '-', cert: '-', ca: '-', ciphers: '-', rejectUnauthorized: '-', perMessageDeflate: '-' });
+const socket = socketIOClient("http://192.168.0.148:4000", { jsonp: false, agent: '-', pfx: '-', cert: '-', ca: '-', ciphers: '-', rejectUnauthorized: '-', perMessageDeflate: '-' });
 
 const Tracking = () => {
+
+    const colors = getThemeColors();
 
     const route = useRoute();
     const navigation = useNavigation();
@@ -27,21 +33,21 @@ const Tracking = () => {
     const [infoLoaded, setInfoLoaded] = useState(false);
     const [coordenatesLoaded, setCoordenatesLoaded] = useState(false);
 
+    const [busObject, setBusObject] = useState({});
+
     const navigateBack = () => {
         socket.disconnect();
         navigation.goBack();
     }
 
     async function loadData() {
-        const busData = route.params.busData;
+        const { busData } = route.params;
 
         const responseRoute = await request.get('/bus/trip', {
-            params: { busCode: busData.id, direction: 0 }
+            params: { busId: busData.id, direction: 0 }
         });
 
-        console.log(responseRoute.data)
-
-        const coordinatesRoute = responseRoute.data[0]['Trips'][0]['Routes'].map(item => {
+        const coordinatesRoute = responseRoute.data['Routes'].map(item => {
             return { latitude: Number(item.latitude), longitude: Number(item.longitude) }
         });
 
@@ -49,20 +55,21 @@ const Tracking = () => {
             params: { tripId: busData.id + "-" + 0 }
         });
 
+        // console.log(responseStops)
+
         const coordinatesStops = responseStops.data.map(item => {
-            return { description: item.name, latitude: Number(item['Stop'].latitude), longitude: Number(item['Stop'].longitude) }
+            return { description: item['Stop'].name, latitude: Number(item['Stop'].latitude), longitude: Number(item['Stop'].longitude) }
         });
 
         setRouteColor("#" + busData.color);
         setCoordinatesRoute(coordinatesRoute);
         setCoordinatesStops(coordinatesStops);
 
-
         setInfoLoaded(true);
     }
 
     const loadCoordinates = async () => {
-        const busData = route.params.busData;
+        const { busData } = route.params;
 
         const responseLine = await request.get('/sptrans/search/line', {
             params: { term: busData.shortName }
@@ -74,16 +81,9 @@ const Tracking = () => {
 
         const lineIdentifier = lineInformations[0]['lineIdentifier'];
 
-        console.log("lineIdentifier" + lineIdentifier)
-
-        // const responsePosition = await request.get('/sptrans/search/position', {
-        //     params: { code: lineIdentifier }
-        // });
-
-
-        console.log("entrando")
         socket.on("/position", data => {
             console.log(data)
+            console.log("data")
 
             const markerList = data.map(item => {
                 return { vehiclePrefix: item.vehiclePrefix, latitude: item.latitudePosition, longitude: item.longitudePosition }
@@ -108,6 +108,10 @@ const Tracking = () => {
 
 
     useEffect(() => {
+        const { busData } = route.params;
+
+        setBusObject(busData);
+
         loadData();
         loadCoordinates();
     }, []);
@@ -117,55 +121,74 @@ const Tracking = () => {
             isLongBar={true}
             mainContent={
                 <View style={styles.containerMap}>
-                    {
-                        (infoLoaded && coordenatesLoaded) &&
-                        <Map
-                            routeColor={routeColor}
-                            coordinatesRoute={coordinatesRoute}
-                            coordinatesStops={coordinatesStops}
-                        >
-                            {(markerList && markerList.length) &&
-                                markerList.map((item, index) => (
-                                    <MapLocation
-                                        key={index}
-                                        coordinates={item}
-                                    />
-                                ))
-                            }
-                        </Map>
-                    }
-                    <TouchableOpacity style={styles.backIcon} onPress={() => navigateBack()}>
-                        <Ionicons name="md-arrow-round-back" size={30} color="#828282" />
+                    {/* <Map
+                        routeColor={routeColor}
+                        coordinatesRoute={coordinatesRoute}
+                        coordinatesStops={coordinatesStops}
+                    >
+                        {(markerList && markerList.length && markerList.length > 0) &&
+                            markerList.map((item, index) => (
+                                <MapLocation
+                                    key={index}
+                                    coordinates={item}
+                                />
+                            ))
+                        }
+                    </Map> */}
+
+                    <TouchableOpacity
+                        style={[styles.backIcon, { backgroundColor: colors.secondary }]}
+                        onPress={() => navigateBack()}
+                    >
+                        <Ionicons
+                            style={[styles.icon, { color: colors.primary }]}
+                            name="md-arrow-round-back"
+                        />
                     </TouchableOpacity>
                 </View>
             }
             barContent={
-                <View style={styles.containerAction}>
-                    <View style={styles.actionBar}>
-                        <TouchableOpacity style={styles.buttonFunction} onPress={() => console.log(coordinates.length)}>
-                            <View style={styles.buttonIconBar}>
-                                <FontAwesome5 style={styles.buttonIcon} name="bus" size={24} />
-                            </View>
+                <View style={styles.container}>
+                    <View style={styles.header}>
+                        <View style={[styles.tagContent, { backgroundColor: '#' + busObject.color }]}>
+                            <Text style={[styles.tagText, { color: '#' + busObject.textColor }]}>
+                                {busObject.shortName}
+                            </Text>
+                        </View>
 
-                            <Text style={styles.buttonTitle}>SPTRANS</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={styles.buttonFunction} onPress={() => console.log("bbbb")}>
-                            <View style={styles.buttonIconBar}>
-                                <Ionicons style={styles.buttonIcon} name="md-bus" size={30} />
-                            </View>
-
-                            <Text style={styles.buttonTitle}>EMTU</Text>
-                        </TouchableOpacity>
+                        <View style={styles.informationContent}>
+                            <Text style={[styles.informationText, { color: colors.text }]}>
+                                {busObject.longName}
+                            </Text>
+                        </View>
                     </View>
 
-                    <View style={styles.divisorBar}>
-                        <Text>PESQUISA DE ROTAS</Text>
-                    </View>
+                    <DivisorBar text={getTranslation('words.routes')} />
 
-                    <View style={styles.actionBar}>
-                        <Text>sda</Text>
-                    </View>
+                    <ScrollView>
+                        {
+                            coordinatesStops.map((item, index) => {
+                                return (
+                                    <View style={styles.stopContent}>
+                                        <View style={styles.iconContent}>
+                                            <FontAwesome5
+                                                style={[styles.icon, { color: colors.text }]}
+                                                name="grip-lines-vertical"
+                                            />
+                                        </View>
+                                        <View style={styles.descriptionContent}>
+                                            <Text
+                                                key={index}
+                                                style={{ color: colors.text }}
+                                            >
+                                                {item.description}
+                                            </Text>
+                                        </View>
+                                    </View>
+                                )
+                            })
+                        }
+                    </ScrollView>
                 </View>
             }
         />
