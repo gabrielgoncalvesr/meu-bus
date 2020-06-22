@@ -1,22 +1,13 @@
-// const Sequelize = require('sequelize');
-// const Op = Sequelize.Op;
+const { findStopRoute } = require('../../repository/stop');
 
-// const { findStopRoute } = require('../../repository/stop');
+const searchStopRoute = async (req, res) => {
+    const { tripId } = req.query;
 
-// const searchStopRoute = async (request, response) => {
-//     console.log(request.query)
-//     const { tripId } = request.query;
+    const result = await findStopRoute({ tripId });
 
-//     console.log(tripId)
+    res.json(result)
+}
 
-//     const result = await findStopRoute({ tripId });
-
-//     console.log(result)
-//     response.json({ "teste": "test" })
-//     // response.header('X-Total-Count', result.count);
-//     // response.json(result.rows.map(item => item['dataValues']));
-// }
-
-// module.exports = {
-//     searchStopRoute
-// }
+module.exports = {
+    searchStopRoute
+}
