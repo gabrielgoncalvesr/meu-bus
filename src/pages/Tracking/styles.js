@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         height: '100%',
-        borderRadius: 5
     },
     containerMap: {
         top: 0,
@@ -14,7 +13,6 @@ const styles = StyleSheet.create({
     },
 
 
-
     contentMap: {
         top: 0,
         left: 0,
@@ -22,23 +20,53 @@ const styles = StyleSheet.create({
         bottom: 0,
         position: 'absolute'
     },
-    icon: {
-        fontSize: 5
-    },
 
     descriptionContent: {
+        marginTop: 0,
         width: '100%',
     },
+
+
+
+    firstContent: {
+        height: 30,
+        width: '100%',
+        marginTop: 40,
+        alignItems: 'flex-start',
+        flexDirection: 'row',
+    },
+
+    lastContent: {
+        height: 30,
+        width: '100%',
+        marginBottom: 70,
+        alignItems: 'flex-end',
+        flexDirection: 'row',
+    },
+
+
     stopContent: {
+        height: 60,
         width: '100%',
         alignItems: 'center',
         flexDirection: 'row',
-        justifyContent: 'space-between'
     },
     iconContent: {
-        width: 50,
+        width: 60,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    iconBar: {
+        width: 5,
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    icon: {
+        fontSize: 10,
+        zIndex: 999,
+        overflow:  'visible',
+        position: 'absolute'
     },
     barContent: {
         height: 100,

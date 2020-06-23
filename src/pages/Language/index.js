@@ -19,7 +19,6 @@ const Language = () => {
     const [selectedLanguage, setSelectedLanguage] = useState('');
 
     const handleLanguage = (value) => {
-        console.log("langugage" + value)
         setSelectedLanguage(value);
         handleLanguageChange(value);
     }

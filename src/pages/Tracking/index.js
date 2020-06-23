@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MapView from 'react-native-maps';
 import socketIOClient from "socket.io-client";
-import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { FontAwesome5, Ionicons, Octicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Text, View, TouchableOpacity, YellowBox, ScrollView } from 'react-native';
 import { SlideBar, Map, MapLocation } from '../../components';
@@ -12,7 +12,7 @@ import styles from './styles';
 import { getThemeColors } from '../../util/themeContext';
 import { getTranslation } from '../../util/locales';
 import { DivisorBar } from '../../components';
-import { set } from 'react-native-reanimated';
+import { set, color } from 'react-native-reanimated';
 
 const socket = socketIOClient("http://192.168.0.148:4000", { jsonp: false, agent: '-', pfx: '-', cert: '-', ca: '-', ciphers: '-', rejectUnauthorized: '-', perMessageDeflate: '-' });
 
@@ -82,9 +82,6 @@ const Tracking = () => {
         const lineIdentifier = lineInformations[0]['lineIdentifier'];
 
         socket.on("/position", data => {
-            console.log(data)
-            console.log("data")
-
             const markerList = data.map(item => {
                 return { vehiclePrefix: item.vehiclePrefix, latitude: item.latitudePosition, longitude: item.longitudePosition }
             });
@@ -116,42 +113,35 @@ const Tracking = () => {
         loadCoordinates();
     }, []);
 
+
     return (
         <SlideBar
             isLongBar={true}
             mainContent={
                 <View style={styles.containerMap}>
-                    {/* <Map
+                    <Map
                         routeColor={routeColor}
+                        busesPosition={markerList}
                         coordinatesRoute={coordinatesRoute}
                         coordinatesStops={coordinatesStops}
-                    >
-                        {(markerList && markerList.length && markerList.length > 0) &&
-                            markerList.map((item, index) => (
-                                <MapLocation
-                                    key={index}
-                                    coordinates={item}
-                                />
-                            ))
-                        }
-                    </Map> */}
+                    />
 
                     <TouchableOpacity
-                        style={[styles.backIcon, { backgroundColor: colors.secondary }]}
+                        style={[styles.backIcon, { backgroundColor: colors.cardText }]}
                         onPress={() => navigateBack()}
                     >
                         <Ionicons
-                            style={[styles.icon, { color: colors.primary }]}
+                            style={[styles.icon, { color: colors.card }]}
                             name="md-arrow-round-back"
                         />
                     </TouchableOpacity>
                 </View>
             }
             barContent={
-                <View style={styles.container}>
+                <View style={[styles.container, { backgroundColor: colors.background }]}>
                     <View style={styles.header}>
                         <View style={[styles.tagContent, { backgroundColor: '#' + busObject.color }]}>
-                            <Text style={[styles.tagText, { color: '#' + busObject.textColor }]}>
+                            <Text style={[styles.tagText, { color: busObject.textColor ? '#' + busObject.textColor : colors.text }]}>
                                 {busObject.shortName}
                             </Text>
                         </View>
@@ -169,18 +159,34 @@ const Tracking = () => {
                         {
                             coordinatesStops.map((item, index) => {
                                 return (
-                                    <View style={styles.stopContent}>
+                                    <View
+                                        key={index}
+                                        style={
+                                            index === 0
+                                                ? styles.firstContent
+                                                : index === coordinatesStops.length - 1
+                                                    ? styles.lastContent
+                                                    : styles.stopContent
+                                        }
+                                    >
                                         <View style={styles.iconContent}>
-                                            <FontAwesome5
-                                                style={[styles.icon, { color: colors.text }]}
-                                                name="grip-lines-vertical"
-                                            />
+                                            <View style={[styles.iconBar, { backgroundColor: '#' + busObject.color }]}>
+                                                <FontAwesome5
+                                                    size={15}
+                                                    style={
+                                                        index === 0
+                                                            ? { position: 'absolute', width: 15, bottom: 22 }
+                                                            : index === coordinatesStops.length - 1
+                                                                ? { position: 'absolute', width: 15, top: 22 }
+                                                                : { position: 'absolute', width: 15 }}
+                                                    name="dot-circle"
+                                                    color={'#' + busObject.color}
+                                                />
+
+                                            </View>
                                         </View>
                                         <View style={styles.descriptionContent}>
-                                            <Text
-                                                key={index}
-                                                style={{ color: colors.text }}
-                                            >
+                                            <Text style={{ color: colors.text }}>
                                                 {item.description}
                                             </Text>
                                         </View>
