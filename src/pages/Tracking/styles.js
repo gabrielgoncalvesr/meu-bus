@@ -11,8 +11,6 @@ const styles = StyleSheet.create({
         bottom: 0,
         position: 'absolute'
     },
-
-
     contentMap: {
         top: 0,
         left: 0,
@@ -20,14 +18,10 @@ const styles = StyleSheet.create({
         bottom: 0,
         position: 'absolute'
     },
-
     descriptionContent: {
         marginTop: 0,
         width: '100%',
     },
-
-
-
     firstContent: {
         height: 30,
         width: '100%',
@@ -35,7 +29,6 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         flexDirection: 'row',
     },
-
     lastContent: {
         height: 30,
         width: '100%',
@@ -43,8 +36,6 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         flexDirection: 'row',
     },
-
-
     stopContent: {
         height: 60,
         width: '100%',
@@ -65,7 +56,7 @@ const styles = StyleSheet.create({
     icon: {
         fontSize: 10,
         zIndex: 999,
-        overflow:  'visible',
+        overflow: 'visible',
         position: 'absolute'
     },
     barContent: {
