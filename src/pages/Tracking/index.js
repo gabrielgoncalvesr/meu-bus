@@ -4,7 +4,7 @@ import socketIOClient from "socket.io-client";
 import { FontAwesome5, Ionicons, Octicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Text, View, TouchableOpacity, YellowBox, ScrollView } from 'react-native';
-import { SlideBar, Map, MapLocation } from '../../components';
+import { SlideBar, Map} from '../../components';
 
 import request from '../../services/api';
 
