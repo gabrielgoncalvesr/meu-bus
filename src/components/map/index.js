@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image } from 'react-native';
 import * as Location from 'expo-location';
+import { View, Text } from 'react-native';
 
 import MapView from 'react-native-maps';
 
 import MapLocation from '../MapLocation';
 
-//import { getThemeColors } from '../../util/themeContext';
-
 import styles from './styles';
 
 const MapComponent = (props) => {
-
-    //const colors = getThemeColors();
-
-    const { coordinatesStops, routeColor, coordinatesRoute, busesPosition } = props;
 
     const [coordinate, setCoordinate] = useState({ latitude: -23.4285, longitude: -46.795379 });
     const [location, setLocation] = useState(null);
@@ -49,8 +43,6 @@ const MapComponent = (props) => {
         text = JSON.stringify(location);
     }
 
-    console.log(busesPosition, "TESTE")
-
     return (
         <View style={styles.container}>
             {
@@ -61,26 +53,10 @@ const MapComponent = (props) => {
                         coordinate={{ latitude: initialRegion.latitude, longitude: initialRegion.longitude }}
                     />
 
-                    {(busesPosition && busesPosition.length > 0) &&
-                        busesPosition.map((item, index) => (
-                            <MapView.Marker
-                                key={index}
-                                title={item.vehiclePrefix}
-                                coordinate={{
-                                    latitude: item.latitude,
-                                    longitude: item.longitude
-                                }}
-                            >
-                                <Image
-                                    style={styles.busIconImage}
-                                    source={require('../../assets/busIcon.png')}
-                                />
-                            </MapView.Marker>
-                        ))
-                    }
+                    {props.children && props.children}
 
-                    {(coordinatesStops && coordinatesStops.length > 0) &&
-                        coordinatesStops.map((item, index) => (
+                    {(props.coordinatesStops && props.coordinatesStops.length) &&
+                        props.coordinatesStops.map((item, index) => (
                             <MapView.Marker
                                 key={index}
                                 title={item.description}
@@ -89,19 +65,17 @@ const MapComponent = (props) => {
                                     longitude: item.longitude
                                 }}
                             >
-                                <View style={[styles.stopBusCircle, { backgroundColor: '#ffffff', borderColor: routeColor ? routeColor : "#002d96" }]} />
+                                <View style={[styles.stopBusCircle, { backgroundColor: '#ffffff', borderColor: props.routeColor ? props.routeColor : "#002d96" }]} />
                             </MapView.Marker>
                         ))
                     }
 
-                    {(coordinatesRoute && coordinatesRoute.length) &&
-                        (
-                            <MapView.Polyline
-                                coordinates={coordinatesRoute}
-                                strokeWidth={5}
-                                strokeColor={routeColor ? routeColor : "#002d96"}
-                            />
-                        )
+                    {(props.coordinatesRoute && props.coordinatesRoute.length) &&
+                        <MapView.Polyline
+                            coordinates={props.coordinatesRoute}
+                            strokeWidth={5}
+                            strokeColor={props.routeColor ? props.routeColor : "#002d96"}
+                        />
                     }
                 </MapView>
             }
