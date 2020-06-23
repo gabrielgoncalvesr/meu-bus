@@ -23,6 +23,10 @@ const styles = StyleSheet.create({
         padding: 0,
         borderWidth: 3,
         borderRadius: 16 / 2,
+    },
+    busIconImage: {
+        height: 30,
+        width: 30
     }
 });
 

@@ -22,7 +22,8 @@
         "theme": "Tema",
         "light": "Light",
         "dark": "Dark",
-        "settings": "Settings"
+        "settings": "Settings",
+        "routes": "Routes"
     },
     "text": {
         "searchPlaceholder": "line code, line name ...",

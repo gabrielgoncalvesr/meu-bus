@@ -10,7 +10,6 @@ import ButtonBar from './ButtonBar';
 import StatusBar from './StatusBar';
 import DivisorBar from './DivisorBar';
 import ItemDivisor from './ItemDivisor';
-import MapLocation from './MapLocation';
 
 export {
     Map,
@@ -24,6 +23,5 @@ export {
     ButtonBar,
     StatusBar,
     DivisorBar,
-    ItemDivisor,
-    MapLocation
+    ItemDivisor
 }
