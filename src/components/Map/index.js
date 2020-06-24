@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
 import MapView from 'react-native-maps';
-
-import MapLocation from '../MapLocation';
 
 import styles from './styles';
 
