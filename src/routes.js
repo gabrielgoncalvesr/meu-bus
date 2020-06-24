@@ -34,22 +34,47 @@ const Stack = createStackNavigator();
 
 const Routes = () => {
 
-    const [isDarkTheme, setIsDarkTheme] = React.useState(true);
-    const [language, setLanguage] = React.useState('en-US');
+    const [selectedTheme, setSelectedTheme] = React.useState();
+    const [selectedLanguage, setSelectedLanguage] = React.useState();
 
     const themeContext = React.useMemo(() => ({
         handleThemeChange: async (value) => {
+            setSelectedTheme(value);
             await addItem('theme', value);
-            setIsDarkTheme(value === "dark" ? true : false)
         },
         handleLanguageChange: async (value) => {
-            setLanguage(value);
+            loadLocales(value);
+
+            setSelectedLanguage(value);
+            await addItem('language', value);
         }
     }), []);
 
     React.useEffect(() => {
-        loadLocales(language);
-    }, [language]);
+        const loadTheme = async () => {
+            let theme = await getItem('theme');
+            theme = theme ? theme : 'light';
+
+            setSelectedTheme(theme);
+            await addItem('theme', theme);
+        }
+
+        loadTheme();
+    }, []);
+
+    React.useEffect(() => {
+        const loadLanguage = async () => {
+            let language = await getItem('language');
+            language = language ? language : 'pt-BR';
+
+            setSelectedLanguage(language);
+            await addItem('language', language);
+
+            loadLocales(language);
+        }
+
+        loadLanguage();
+    }, []);
 
     const CustomDefaultTheme = {
         ...DefaultTheme,
@@ -63,22 +88,12 @@ const Routes = () => {
 
 
 
-            background: '#FFFFFF',
             primary: '#FFFFFF',
-            //text: '#162447',
-
-
-
             basic: '#000000',
-
             secondary: '#162447',
             thirdy: '#eeeeee',
-
-
             item: '#FFFFFF',
             content: '#F5F5F5',
-
-            //thirdy: '#F5F5F5',
             fourth: '#FFFFFF'
         }
     }
@@ -97,29 +112,16 @@ const Routes = () => {
 
 
             primary: '#1B1C21',
-
-
-
             basic: '#FFFFFF',
-
             secondary: '#F2F2F2',
             thirdy: '#393E46',
-
-
-
-
-
-
-
             item: '#FFFFFF',
             content: '#F5F5F5',
-
-            //thirdy: '#F5F5F5',
             fourth: '#FFFFFF'
         }
     }
 
-    const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
+    const theme = selectedTheme === "dark" ? CustomDarkTheme : CustomDefaultTheme;
 
     return (
         <ThemeContext.Provider value={themeContext}>

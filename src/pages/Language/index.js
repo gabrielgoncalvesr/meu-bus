@@ -1,34 +1,36 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Text, View, Image } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
-import { CheckBox, HeaderBar, DivisorBar, ItemDivisor } from '../../components';
+import { CheckBox, HeaderBar, DivisorBar } from '../../components';
 
-import { getTranslation } from '../../util/locales';
 import { getItem } from '../../util/storage';
-import { ThemeContext } from '../../util/themeContext';
+import { getTranslation } from '../../util/locales';
+import { ThemeContext, getThemeColors } from '../../util/themeContext';
 
 import styles from './styles';
 
 const Language = () => {
 
-    const { colors } = useTheme();
+    const colors = getThemeColors();
+    const navigation = useNavigation();
 
     const { handleLanguageChange } = useContext(ThemeContext);
 
-    const [selectedLanguage, setSelectedLanguage] = useState('');
+    const [selectedLanguage, setSelectedLanguage] = useState();
 
     const handleLanguage = (value) => {
         setSelectedLanguage(value);
         handleLanguageChange(value);
+        handleLanguageChange(value);
+
+        //navigation.navigate('HomeScreen');
     }
 
     useEffect(() => {
         const loadLanguage = async () => {
-            const user = await getItem('user');
-            if (user) {
-                setSelectedLanguage(user.language);
-            }
+            const language = await getItem('language');
+            setSelectedLanguage(language);
         }
 
         loadLanguage();
@@ -55,7 +57,6 @@ const Language = () => {
                         value={selectedLanguage === "pt-BR" ? true : false}
                     />
                 </View>
-                <ItemDivisor />
 
                 <View style={styles.item}>
                     <View style={styles.iconContent}>
@@ -71,7 +72,6 @@ const Language = () => {
                         value={selectedLanguage === "en-US" ? true : false}
                     />
                 </View>
-                <ItemDivisor />
 
                 <View style={styles.item}>
                     <View style={styles.iconContent}>
@@ -87,7 +87,6 @@ const Language = () => {
                         value={selectedLanguage === "fr-FR" ? true : false}
                     />
                 </View>
-                <ItemDivisor />
             </View>
         </View>
     );

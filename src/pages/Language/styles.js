@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     item: {
-        height: 80,
+        height: 60,
         marginLeft: 20,
         marginRight: 20,
         flexDirection: 'row',
