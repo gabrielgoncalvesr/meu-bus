@@ -1,0 +1,16 @@
+{
+    "phrases": {
+        "seeLines": "Voir les Lignes",
+        "sendEmail": "Envoyer un E-mail"
+    },
+    "words": {
+        "help": "Aide",
+        "language": "Langue",
+        "portuguese": "Portugais",
+        "english": "Anglais",
+        "french": "Français"
+    },
+    "text": {
+        "emailHelp": "En cas d'aide avec l'application, les fonctionnalités et les suggestions, envoyez un email pour nous contacter."
+    }
+}

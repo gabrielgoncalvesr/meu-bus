@@ -3,6 +3,9 @@
 import React from 'react';
 import { FontAwesome5 } from '@expo/vector-icons';
 import {
+    useTheme
+} from '@react-navigation/native';
+import {
     View,
     Text,
     TouchableOpacity
@@ -18,6 +21,8 @@ const ButtonBar = ({
     callback
 }) => {
 
+    const { colors } = useTheme();
+
     const handleBarPress = () => {
         callback();
     }
@@ -31,16 +36,14 @@ const ButtonBar = ({
                 <View style={styles.iconContent}>
                     <FontAwesome5
                         name={iconType}
-                        style={styles.icon}
+                        style={[styles.icon, { color: colors.text }]}
                     />
                 </View>
 
-                <Text style={styles.text}>
+                <Text style={[styles.text, { color: colors.text }]}>
                     {text}
                 </Text>
             </TouchableOpacity>
-
-            <ItemDivisor />
         </>
     );
 }

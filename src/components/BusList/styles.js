@@ -5,13 +5,12 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
         width: '100%',
-        backgroundColor: '#ffffff'
     },
     barContent: {
         height: 65,
         width: '100%',
-        flexDirection: 'row',
         alignItems: 'center',
+        flexDirection: 'row',
         justifyContent: 'space-between',
     },
     tagContent: {
@@ -28,20 +27,19 @@ const styles = StyleSheet.create({
     },
     touchableArea: {
         width: '70%',
-        flexDirection: 'row',
         alignItems: 'center',
+        flexDirection: 'row',
         justifyContent: 'space-between',
     },
     informationContent: {
-        flexShrink: 1,
         margin: 5,
-        flexDirection: 'row',
+        flexShrink: 1,
         alignItems: 'center',
+        flexDirection: 'row',
         justifyContent: 'center',
     },
     informationText: {
         fontSize: 16,
-        color: '#828282'
     },
     iconContent: {
         width: 30,
@@ -50,8 +48,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     icon: {
-        fontSize: 25,
-        color: '#828282'
+        fontSize: 25
     }
 });
 

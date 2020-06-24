@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { Feather } from '@expo/vector-icons';
-import {
-    View,
-    Animated,
-    TouchableOpacity
-} from 'react-native';
+import { View, Animated, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
+import { getThemeColors } from '../../util/themeContext';
+import { color } from 'react-native-reanimated';
 
 const SlideBarComponent = ({
     isLongBar,
     barContent,
     mainContent,
 }) => {
+
+    const colors = getThemeColors();
+
     const LONG_HEIGHT = 700;
     const SMALL_HEIGHT = 450;
     const LONG_ANIMATED_HEIGHT = 550;
@@ -45,8 +46,9 @@ const SlideBarComponent = ({
                 }]}
             >
                 <TouchableOpacity
-                    style={styles.touchableBar}
+                    activeOpacity={0.8}
                     onPress={() => handleBarPress()}
+                    style={[styles.touchableBar, { backgroundColor: colors.thirdy }]}
                 >
                     <Feather
                         name="minus"

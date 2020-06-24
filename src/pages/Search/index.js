@@ -1,20 +1,11 @@
 import React, { useState } from 'react';
+import { View, AsyncStorage } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import {
-    View,
-    AsyncStorage
-} from 'react-native';
 
-import {
-    Input,
-    Loading,
-    BusList,
-    Message,
-    BackButton,
-    DivisorBar,
-} from '../../components';
+import { Input, Loading, BusList, Message, HeaderBar, DivisorBar } from '../../components';
 
 import request from '../../services/api';
+import { getTranslation } from '../../util/locales';
 
 import styles from './styles';
 
@@ -26,13 +17,9 @@ const Search = () => {
     const [loading, setLoading] = useState(false);
     const [emptySearch, setEmptySearch] = useState(false);
 
-    const navigateBack = () => {
-        navigation.goBack();
-    }
-
     const navigateToTracking = async (value) => {
         const user = JSON.parse(await AsyncStorage.getItem('user'));
-        console.log(user)
+
         if (!user) {
             await request.post({
                 method: 'post',
@@ -71,22 +58,19 @@ const Search = () => {
     return (
         <View style={styles.content}>
 
-            <BackButton callback={() => navigateBack()} />
-
-            <View style={styles.contentBar}>
+            <HeaderBar>
                 <View style={styles.searchBar}>
                     <Input
-                        light
                         hasIcon
                         iconSize={20}
                         iconType={"search"}
-                        placeholder={"código do linha, nome da linha..."}
                         callback={value => handleTermSearch(value)}
+                        placeholder={getTranslation('text.searchPlaceholder')}
                     />
                 </View>
-            </View>
+            </HeaderBar>
 
-            <DivisorBar text={"BUSCA DE ROTAS"} />
+            <DivisorBar text={getTranslation('phrases.routesSearch')} />
 
             <Loading loading={loading} />
 
