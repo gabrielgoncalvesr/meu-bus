@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Text, View } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 
-import { CheckBox, HeaderBar, DivisorBar, ItemDivisor } from '../../components';
+import { CheckBox, HeaderBar, DivisorBar } from '../../components';
 
 import { getItem } from '../../util/storage';
 import { getTranslation } from '../../util/locales';
@@ -57,7 +57,6 @@ const Theme = () => {
                         value={selectedTheme === "light" ? true : false}
                     />
                 </View>
-                <ItemDivisor />
 
                 <View style={styles.item}>
                     <View style={styles.themeContent}>
@@ -77,7 +76,6 @@ const Theme = () => {
                         value={selectedTheme === "dark" ? true : false}
                     />
                 </View>
-                <ItemDivisor />
             </View>
         </View>
     );
