@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, AsyncStorage } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -6,12 +6,14 @@ import { Input, Loading, BusList, Message, HeaderBar, DivisorBar } from '../../c
 
 import request from '../../services/api';
 import { getTranslation } from '../../util/locales';
+import { ThemeContext } from '../../util/themeContext';
 
 import styles from './styles';
 
 const Search = () => {
 
     const navigation = useNavigation();
+    const { getToken } = useContext(ThemeContext);
 
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -20,14 +22,17 @@ const Search = () => {
     const navigateToTracking = async (value) => {
         const user = JSON.parse(await AsyncStorage.getItem('user'));
 
+
         if (!user) {
+            const token = await getToken();
             await request.post({
                 method: 'post',
                 url: '/history',
                 data: {
                     busId: value.id,
                     userId: user.id
-                }
+                },
+                headers: { 'x-access-token': token }
             });
         }
 
@@ -44,8 +49,10 @@ const Search = () => {
             return;
         }
 
+        const token = await getToken();
         const response = await request.get('/bus', {
-            params: { searchTerm: value }
+            params: { searchTerm: value },
+            headers: { 'x-access-token': token }
         });
 
         if (response.data.length === 0) {

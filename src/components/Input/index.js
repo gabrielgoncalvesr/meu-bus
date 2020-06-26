@@ -1,21 +1,10 @@
 import React from 'react';
+import { View, TextInput } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import {
-    View,
-    TextInput
-} from 'react-native';
 
 import styles from './styles';
 
-const Input = ({
-    light,
-    hasIcon,
-    iconType,
-    iconSize,
-    callback,
-    secureText,
-    placeholder
-}) => {
+const Input = ({ light, hasIcon, iconType, iconSize, callback, secureText, placeholder }) => {
 
     const handleTextChange = (value) => {
         callback(value);
@@ -23,13 +12,13 @@ const Input = ({
 
     return (
         <View style={[styles.content, { backgroundColor: light ? '#FFFFFF' : '#F5F5F5' }]}>
-            {hasIcon &&
+            {hasIcon && (
                 <FontAwesome
                     name={iconType}
                     size={iconSize}
                     style={styles.icon}
                 />
-            }
+            )}
 
             <TextInput
                 style={styles.input}

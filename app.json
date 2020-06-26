@@ -28,7 +28,7 @@
             "package": "com.thecode.meubus",
             "config": {
                 "googleMaps": {
-                    "apiKey": ""
+                    "apiKey": "AIzaSyAj4Cw7brN3sHGMt8fo0sg5HHp8KlCNCyE"
                 }
             }
         }

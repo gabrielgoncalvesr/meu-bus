@@ -10,7 +10,9 @@
         "withoutHistory": "Sem Resultados",
         "searchHistory": "Procurar Histórico",
         "allLines": "Todas Linhas",
-        "routesSearch": "Pesquisa de Rotas"
+        "routesSearch": "Pesquisa de Rotas",
+        "forgotPassword": "Esqueceu Sua Senha?",
+        "newAccount": "Criar Nova Conta"
     },
     "words": {
         "help": "Ajuda",
@@ -23,7 +25,11 @@
         "light": "Claro",
         "dark": "Escuro",
         "settings": "Configurações",
-        "routes": "Rotas"
+        "routes": "Rotas",
+        "login": "Login",
+        "password": "Senha",
+        "email": "Email",
+        "name": "Nome"
     },
     "text": {
         "searchPlaceholder": "código da linha, nome da linha ...",

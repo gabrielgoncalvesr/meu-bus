@@ -10,7 +10,9 @@
         "withoutHistory": "Without Result",
         "searchHistory": "Search History",
         "allLines": "All Lines",
-        "routesSearch": "Routes Search"
+        "routesSearch": "Routes Search",
+        "forgotPassword": "Forgot Your Password?",
+        "newAccount": "Create New Account"
     },
     "words": {
         "help": "Help",
@@ -23,7 +25,11 @@
         "light": "Light",
         "dark": "Dark",
         "settings": "Settings",
-        "routes": "Routes"
+        "routes": "Routes",
+        "login": "Login",
+        "password": "Password",
+        "email": "Email",
+        "name": "Name"
     },
     "text": {
         "searchPlaceholder": "line code, line name ...",

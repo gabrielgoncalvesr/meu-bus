@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -6,15 +6,15 @@ import { BusList, HeaderBar, DivisorBar } from '../../components';
 
 import request from '../../services/api';
 import { getTranslation } from '../../util/locales';
-import { getThemeColors } from '../../util/themeContext';
+import { getThemeColors, ThemeContext } from '../../util/themeContext';
 
 import styles from './styles';
 
 const Search = () => {
 
     const colors = getThemeColors();
-
     const navigation = useNavigation();
+    const { getToken } = useContext(ThemeContext);
 
     const [page, setPage] = useState(0);
     const [data, setData] = useState([]);
@@ -36,8 +36,10 @@ const Search = () => {
 
         setLoading(true);
 
+        const token = await getToken();
         const response = await request.get('/bus', {
-            params: { page: page }
+            params: { page: page },
+            headers: { 'x-access-token': token }
         });
 
         setData([...data, ...response.data]);
