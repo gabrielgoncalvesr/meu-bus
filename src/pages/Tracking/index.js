@@ -1,27 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import MapView from 'react-native-maps';
+import React, { useEffect, useState, useContext } from 'react';
 import socketIOClient from "socket.io-client";
-import { FontAwesome5, Ionicons, Octicons } from '@expo/vector-icons';
+import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Text, View, TouchableOpacity, YellowBox, ScrollView } from 'react-native';
-import { SlideBar, Map} from '../../components';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
+
+import { SlideBar, Map, DivisorBar } from '../../components';
 
 import request from '../../services/api';
+import { getTranslation } from '../../util/locales';
+import { getThemeColors, ThemeContext } from '../../util/themeContext';
 
 import styles from './styles';
-import { getThemeColors } from '../../util/themeContext';
-import { getTranslation } from '../../util/locales';
-import { DivisorBar } from '../../components';
-import { set, color } from 'react-native-reanimated';
 
 const socket = socketIOClient("http://192.168.0.148:4000", { jsonp: false, agent: '-', pfx: '-', cert: '-', ca: '-', ciphers: '-', rejectUnauthorized: '-', perMessageDeflate: '-' });
 
 const Tracking = () => {
 
-    const colors = getThemeColors();
-
     const route = useRoute();
+    const colors = getThemeColors();
     const navigation = useNavigation();
+    const { getToken } = useContext(ThemeContext);
 
     const [lineInformations, setLineInformations] = useState('');
 
@@ -41,10 +39,13 @@ const Tracking = () => {
     }
 
     async function loadData() {
+        const token = await getToken();
+
         const { busData } = route.params;
 
         const responseRoute = await request.get('/bus/trip', {
-            params: { busId: busData.id, direction: 0 }
+            params: { busId: busData.id, direction: 0 },
+            headers: { 'x-access-token': token }
         });
 
         const coordinatesRoute = responseRoute.data['Routes'].map(item => {
@@ -52,7 +53,8 @@ const Tracking = () => {
         });
 
         const responseStops = await request.get('/stop/route', {
-            params: { tripId: busData.id + "-" + 0 }
+            params: { tripId: busData.id + "-" + 0 },
+            headers: { 'x-access-token': token }
         });
 
         // console.log(responseStops)
@@ -69,10 +71,13 @@ const Tracking = () => {
     }
 
     const loadCoordinates = async () => {
+        const token = await getToken();
+
         const { busData } = route.params;
 
         const responseLine = await request.get('/sptrans/search/line', {
-            params: { term: busData.shortName }
+            params: { term: busData.shortName },
+            headers: { 'x-access-token': token }
         });
 
         const lineInformations = responseLine.data;

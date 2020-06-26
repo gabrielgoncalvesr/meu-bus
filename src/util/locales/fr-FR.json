@@ -10,7 +10,9 @@
         "withoutHistory": "Sans Résultat",
         "searchHistory": "Historique des Recherches",
         "allLines": "Toutes les Lignes",
-        "routesSearch": "Recherche d'itinéraires"
+        "routesSearch": "Recherche d'itinéraires",
+        "forgotPassword": "Mot de Passe Oublié?",
+        "newAccount": "Créer un Nouveau Compte"
     },
     "words": {
         "help": "Aide",
@@ -23,7 +25,11 @@
         "light": "Lumière",
         "dark": "Sombre",
         "settings": "Paramètres",
-        "routes": "Itinéraires"
+        "routes": "Itinéraires",
+        "login": "Login",
+        "password": "Mot de Passe",
+        "email": "Email",
+        "name": "Nom"
     },
     "text": {
         "searchPlaceholder": "lcode de ligne, nom de ligne ...",

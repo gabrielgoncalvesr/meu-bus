@@ -22,7 +22,7 @@ const Language = () => {
     const handleLanguage = (value) => {
         setSelectedLanguage(value);
         handleLanguageChange(value);
-        handleLanguageChange(value);
+        //handleLanguageChange(value);
 
         //navigation.navigate('HomeScreen');
     }
@@ -45,7 +45,7 @@ const Language = () => {
 
                 <View style={styles.item}>
                     <View style={styles.iconContent}>
-                        <Image source={require('../../assets/languages/portuguese.png')} style={styles.icon} />
+                        <Image source={require('../../assets/images/language-flags/portuguese.png')} style={styles.icon} />
                         <Text style={[styles.text, { color: colors.text }]}>
                             {getTranslation('words.portuguese')}
                         </Text>
@@ -60,7 +60,7 @@ const Language = () => {
 
                 <View style={styles.item}>
                     <View style={styles.iconContent}>
-                        <Image source={require('../../assets/languages/english.png')} style={styles.icon} />
+                        <Image source={require('../../assets/images/language-flags/english.png')} style={styles.icon} />
                         <Text style={[styles.text, { color: colors.text }]}>
                             {getTranslation('words.english')}
                         </Text>
@@ -75,7 +75,7 @@ const Language = () => {
 
                 <View style={styles.item}>
                     <View style={styles.iconContent}>
-                        <Image source={require('../../assets/languages/french.png')} style={styles.icon} />
+                        <Image source={require('../../assets/images/language-flags/french.png')} style={styles.icon} />
                         <Text style={[styles.text, { color: colors.text }]}>
                             {getTranslation('words.french')}
                         </Text>

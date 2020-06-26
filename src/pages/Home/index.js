@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { Text, View, TouchableOpacity } from 'react-native';
@@ -6,17 +6,17 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { Map, Message, BusList, SlideBar, StatusBar, DivisorBar } from '../../components';
 
 import request from '../../services/api';
+import { getItem } from '../../util/storage';
 import { getTranslation } from '../../util/locales';
-import { addItem, getItem } from '../../util/storage';
-import { getThemeColors } from '../../util/themeContext';
+import { getThemeColors, ThemeContext } from '../../util/themeContext';
 
 import styles from './styles';
 
 const Home = () => {
 
     const colors = getThemeColors();
-
     const navigation = useNavigation();
+    const { getToken } = useContext(ThemeContext);
 
     const [data, setData] = useState([]);
     const [userLogged, setUserLogged] = useState(true);
@@ -35,15 +35,16 @@ const Home = () => {
             setData([]);
             setEmptySearch(false);
 
-            await addItem('user', { id: 1, language: 'pt-BR', theme: 'light', name: 'Nome do Usuário', profilePhoto: 'user-icon1' });
-
             const user = await getItem('user');
             if (!user) {
                 setUserLogged(false);
                 return;
             }
 
-            const response = await request.get(`/history?userId=${user.id}`);
+            const token = await getToken();
+            const response = await request.get(`/history?userId=${user.id}`, {
+                headers: { 'x-access-token': token }
+            });
 
             if (response.data.length === 0) {
                 setEmptySearch(true);

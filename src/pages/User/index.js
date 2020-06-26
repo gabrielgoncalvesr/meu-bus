@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Text, View, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { ButtonBar, HeaderBar, DivisorBar } from '../../components';
 
-import { getTranslation } from '../../util/locales';
-import { getThemeColors } from '../../util/themeContext';
-
 import { getItem } from '../../util/storage';
+import { getTranslation } from '../../util/locales';
+import { ThemeContext, getThemeColors } from '../../util/themeContext';
 
 import styles from './styles';
 
 const User = () => {
 
     const colors = getThemeColors();
+    const { handleLoginUser } = useContext(ThemeContext);
 
     const userIcons = {
-        'user-icon1': require('../../../assets/user-icons/user-icon1.jpg'),
-        'user-icon2': require('../../../assets/user-icons/user-icon2.jpg'),
-        'user-icon3': require('../../../assets/user-icons/user-icon3.jpg'),
-        'user-icon4': require('../../../assets/user-icons/user-icon4.jpg'),
+        'user-icon1': require('../../../src/assets/images/user-icons/user-icon1.jpg'),
+        'user-icon2': require('../../../src/assets/images/user-icons/user-icon2.jpg'),
+        'user-icon3': require('../../../src/assets/images/user-icons/user-icon3.jpg'),
+        'user-icon4': require('../../../src/assets/images/user-icons/user-icon4.jpg'),
     };
 
     const navigation = useNavigation();
@@ -32,7 +32,7 @@ const User = () => {
     }
 
     const signOutAccount = () => {
-        navigation.navigate();
+        handleLoginUser(null);
     }
 
     useEffect(() => {
