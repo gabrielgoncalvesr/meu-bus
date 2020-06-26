@@ -3,10 +3,10 @@ const router = express.Router();
 
 const {
     login,
-    logout
+    createNewUser
 } = require('../../services/login');
 
 router.post('/login', login);
-router.post('/logout', logout);
+router.post('/user/create', createNewUser);
 
 module.exports.router = router;

@@ -11,10 +11,10 @@ const userRoutes = require('./api/sptrans');
 const historyRoutes = require('./api/history');
 
 router.use('/', loginRoutes.router);
-router.use('/trip', authenticateJWT, tripRoutes.router);
-router.use('/sptrans', authenticateJWT, userRoutes.router);
-router.use('/history', authenticateJWT, historyRoutes.router);
-router.use('/stop', authenticateJWT, stopRoutes.router);
+router.use('/sptrans', userRoutes.router);
 router.use('/bus', authenticateJWT, busRoutes.router);
+router.use('/stop', authenticateJWT, stopRoutes.router);
+router.use('/trip', authenticateJWT, tripRoutes.router);
+router.use('/history', authenticateJWT, historyRoutes.router);
 
 module.exports = router;
