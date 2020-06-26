@@ -14,22 +14,11 @@ const getUser = async ({ email }) => {
     });
 }
 
-const updateUser = async (user) => {
-    return await User.update(
-        { ...user },
-        {
-            where: {
-                email: user.email
-            }
-        }
-    ).success(result => {
-        return true;
-    }).error(err => {
-        return false;
-    });
+const createUser = async ({ name, email, password, profilePhoto }) => {
+    return User.create({ name, email, password, profilePhoto });
 }
 
 module.exports = {
-    updateUser,
+    createUser,
     getUser
 }

@@ -1,14 +1,10 @@
-const { getUser, updateUser } = require('../../repository/user');
+const { getUser, createUser } = require('../../repository/user');
 
 const { generateToken } = require('../../../utils/jwt');
 const { cryptPassword, comparePassword } = require('../../../utils/encryption');
 
 const login = async (req, res) => {
     const { email, password } = req.body;
-
-    // await cryptPassword(password, (hash) => {
-    //     console.log("HASH: " + hash);
-    // })
 
     const user = await getUser({ email });
 
@@ -28,11 +24,29 @@ const login = async (req, res) => {
     }
 }
 
-const logout = async (req, res) => {
-    res.json({ auth: false, token: null });
+const createNewUser = async (req, res) => {
+    const { name, email, password } = req.body;
+
+    if (!name || !email || !password) {
+        return res.status(400).json({ message: "missing params" });
+    }
+
+    await cryptPassword(password, (hash) => {
+        const newUser = async () => {
+            const result = await createUser({ name, email, password: hash, profilePhoto: 'user-icon1' });
+
+            if (!result) {
+                return res.status(400).json({ message: "Cannot create user" })
+            }
+
+            return res.sendStatus(200);
+        }
+
+        newUser();
+    })
 }
 
 module.exports = {
     login,
-    logout
+    createNewUser
 }
