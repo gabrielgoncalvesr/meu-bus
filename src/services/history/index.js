@@ -3,8 +3,6 @@ const { findHistory, saveHistory } = require('../../repository/history');
 const searchHistory = async (request, response) => {
     const { userId } = request.query;
 
-    console.log(request.headers)
-
     if (!userId) {
         return response.status(400).json({ message: "missing routeId" });
     }
