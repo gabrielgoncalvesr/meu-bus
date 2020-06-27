@@ -29,7 +29,8 @@
         "login": "Login",
         "password": "Senha",
         "email": "Email",
-        "name": "Nome"
+        "name": "Nome",
+        "images": "Imagens"
     },
     "text": {
         "searchPlaceholder": "código da linha, nome da linha ...",

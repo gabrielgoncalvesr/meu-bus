@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
     },
     bar: {
         height: 85,
-        flexDirection: 'row',
         alignItems: 'center',
+        flexDirection: 'row',
         justifyContent: 'flex-end',
     },
     contentFunctions: {

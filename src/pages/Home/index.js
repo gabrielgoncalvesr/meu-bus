@@ -8,7 +8,7 @@ import { Map, Message, BusList, SlideBar, StatusBar, DivisorBar } from '../../co
 import request from '../../services/api';
 import { getItem } from '../../util/storage';
 import { getTranslation } from '../../util/locales';
-import { getThemeColors, ThemeContext } from '../../util/themeContext';
+import { getThemeColors, AppContext } from '../../util/appContext';
 
 import styles from './styles';
 
@@ -16,7 +16,7 @@ const Home = () => {
 
     const colors = getThemeColors();
     const navigation = useNavigation();
-    const { getToken } = useContext(ThemeContext);
+    const { getToken } = useContext(AppContext);
 
     const [data, setData] = useState([]);
     const [userLogged, setUserLogged] = useState(true);
@@ -64,8 +64,15 @@ const Home = () => {
                     <View style={styles.contentMap}>
                         <Map />
 
-                        <TouchableOpacity style={styles.userIconContent} onPress={() => navigateToScreen('UserScreen')}>
-                            <FontAwesome5 style={styles.userIcon} name="user-circle" />
+                        <TouchableOpacity
+                            style={styles.userIconContent}
+                            onPress={() => navigateToScreen('UserScreen')}
+                        >
+                            <FontAwesome5
+                                name="user-circle"
+                                color={colors.cardText}
+                                style={styles.userIcon}
+                            />
                         </TouchableOpacity>
                     </View>
                 }

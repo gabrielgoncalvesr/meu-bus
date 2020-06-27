@@ -6,7 +6,7 @@ import { BusList, HeaderBar, DivisorBar } from '../../components';
 
 import request from '../../services/api';
 import { getTranslation } from '../../util/locales';
-import { getThemeColors, ThemeContext } from '../../util/themeContext';
+import { getThemeColors, AppContext } from '../../util/appContext';
 
 import styles from './styles';
 
@@ -14,7 +14,7 @@ const Search = () => {
 
     const colors = getThemeColors();
     const navigation = useNavigation();
-    const { getToken } = useContext(ThemeContext);
+    const { getToken } = useContext(AppContext);
 
     const [page, setPage] = useState(0);
     const [data, setData] = useState([]);

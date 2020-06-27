@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
 
-export const ThemeContext = React.createContext();
+export const AppContext = React.createContext();
 
 const getThemeColors = () => {
     const { colors } = useTheme();

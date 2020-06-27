@@ -4,7 +4,7 @@ import { Text, View } from 'react-native';
 import { HeaderBar, DivisorBar } from '../../components';
 
 import { getTranslation } from '../../util/locales';
-import { getThemeColors } from '../../util/themeContext';
+import { getThemeColors } from '../../util/appContext';
 
 import styles from './styles';
 

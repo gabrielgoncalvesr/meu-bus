@@ -7,10 +7,8 @@ const locales = {
 }
 
 const loadLocales = (currentLocale) => {
-    console.log('currentLocale' + currentLocale)
     intl.init({
-        locales,
-        currentLocale,
+        locales, currentLocale,
     }).then(() => {
         return true;
     }).catch(() => {

@@ -2,8 +2,9 @@ import React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 
+import { getThemeColors } from '../../util/appContext';
+
 import styles from './styles';
-import { getThemeColors } from '../../util/themeContext';
 
 const BusList = ({ data, callback, onPressBar }) => {
 

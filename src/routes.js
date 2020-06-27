@@ -8,7 +8,7 @@ import SafeAreaView from 'react-native-safe-area-view';
 import { DarkTheme, DefaultTheme, NavigationContainer } from '@react-navigation/native';
 
 import { getItem, addItem } from './util/storage';
-import { ThemeContext } from './util/themeContext';
+import { AppContext } from './util/appContext';
 
 import { loadLocales } from './util/locales';
 
@@ -147,7 +147,7 @@ const Routes = () => {
     const theme = selectedTheme === "dark" ? CustomDarkTheme : CustomDefaultTheme;
 
     return (
-        <ThemeContext.Provider value={themeContext}>
+        <AppContext.Provider value={themeContext}>
             <NavigationContainer theme={theme}>
                 {
                     authenticatedUser
@@ -155,7 +155,7 @@ const Routes = () => {
                         : <AuthScreen />
                 }
             </NavigationContainer>
-        </ThemeContext.Provider>
+        </AppContext.Provider>
     )
 }
 

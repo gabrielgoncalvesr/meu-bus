@@ -1,16 +1,11 @@
 import React from 'react';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { useTheme } from '@react-navigation/native';
 import { View, TouchableOpacity, Text } from 'react-native';
 
 import styles from './styles';
-import { useTheme } from '@react-navigation/native';
 
-const CheckBox = ({
-    name,
-    label,
-    value,
-    callback,
-}) => {
+const CheckBox = ({ name, label, value, callback }) => {
 
     const { colors } = useTheme();
 
@@ -33,7 +28,6 @@ const CheckBox = ({
                         style={[styles.icon, { color: colors.text }]}
                     />
                 }
-
             </TouchableOpacity>
 
             {

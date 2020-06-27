@@ -1,23 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Text, View, Image } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
 
-import { BusList, HeaderBar, DivisorBar, Input } from '../../components';
+import { Input } from '../../components';
 
+import alert from '../../util/alert';
 import request from '../../services/api';
+import { getItem } from '../../util/storage';
 import { getTranslation } from '../../util/locales';
-import { getThemeColors, ThemeContext } from '../../util/themeContext';
+import { getThemeColors, AppContext } from '../../util/appContext';
 
 import styles from './styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { getItem } from '../../util/storage';
-import alert from '../../util/alert';
 
 const Search = () => {
 
     const colors = getThemeColors();
-    const { handleLoginUser } = useContext(ThemeContext);
+    const { handleLoginUser } = useContext(AppContext);
 
     const [name, setName] = useState();
     const [email, setEmail] = useState();
@@ -51,7 +49,7 @@ const Search = () => {
     }
 
     const handleForgotPassword = () => {
-        console.log("handleForgotPassword")
+        //TODO create
     }
 
     const handleLogin = async () => {
@@ -195,10 +193,10 @@ const Search = () => {
                             </View>
 
                             <TouchableOpacity
-                                style={[styles.button, { backgroundColor: colors.cardDark }]}
+                                style={[styles.button, { backgroundColor: colors.card }]}
                                 onPress={() => handleLogin()}
                             >
-                                <Text style={[styles.buttonText, { color: colors.text }]}>
+                                <Text style={[styles.buttonText, { color: colors.cardText }]}>
                                     {getTranslation('words.login')}
                                 </Text>
                             </TouchableOpacity>
@@ -212,18 +210,17 @@ const Search = () => {
                             </View>
 
                             <TouchableOpacity
-                                style={styles.newAccountContent}
+                                style={[styles.button, { backgroundColor: colors.card }]}
                                 onPress={() => handleOpenNewAccount()}
                             >
-                                <Text style={[styles.infoText, { color: colors.text }]}>
+                                <Text style={[styles.infoText, { color: colors.cardText }]}>
                                     {getTranslation('phrases.newAccount')}
                                 </Text>
 
                                 <FontAwesome
                                     size={20}
                                     name={'sign-in'}
-                                    style={styles.newAccountIcon}
-                                    style={[styles.newAccountIcon, { color: colors.text }]}
+                                    style={[styles.newAccountIcon, { color: colors.cardText }]}
                                 />
                             </TouchableOpacity>
                         </View>

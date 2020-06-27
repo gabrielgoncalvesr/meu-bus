@@ -1,70 +1,83 @@
-import React, { useState } from 'react';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import {
-    Text,
-    View,
-    Image
-} from 'react-native';
+import React, { useContext } from 'react';
+import { View, Image, TouchableOpacity } from 'react-native';
 
-import {
-    ButtonBar,
-    HeaderBar,
-    DivisorBar
-} from '../../components';
+import { HeaderBar, DivisorBar } from '../../components';
+
+import alert from '../../util/alert';
+import request from '../../services/api';
+import { getItem } from '../../util/storage';
+import { getTranslation } from '../../util/locales';
+import { getThemeColors, AppContext } from '../../util/appContext';
 
 import styles from './styles';
 
-const User = () => {
+const ImageScreen = () => {
 
-    const navigation = useNavigation();
+    const colors = getThemeColors();
+    const { getToken } = useContext(AppContext);
 
-    const navigateBack = () => {
-        navigation.goBack();
-    }
+    const handleChangeImage = async (value) => {
+        const user = await getItem('user');
 
-    const navigateToTheme = () => {
-        navigation.navigate('SettingsScreen');
-    }
+        const token = await getToken();
 
-    const navigateToLanguage = () => {
-        navigation.navigate('SettingsScreen');
-    }
+        console.log(token)
+        console.log(user)
 
-    const navigateToImage = () => {
-        navigation.navigate('HelpScreen');
+        await request.put({
+            method: 'put',
+            url: '/user/profilePhoto',
+            data: {
+                email: user.email,
+                profilePhoto: value
+            },
+            headers: { 'x-access-token': token }
+        });
     }
 
     return (
         <View style={styles.content}>
             <HeaderBar />
 
-            <View style={styles.userBar} />
+            <View style={[styles.contentImages, { backgroundColor: colors.background }]}>
+                <DivisorBar text={getTranslation('words.images')} />
 
-            <View style={styles.itemsBox}>
-                <View style={styles.contentFunctions}>
-                    <DivisorBar text={"CONFIGURAÇÕES"} />
+                <View style={styles.imageGrid}>
+                    <View style={styles.imageLine}>
+                        <TouchableOpacity onPress={() => handleChangeImage('user-icon1')}>
+                            <Image
+                                style={[styles.userIcon, { borderColor: colors.text }]}
+                                source={require('../../../src/assets/images/user-icons/user-icon1.jpg')}
+                            />
+                        </TouchableOpacity>
 
-                    <ButtonBar
-                        iconType={"paint-roller"}
-                        text={"Alterar Tema"}
-                        callback={navigateToTheme}
-                    />
+                        <TouchableOpacity onPress={() => handleChangeImage('user-icon2')}>
+                            <Image
+                                style={[styles.userIcon, { borderColor: colors.text }]}
+                                source={require('../../../src/assets/images/user-icons/user-icon2.jpg')}
+                            />
+                        </TouchableOpacity>
+                    </View>
 
-                    <ButtonBar
-                        iconType={"language"}
-                        text={"Alterar Idioma"}
-                        callback={navigateToLanguage}
-                    />
+                    <View style={styles.imageLine}>
+                        <TouchableOpacity onPress={() => handleChangeImage('user-icon3')}>
+                            <Image
+                                style={[styles.userIcon, { borderColor: colors.text }]}
+                                source={require('../../../src/assets/images/user-icons/user-icon3.jpg')}
+                            />
+                        </TouchableOpacity>
 
-                    <ButtonBar
-                        iconType={"image"}
-                        text={"Alterar Imagem"}
-                        callback={navigateToImage}
-                    />
+                        <TouchableOpacity onPress={() => handleChangeImage('user-icon4')}>
+                            <Image
+                                style={[styles.userIcon, { borderColor: colors.text }]}
+                                source={require('../../../src/assets/images/user-icons/user-icon4.jpg')}
+                            />
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         </View>
     );
 }
 
-export default User;
+export default ImageScreen;

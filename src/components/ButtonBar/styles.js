@@ -5,8 +5,8 @@ const styles = StyleSheet.create({
     content: {
         height: 60,
         width: '100%',
-        flexDirection: 'row',
         alignItems: 'center',
+        flexDirection: 'row',
         justifyContent: 'flex-start',
     },
     iconContent: {

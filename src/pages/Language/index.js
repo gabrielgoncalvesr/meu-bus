@@ -1,30 +1,24 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Text, View, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 import { CheckBox, HeaderBar, DivisorBar } from '../../components';
 
 import { getItem } from '../../util/storage';
 import { getTranslation } from '../../util/locales';
-import { ThemeContext, getThemeColors } from '../../util/themeContext';
+import { AppContext, getThemeColors } from '../../util/appContext';
 
 import styles from './styles';
 
 const Language = () => {
 
     const colors = getThemeColors();
-    const navigation = useNavigation();
-
-    const { handleLanguageChange } = useContext(ThemeContext);
+    const { handleLanguageChange } = useContext(AppContext);
 
     const [selectedLanguage, setSelectedLanguage] = useState();
 
     const handleLanguage = (value) => {
         setSelectedLanguage(value);
         handleLanguageChange(value);
-        //handleLanguageChange(value);
-
-        //navigation.navigate('HomeScreen');
     }
 
     useEffect(() => {

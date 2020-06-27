@@ -18,11 +18,15 @@ const styles = StyleSheet.create({
     },
     stopBusCircle: {
         margin: 0,
-        padding: 0,
         width: 16,
         height: 16,
+        padding: 0,
+        borderWidth: 3,
         borderRadius: 16 / 2,
-        borderWidth: 3
+    },
+    busIconImage: {
+        // width: 40,
+        // height: 40
     }
 });
 
