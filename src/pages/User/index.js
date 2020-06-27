@@ -6,14 +6,15 @@ import { ButtonBar, HeaderBar, DivisorBar } from '../../components';
 
 import { getItem } from '../../util/storage';
 import { getTranslation } from '../../util/locales';
-import { ThemeContext, getThemeColors } from '../../util/themeContext';
+import { AppContext, getThemeColors } from '../../util/appContext';
 
 import styles from './styles';
 
 const User = () => {
 
     const colors = getThemeColors();
-    const { handleLoginUser } = useContext(ThemeContext);
+    const navigation = useNavigation();
+    const { handleLoginUser } = useContext(AppContext);
 
     const userIcons = {
         'user-icon1': require('../../../src/assets/images/user-icons/user-icon1.jpg'),
@@ -21,8 +22,6 @@ const User = () => {
         'user-icon3': require('../../../src/assets/images/user-icons/user-icon3.jpg'),
         'user-icon4': require('../../../src/assets/images/user-icons/user-icon4.jpg'),
     };
-
-    const navigation = useNavigation();
 
     const [userName, setUserName] = useState('');
     const [userProfilePhoto, setUserProfilePhoto] = useState('');

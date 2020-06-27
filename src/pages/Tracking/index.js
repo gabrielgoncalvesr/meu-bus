@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import socketIOClient from "socket.io-client";
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+
+import { SOCKET_SERVER_URL, SOCKET_SERVER_PORT } from 'react-native-dotenv';
+
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 
@@ -8,18 +11,20 @@ import { SlideBar, Map, DivisorBar } from '../../components';
 
 import request from '../../services/api';
 import { getTranslation } from '../../util/locales';
-import { getThemeColors, ThemeContext } from '../../util/themeContext';
+import { getThemeColors, AppContext } from '../../util/appContext';
 
 import styles from './styles';
 
-const socket = socketIOClient("http://192.168.0.148:4000", { jsonp: false, agent: '-', pfx: '-', cert: '-', ca: '-', ciphers: '-', rejectUnauthorized: '-', perMessageDeflate: '-' });
+const socket = socketIOClient(`http://${SOCKET_SERVER_URL}:${SOCKET_SERVER_PORT}`,
+    { jsonp: false, agent: '-', pfx: '-', cert: '-', ca: '-', ciphers: '-', rejectUnauthorized: '-', perMessageDeflate: '-' }
+);
 
 const Tracking = () => {
 
     const route = useRoute();
     const colors = getThemeColors();
     const navigation = useNavigation();
-    const { getToken } = useContext(ThemeContext);
+    const { getToken } = useContext(AppContext);
 
     const [lineInformations, setLineInformations] = useState('');
 
@@ -56,8 +61,6 @@ const Tracking = () => {
             params: { tripId: busData.id + "-" + 0 },
             headers: { 'x-access-token': token }
         });
-
-        // console.log(responseStops)
 
         const coordinatesStops = responseStops.data.map(item => {
             return { description: item['Stop'].name, latitude: Number(item['Stop'].latitude), longitude: Number(item['Stop'].longitude) }

@@ -2,15 +2,11 @@ import React, { useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { View, Animated, TouchableOpacity } from 'react-native';
 
-import styles from './styles';
-import { getThemeColors } from '../../util/themeContext';
-import { color } from 'react-native-reanimated';
+import { getThemeColors } from '../../util/appContext';
 
-const SlideBarComponent = ({
-    isLongBar,
-    barContent,
-    mainContent,
-}) => {
+import styles from './styles';
+
+const SlideBarComponent = ({ isLongBar, barContent, mainContent }) => {
 
     const colors = getThemeColors();
 

@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
         height: 60,
         marginLeft: 20,
         marginRight: 20,
-        flexDirection: 'row',
         alignItems: 'center',
+        flexDirection: 'row',
         justifyContent: 'space-between',
     },
     icon: {
@@ -23,14 +23,14 @@ const styles = StyleSheet.create({
         marginRight: 20,
     },
     themeContent: {
-        flexDirection: 'row',
         alignItems: 'center',
+        flexDirection: 'row',
         justifyContent: 'space-between'
     },
     text: {
         fontSize: 14,
+        textAlign: 'right',
         fontWeight: 'bold',
-        textAlign: 'right'
     }
 });
 

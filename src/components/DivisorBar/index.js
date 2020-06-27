@@ -1,11 +1,8 @@
 
 
 import React from 'react';
+import { View, Text } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import {
-    View,
-    Text
-} from 'react-native';
 
 import styles from './styles';
 

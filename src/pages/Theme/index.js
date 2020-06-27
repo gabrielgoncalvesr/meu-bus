@@ -6,15 +6,14 @@ import { CheckBox, HeaderBar, DivisorBar } from '../../components';
 
 import { getItem } from '../../util/storage';
 import { getTranslation } from '../../util/locales';
-import { ThemeContext, getThemeColors } from '../../util/themeContext';
+import { AppContext, getThemeColors } from '../../util/appContext';
 
 import styles from './styles';
 
 const Theme = () => {
 
     const colors = getThemeColors();
-
-    const { handleThemeChange } = useContext(ThemeContext);
+    const { handleThemeChange } = useContext(AppContext);
 
     const [selectedTheme, setSelectedTheme] = useState();
 

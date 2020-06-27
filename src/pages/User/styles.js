@@ -8,8 +8,8 @@ const styles = StyleSheet.create({
     userBar: {
         height: 85,
         width: '100%',
-        flexDirection: 'row',
         alignItems: 'center',
+        flexDirection: 'row',
         justifyContent: 'flex-end',
     },
     contentFunctions: {

@@ -1,27 +1,27 @@
 import React, { useState, useContext } from 'react';
-import { View, AsyncStorage } from 'react-native';
+import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { Input, Loading, BusList, Message, HeaderBar, DivisorBar } from '../../components';
 
 import request from '../../services/api';
+import { getItem } from '../../util/storage';
+import { AppContext } from '../../util/appContext';
 import { getTranslation } from '../../util/locales';
-import { ThemeContext } from '../../util/themeContext';
 
 import styles from './styles';
 
 const Search = () => {
 
     const navigation = useNavigation();
-    const { getToken } = useContext(ThemeContext);
+    const { getToken } = useContext(AppContext);
 
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [emptySearch, setEmptySearch] = useState(false);
 
     const navigateToTracking = async (value) => {
-        const user = JSON.parse(await AsyncStorage.getItem('user'));
-
+        const user = await getItem('user');
 
         if (!user) {
             const token = await getToken();
@@ -64,7 +64,6 @@ const Search = () => {
 
     return (
         <View style={styles.content}>
-
             <HeaderBar>
                 <View style={styles.searchBar}>
                     <Input

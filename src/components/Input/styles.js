@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     icon: {
         padding: 12,
-        color: '#162447',
     },
     content: {
         width: '100%',
@@ -16,7 +15,6 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         fontSize: 18,
-        color: '#162447',
         fontWeight: 'bold'
     }
 });

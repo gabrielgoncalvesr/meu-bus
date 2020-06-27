@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 5,
         alignItems: 'center',
+        flexDirection: 'row',
         justifyContent: 'center'
     },
     buttonText: {
@@ -50,13 +51,14 @@ const styles = StyleSheet.create({
     },
     forgotContent: {
         width: '100%',
-        marginTop: 10,
+        marginTop: 20,
+        marginBottom: 30,
         alignItems: 'flex-end',
         justifyContent: 'center'
     },
     applicationIcon: {
         width: 220,
-        height: 80
+        height: 80,
     }
 });
 

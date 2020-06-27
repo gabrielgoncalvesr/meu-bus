@@ -7,30 +7,31 @@ const styles = StyleSheet.create({
     },
     userBar: {
         height: 85,
-        flexDirection: 'row',
         alignItems: 'center',
+        flexDirection: 'row',
         justifyContent: 'flex-end',
     },
-    itemsBox: {
+    contentImages: {
         flex: 1,
+        width: '100%',
+    },
+    userIcon: {
+        width: 120,
+        margin: 20,
+        height: 120,
+        borderWidth: 2,
+        borderRadius: 120 / 2,
+        backgroundColor: 'red'
+    },
+    imageLine: {
+        flexDirection: 'row',
+    },
+    imageGrid: {
+        width: '100%',
+        marginTop: 50,
         alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        elevation: 5,
-        shadowRadius: 2,
-        shadowOpacity: 0.8,
-        shadowColor: '#000',
-        backgroundColor: "#f5f5f5",
-        shadowOffset: {
-            width: 0,
-            height: 1
-        }
-    },
-    contentFunctions: {
-        flex: 1,
-        width: '100%',
-        backgroundColor: '#ffffff'
-    },
+        justifyContent: 'center'
+    }
 });
 
 export default styles;

@@ -4,8 +4,8 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     bar: {
         height: 40,
-        paddingLeft: 20,
         elevation: 5,
+        paddingLeft: 20,
         shadowRadius: 2,
         shadowOpacity: 0.8,
         alignItems: 'flex-start',
