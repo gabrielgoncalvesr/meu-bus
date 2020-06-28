@@ -14,11 +14,7 @@ const findHistory = async ({ userId }) => {
     return await Bus.findAll(options);
 }
 
-const saveHistory = async ({
-    busId,
-    userId
-}) => {
-    console.log(busId, userId)
+const saveHistory = async ({ busId, userId }) => {
     return await History.findOne({
         where: {
             busId,

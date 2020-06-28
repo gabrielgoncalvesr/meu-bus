@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const {
-    searchStopRoute
-} = require('../../services/stop');
+    updateImage,
+} = require('../../services/user');
 
-router.get('/route', searchStopRoute);
+router.put('/profilePhoto', updateImage);
 
 module.exports.router = router;

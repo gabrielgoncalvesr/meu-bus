@@ -45,29 +45,21 @@ const findBuses = async ({
         });
 }
 
-const findBusTripsByBusCode = async ({
-    busCode,
-    direction
-}) => {
+const findBusTripsByBusCode = async ({ busId, direction }) => {
     const options = {
+
         where: {
-            id: { [Op.like]: busCode }
+            direction: direction,
+            busId: busId
         },
-        order: [
-            ['id', 'ASC']
-        ],
         include: [{
-            model: Trip,
-            as: 'Trips',
-            where: { direction: direction },
-            include: [{
-                model: Route,
-                as: 'Routes'
-            }]
+            model: Route,
+            as: 'Routes',
+            order: [['id', 'ASC']],
         }]
     }
 
-    return await Bus.findAndCountAll(options)
+    return await Trip.findOne(options)
         .then(result => {
             return result;
         });

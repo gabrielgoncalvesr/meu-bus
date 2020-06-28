@@ -1,36 +1,40 @@
 module.exports = {
-	up: (queryInterface, DataTypes) => {
-		return queryInterface.createTable('Users', {
-			id: {
-				allowNull: false,
-				primaryKey: true,
-				autoIncrement: true,
-				type: DataTypes.INTEGER
+    up: (queryInterface, DataTypes) => {
+        return queryInterface.createTable('Users', {
+            id: {
+                allowNull: false,
+                primaryKey: true,
+                autoIncrement: true,
+                type: DataTypes.INTEGER
             },
             email: {
-				allowNull: false,
-				type: DataTypes.STRING,
+                allowNull: false,
+                type: DataTypes.STRING,
             },
             password: {
-				allowNull: false,
-				type: DataTypes.STRING,
-			},
-			name: {
-				allowNull: false,
-				type: DataTypes.STRING,
+                allowNull: false,
+                type: DataTypes.STRING,
             },
-			createdAt: {
-				allowNull: false,
-				type: DataTypes.DATE,
-			},
-			updatedAt: {
-				allowNull: false,
-				type: DataTypes.DATE,
-			},
-		});
-	},
+            name: {
+                allowNull: false,
+                type: DataTypes.STRING,
+            },
+            profilePhoto: {
+                allowNull: false,
+                type: DataTypes.STRING
+            },
+            createdAt: {
+                allowNull: false,
+                type: DataTypes.DATE,
+            },
+            updatedAt: {
+                allowNull: false,
+                type: DataTypes.DATE,
+            },
+        });
+    },
 
-	down: (queryInterface) => {
-		return queryInterface.dropTable('Users');
-	}
+    down: (queryInterface) => {
+        return queryInterface.dropTable('Users');
+    }
 };

@@ -12,12 +12,11 @@ const searchBuses = async (req, res) => {
 }
 
 const searchBusTripsByBusCode = async (req, res) => {
-    const params = req.query;
+    const { busId, direction } = req.query;
 
-    const result = await findBusTripsByBusCode({ ...params });
+    const result = await findBusTripsByBusCode({ busId, direction });
 
-    res.header('X-Total-Count', result.count);
-    res.json(result.rows.map(item => item['dataValues']));
+    res.json(result);
 }
 
 module.exports = {
