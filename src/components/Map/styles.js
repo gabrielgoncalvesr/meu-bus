@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
         borderRadius: 16 / 2,
     },
     busIconImage: {
-        // width: 40,
-        // height: 40
+        width: 40,
+        height: 40
     }
 });
 

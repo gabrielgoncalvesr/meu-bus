@@ -70,7 +70,7 @@ const Home = () => {
                         >
                             <FontAwesome5
                                 name="user-circle"
-                                color={colors.cardText}
+                                color={colors.card}
                                 style={styles.userIcon}
                             />
                         </TouchableOpacity>
