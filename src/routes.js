@@ -75,28 +75,24 @@ const Routes = () => {
     }), []);
 
     useEffect(() => {
-        const loadLanguage = async () => {
-            await addItem('user', null)
+        const loadBasicData = async () => {
+            //await addItem('user', null)
+
             let language = await getItem('language');
             language = language ? language : 'pt-BR';
 
-            //setSelectedLanguage(language);
-            await addItem('language', language);
-
-            loadLocales(language);
-        }
-
-        const loadTheme = async () => {
             let theme = await getItem('theme');
             theme = theme ? theme : 'light';
 
-            setSelectedTheme(theme);
-            await addItem('theme', theme);
-        }
-        
+            await loadLocales(language);
 
-        loadTheme();
-        loadLanguage();
+            setSelectedTheme(theme);
+
+            await addItem('theme', theme);
+            await addItem('language', language);
+        }
+
+        loadBasicData();
     }, []);
 
     const CustomDefaultTheme = {

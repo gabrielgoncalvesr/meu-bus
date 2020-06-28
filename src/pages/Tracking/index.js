@@ -21,6 +21,9 @@ const socket = socketIOClient(`http://${SOCKET_SERVER_URL}:${SOCKET_SERVER_PORT}
 
 const Tracking = () => {
 
+    console.log(SOCKET_SERVER_PORT)
+    console.log(SOCKET_SERVER_URL)
+
     const route = useRoute();
     const colors = getThemeColors();
     const navigation = useNavigation();
@@ -90,6 +93,7 @@ const Tracking = () => {
         const lineIdentifier = lineInformations[0]['lineIdentifier'];
 
         socket.on("/position", data => {
+            console.log(JSON.stringify(data))
             const markerList = data.map(item => {
                 return { vehiclePrefix: item.vehiclePrefix, latitude: item.latitudePosition, longitude: item.longitudePosition }
             });
@@ -148,7 +152,7 @@ const Tracking = () => {
             barContent={
                 <View style={[styles.container, { backgroundColor: colors.background }]}>
                     <View style={styles.header}>
-                        <View style={[styles.tagContent, { backgroundColor: '#' + busObject.color }]}>
+                        <View style={[styles.tagContent, { borderRadius: 5, backgroundColor: '#' + busObject.color }]}>
                             <Text style={[styles.tagText, { color: busObject.textColor ? '#' + busObject.textColor : colors.text }]}>
                                 {busObject.shortName}
                             </Text>

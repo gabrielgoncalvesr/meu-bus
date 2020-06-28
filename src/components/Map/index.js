@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import MapView from 'react-native-maps';
 import * as Location from 'expo-location';
 import { View, Image } from 'react-native';
-
-import MapView from 'react-native-maps';
 
 import styles from './styles';
 
@@ -10,38 +9,36 @@ const MapComponent = (props) => {
 
     const { coordinatesStops, routeColor, coordinatesRoute, busesPosition } = props;
 
-    const [coordinate, setCoordinate] = useState({ latitude: -23.4285, longitude: -46.795379 });
-    const [location, setLocation] = useState(null);
-    const [errorMsg, setErrorMsg] = useState(null);
+    const [mapNotLoaded, setMapNotLoaded] = useState(false);
     const [initialRegion, setInitialRegion] = useState(null);
 
     useEffect(() => {
         (async () => {
-            let { status } = await Location.requestPermissionsAsync();
-            if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
+            setMapNotLoaded(false);
+
+            try {
+                let { status } = await Location.requestPermissionsAsync();
+                if (status !== 'granted') {
+                    setMapNotLoaded(true);
+                }
+
+                let location = await Location.getCurrentPositionAsync({});
+
+                const initialRegion = {
+                    latitude: location.coords.latitude,
+                    longitude: location.coords.longitude,
+                    latitudeDelta: 0.08,
+                    longitudeDelta: 0.09,
+                }
+
+                setInitialRegion(initialRegion);
+            } catch (error) {
+                setMapNotLoaded(true);
             }
-
-            let location = await Location.getCurrentPositionAsync({});
-            setLocation(location);
-
-            const initialRegion = {
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
-                latitudeDelta: 0.08,
-                longitudeDelta: 0.09,
-            }
-
-            setInitialRegion(initialRegion);
         })();
     }, []);
 
-    let text = 'Waiting..';
-    if (errorMsg) {
-        text = errorMsg;
-    } else if (location) {
-        text = JSON.stringify(location);
-    }
+    console.log(busesPosition)
 
     return (
         <View style={styles.container}>
