@@ -1,16 +1,41 @@
 {
     "phrases": {
         "seeLines": "Ver Linhas",
-        "sendEmail": "Enviar E-mail"
+        "sendEmail": "Enviar E-mail",
+        "changeTheme": "Mudar Tema",
+        "changeLanguage": "Mudar Língua",
+        "changeImage": "Mudar Imagem",
+        "signOut": "Sair",
+        "searchLine": "Procurar Linha",
+        "withoutHistory": "Sem Resultados",
+        "searchHistory": "Procurar Histórico",
+        "allLines": "Todas Linhas",
+        "routesSearch": "Pesquisa de Rotas",
+        "forgotPassword": "Esqueceu Sua Senha?",
+        "newAccount": "Criar Nova Conta"
     },
     "words": {
         "help": "Ajuda",
-        "language": "Idioma",
+        "language": "Língua",
         "portuguese": "Português",
         "english": "Inglês",
-        "french": "Francês"
+        "french": "Francês",
+        "information": "Informação",
+        "theme": "Tema",
+        "light": "Claro",
+        "dark": "Escuro",
+        "settings": "Configurações",
+        "routes": "Rotas",
+        "login": "Login",
+        "password": "Senha",
+        "email": "Email",
+        "name": "Nome",
+        "images": "Imagens"
     },
     "text": {
-        "emailHelp": "In case of help with the application, functionality and suggestions, send an email to contact us."
+        "searchPlaceholder": "código da linha, nome da linha ...",
+        "emailHelp": "Em caso de ajuda com a aplicação, funcionalidades e sugestões, envie um email para contactar conosco.",
+        "buildInfo": "Essa aplicação foi construída usando React Native e consumindo uma API em NodeJS.",
+        "goalsInfo": "Essa aplicação é somente destinada para aprendizagem e como usar tecnologias."
     }
 }

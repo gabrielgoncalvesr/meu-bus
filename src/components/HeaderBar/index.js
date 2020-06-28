@@ -1,20 +1,11 @@
 import React from 'react';
-import {
-    View,
-    TouchableOpacity
-} from 'react-native';
-import {
-    useTheme,
-    useNavigation
-} from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { View, TouchableOpacity } from 'react-native';
+import { useTheme, useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
 
-const HeaderBar = ({
-    children,
-    callback
-}) => {
+const HeaderBar = ({ children, callback }) => {
 
     const { colors } = useTheme();
 

@@ -1,45 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import * as Location from 'expo-location';
-import { View } from 'react-native';
-
 import MapView from 'react-native-maps';
+import * as Location from 'expo-location';
+import { View, Image } from 'react-native';
 
 import styles from './styles';
 
 const MapComponent = (props) => {
 
-    const [coordinate, setCoordinate] = useState({ latitude: -23.4285, longitude: -46.795379 });
-    const [location, setLocation] = useState(null);
-    const [errorMsg, setErrorMsg] = useState(null);
+    const { coordinatesStops, routeColor, coordinatesRoute, busesPosition } = props;
+
+    const [mapNotLoaded, setMapNotLoaded] = useState(false);
     const [initialRegion, setInitialRegion] = useState(null);
 
     useEffect(() => {
         (async () => {
-            let { status } = await Location.requestPermissionsAsync();
-            if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
+            setMapNotLoaded(false);
+
+            try {
+                let { status } = await Location.requestPermissionsAsync();
+                if (status !== 'granted') {
+                    setMapNotLoaded(true);
+                }
+
+                let location = await Location.getCurrentPositionAsync({});
+
+                const initialRegion = {
+                    latitude: location.coords.latitude,
+                    longitude: location.coords.longitude,
+                    latitudeDelta: 0.08,
+                    longitudeDelta: 0.09,
+                }
+
+                setInitialRegion(initialRegion);
+            } catch (error) {
+                setMapNotLoaded(true);
             }
-
-            let location = await Location.getCurrentPositionAsync({});
-            setLocation(location);
-
-            const initialRegion = {
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
-                latitudeDelta: 0.08,
-                longitudeDelta: 0.09,
-            }
-
-            setInitialRegion(initialRegion);
         })();
     }, []);
 
-    let text = 'Waiting..';
-    if (errorMsg) {
-        text = errorMsg;
-    } else if (location) {
-        text = JSON.stringify(location);
-    }
+    console.log(busesPosition)
 
     return (
         <View style={styles.container}>
@@ -51,10 +50,26 @@ const MapComponent = (props) => {
                         coordinate={{ latitude: initialRegion.latitude, longitude: initialRegion.longitude }}
                     />
 
-                    {props.children && props.children}
+                    {(busesPosition && busesPosition.length > 0) &&
+                        busesPosition.map((item, index) => (
+                            <MapView.Marker
+                                key={index}
+                                title={item.vehiclePrefix}
+                                coordinate={{
+                                    latitude: item.latitude,
+                                    longitude: item.longitude
+                                }}
+                            >
+                                <Image
+                                    style={styles.busIconImage}
+                                    source={require('../../assets/images/icons/busIcon.png')}
+                                />
+                            </MapView.Marker>
+                        ))
+                    }
 
-                    {(props.coordinatesStops && props.coordinatesStops.length) &&
-                        props.coordinatesStops.map((item, index) => (
+                    {(coordinatesStops && coordinatesStops.length > 0) &&
+                        coordinatesStops.map((item, index) => (
                             <MapView.Marker
                                 key={index}
                                 title={item.description}
@@ -63,16 +78,16 @@ const MapComponent = (props) => {
                                     longitude: item.longitude
                                 }}
                             >
-                                <View style={[styles.stopBusCircle, { backgroundColor: '#ffffff', borderColor: props.routeColor ? props.routeColor : "#002d96" }]} />
+                                <View style={[styles.stopBusCircle, { backgroundColor: '#ffffff', borderColor: routeColor ? routeColor : "#002d96" }]} />
                             </MapView.Marker>
                         ))
                     }
 
-                    {(props.coordinatesRoute && props.coordinatesRoute.length) &&
+                    {(coordinatesRoute && coordinatesRoute.length) &&
                         <MapView.Polyline
-                            coordinates={props.coordinatesRoute}
+                            coordinates={coordinatesRoute}
                             strokeWidth={5}
-                            strokeColor={props.routeColor ? props.routeColor : "#002d96"}
+                            strokeColor={routeColor ? routeColor : "#002d96"}
                         />
                     }
                 </MapView>

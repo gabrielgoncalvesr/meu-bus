@@ -1,22 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Text, View, Image } from 'react-native';
-import { useTheme } from '@react-navigation/native';
 
-import { CheckBox, HeaderBar, DivisorBar, ItemDivisor } from '../../components';
+import { CheckBox, HeaderBar, DivisorBar } from '../../components';
 
-import { getTranslation } from '../../util/locales';
 import { getItem } from '../../util/storage';
-import { ThemeContext } from '../../util/themeContext';
+import { getTranslation } from '../../util/locales';
+import { AppContext, getThemeColors } from '../../util/appContext';
 
 import styles from './styles';
 
 const Language = () => {
 
-    const { colors } = useTheme();
+    const colors = getThemeColors();
+    const { handleLanguageChange } = useContext(AppContext);
 
-    const { handleLanguageChange } = useContext(ThemeContext);
-
-    const [selectedLanguage, setSelectedLanguage] = useState('');
+    const [selectedLanguage, setSelectedLanguage] = useState();
 
     const handleLanguage = (value) => {
         setSelectedLanguage(value);
@@ -25,10 +23,8 @@ const Language = () => {
 
     useEffect(() => {
         const loadLanguage = async () => {
-            const user = await getItem('user');
-            if (user) {
-                setSelectedLanguage(user.language);
-            }
+            const language = await getItem('language');
+            setSelectedLanguage(language);
         }
 
         loadLanguage();
@@ -43,7 +39,7 @@ const Language = () => {
 
                 <View style={styles.item}>
                     <View style={styles.iconContent}>
-                        <Image source={require('../../assets/languages/portuguese.png')} style={styles.icon} />
+                        <Image source={require('../../assets/images/language-flags/portuguese.png')} style={styles.icon} />
                         <Text style={[styles.text, { color: colors.text }]}>
                             {getTranslation('words.portuguese')}
                         </Text>
@@ -55,11 +51,10 @@ const Language = () => {
                         value={selectedLanguage === "pt-BR" ? true : false}
                     />
                 </View>
-                <ItemDivisor />
 
                 <View style={styles.item}>
                     <View style={styles.iconContent}>
-                        <Image source={require('../../assets/languages/english.png')} style={styles.icon} />
+                        <Image source={require('../../assets/images/language-flags/english.png')} style={styles.icon} />
                         <Text style={[styles.text, { color: colors.text }]}>
                             {getTranslation('words.english')}
                         </Text>
@@ -71,11 +66,10 @@ const Language = () => {
                         value={selectedLanguage === "en-US" ? true : false}
                     />
                 </View>
-                <ItemDivisor />
 
                 <View style={styles.item}>
                     <View style={styles.iconContent}>
-                        <Image source={require('../../assets/languages/french.png')} style={styles.icon} />
+                        <Image source={require('../../assets/images/language-flags/french.png')} style={styles.icon} />
                         <Text style={[styles.text, { color: colors.text }]}>
                             {getTranslation('words.french')}
                         </Text>
@@ -87,7 +81,6 @@ const Language = () => {
                         value={selectedLanguage === "fr-FR" ? true : false}
                     />
                 </View>
-                <ItemDivisor />
             </View>
         </View>
     );

@@ -1,11 +1,10 @@
 import React from 'react';
-
 import { Text, View, Linking } from 'react-native';
 
 import { ButtonBar, HeaderBar, DivisorBar, ItemDivisor } from '../../components';
 
 import { getTranslation } from '../../util/locales';
-import { getThemeColors } from '../../util/themeContext';
+import { getThemeColors } from '../../util/appContext';
 
 import styles from './styles';
 

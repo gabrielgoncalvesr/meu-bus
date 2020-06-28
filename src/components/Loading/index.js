@@ -3,7 +3,7 @@
 import React from 'react';
 import { View, ActivityIndicator } from 'react-native';
 
-import { getThemeColors } from '../../util/themeContext';
+import { getThemeColors } from '../../util/appContext';
 
 import styles from './styles';
 

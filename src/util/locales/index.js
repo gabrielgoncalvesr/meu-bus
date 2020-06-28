@@ -6,10 +6,9 @@ const locales = {
     "pt-BR": require('./pt-BR.json'),
 }
 
-const loadLocales = (currentLocale) => {
-    intl.init({
-        locales,
-        currentLocale,
+const loadLocales = async (currentLocale) => {
+    await intl.init({
+        locales, currentLocale,
     }).then(() => {
         return true;
     }).catch(() => {

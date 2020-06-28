@@ -1,27 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import MapView from 'react-native-maps';
+import React, { useEffect, useState, useContext } from 'react';
 import socketIOClient from "socket.io-client";
-import { FontAwesome5, Ionicons, Octicons } from '@expo/vector-icons';
+import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+
+import { SOCKET_SERVER_URL, SOCKET_SERVER_PORT } from 'react-native-dotenv';
+
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Text, View, TouchableOpacity, YellowBox, ScrollView } from 'react-native';
-import { SlideBar, Map} from '../../components';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
+
+import { SlideBar, Map, DivisorBar } from '../../components';
 
 import request from '../../services/api';
+import { getTranslation } from '../../util/locales';
+import { getThemeColors, AppContext } from '../../util/appContext';
 
 import styles from './styles';
-import { getThemeColors } from '../../util/themeContext';
-import { getTranslation } from '../../util/locales';
-import { DivisorBar } from '../../components';
-import { set, color } from 'react-native-reanimated';
 
-const socket = socketIOClient("http://192.168.0.148:4000", { jsonp: false, agent: '-', pfx: '-', cert: '-', ca: '-', ciphers: '-', rejectUnauthorized: '-', perMessageDeflate: '-' });
+const socket = socketIOClient(`http://${SOCKET_SERVER_URL}:${SOCKET_SERVER_PORT}`,
+    { jsonp: false, agent: '-', pfx: '-', cert: '-', ca: '-', ciphers: '-', rejectUnauthorized: '-', perMessageDeflate: '-' }
+);
 
 const Tracking = () => {
 
-    const colors = getThemeColors();
+    console.log(SOCKET_SERVER_PORT)
+    console.log(SOCKET_SERVER_URL)
 
     const route = useRoute();
+    const colors = getThemeColors();
     const navigation = useNavigation();
+    const { getToken } = useContext(AppContext);
 
     const [lineInformations, setLineInformations] = useState('');
 
@@ -41,10 +47,13 @@ const Tracking = () => {
     }
 
     async function loadData() {
+        const token = await getToken();
+
         const { busData } = route.params;
 
         const responseRoute = await request.get('/bus/trip', {
-            params: { busId: busData.id, direction: 0 }
+            params: { busId: busData.id, direction: 0 },
+            headers: { 'x-access-token': token }
         });
 
         const coordinatesRoute = responseRoute.data['Routes'].map(item => {
@@ -52,10 +61,9 @@ const Tracking = () => {
         });
 
         const responseStops = await request.get('/stop/route', {
-            params: { tripId: busData.id + "-" + 0 }
+            params: { tripId: busData.id + "-" + 0 },
+            headers: { 'x-access-token': token }
         });
-
-        // console.log(responseStops)
 
         const coordinatesStops = responseStops.data.map(item => {
             return { description: item['Stop'].name, latitude: Number(item['Stop'].latitude), longitude: Number(item['Stop'].longitude) }
@@ -69,10 +77,13 @@ const Tracking = () => {
     }
 
     const loadCoordinates = async () => {
+        const token = await getToken();
+
         const { busData } = route.params;
 
         const responseLine = await request.get('/sptrans/search/line', {
-            params: { term: busData.shortName }
+            params: { term: busData.shortName },
+            headers: { 'x-access-token': token }
         });
 
         const lineInformations = responseLine.data;
@@ -82,6 +93,7 @@ const Tracking = () => {
         const lineIdentifier = lineInformations[0]['lineIdentifier'];
 
         socket.on("/position", data => {
+            console.log(JSON.stringify(data))
             const markerList = data.map(item => {
                 return { vehiclePrefix: item.vehiclePrefix, latitude: item.latitudePosition, longitude: item.longitudePosition }
             });
@@ -140,7 +152,7 @@ const Tracking = () => {
             barContent={
                 <View style={[styles.container, { backgroundColor: colors.background }]}>
                     <View style={styles.header}>
-                        <View style={[styles.tagContent, { backgroundColor: '#' + busObject.color }]}>
+                        <View style={[styles.tagContent, { borderRadius: 5, backgroundColor: '#' + busObject.color }]}>
                             <Text style={[styles.tagText, { color: busObject.textColor ? '#' + busObject.textColor : colors.text }]}>
                                 {busObject.shortName}
                             </Text>

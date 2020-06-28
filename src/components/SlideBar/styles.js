@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     },
     icon: {
         fontSize: 60,
-        color: '#adadad',
+        color: '#ADADAD',
         borderRadius: 10,
     },
     subView: {

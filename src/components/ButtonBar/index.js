@@ -2,24 +2,12 @@
 
 import React from 'react';
 import { FontAwesome5 } from '@expo/vector-icons';
-import {
-    useTheme
-} from '@react-navigation/native';
-import {
-    View,
-    Text,
-    TouchableOpacity
-} from 'react-native';
-
-import ItemDivisor from '../ItemDivisor';
+import { useTheme } from '@react-navigation/native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 
-const ButtonBar = ({
-    text,
-    iconType,
-    callback
-}) => {
+const ButtonBar = ({ text, iconType, callback }) => {
 
     const { colors } = useTheme();
 
