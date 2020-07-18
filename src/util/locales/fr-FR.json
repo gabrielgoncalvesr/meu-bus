@@ -1,0 +1,41 @@
+{
+    "phrases": {
+        "seeLines": "Voir les Lignes",
+        "sendEmail": "Envoyer un E-mail",
+        "changeTheme": "Changer le Thème",
+        "changeLanguage": "Changer de Langue",
+        "changeImage": "Changer l'image",
+        "signOut": "Déconnexion",
+        "searchLine": "Rechercher Ligne",
+        "withoutHistory": "Sans Résultat",
+        "searchHistory": "Historique des Recherches",
+        "allLines": "Toutes les Lignes",
+        "routesSearch": "Recherche d'itinéraires",
+        "forgotPassword": "Mot de Passe Oublié?",
+        "newAccount": "Créer un Nouveau Compte"
+    },
+    "words": {
+        "help": "Aide",
+        "language": "Langue",
+        "portuguese": "Portugais",
+        "english": "Anglais",
+        "french": "Français",
+        "information": "Information",
+        "theme": "Thème",
+        "light": "Lumière",
+        "dark": "Sombre",
+        "settings": "Paramètres",
+        "routes": "Itinéraires",
+        "login": "Login",
+        "password": "Mot de Passe",
+        "email": "Email",
+        "name": "Nom",
+        "images": "Images"
+    },
+    "text": {
+        "searchPlaceholder": "lcode de ligne, nom de ligne ...",
+        "emailHelp": "En cas d'aide avec l'application, la fonctionnalité et les suggestions, envoyez un email pour nous contacter.",
+        "buildInfo": "Cette application est construite en utilisant React Native et en consommant une API dans NodeJS.",
+        "goalsInfo": "Cette application est uniquement destinée à l'apprentissage et à l'utilisation des technologies."
+    }
+}
