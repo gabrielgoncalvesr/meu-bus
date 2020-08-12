@@ -1,4 +1,8 @@
 ## meu-bus
+
+<p align="center">
+  <img src="https://github.com/gabrielgoncalvesr/meu-bus/blob/master/mobile/assets/icon-app.png?raw=true">
+</p>
 <hr>
 
 ### Installation
